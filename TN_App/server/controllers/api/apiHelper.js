@@ -10,6 +10,7 @@ const schema = require('../../models/databaseHelper/schema');
 let registerUser = schema.register_users,
     employeeList = schema.regsiter_employee,
     employeeAttendance = schema.emp_attendance,
+    employeePresonalDetails = schema.employee_details,
     resMsg, postedData;
 
 const apiHelper = {
@@ -86,7 +87,7 @@ const apiHelper = {
         insertResponse && insertResponse.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
         res.send(resMsg);
     },
-    "getAttendance": (data) => {
+    "getAttendance": (data, tableName = '') => {
         let { month, day, year, emp_code } = data
         let query = [{ [employeeAttendance.fields.emp_code]: emp_code }];
         // check pin is getting add one more query
@@ -100,7 +101,7 @@ const apiHelper = {
             query.push({ [employeeAttendance.fields.year]: year });
         }
         let options = {
-            table: employeeAttendance.tableName,
+            table: tableName || employeeAttendance.tableName,
             query: query
         };
         return new Promise((resolve, reject) => {
@@ -110,17 +111,27 @@ const apiHelper = {
         });
     },
     "addEmployeeDetails": async (req, res) => {
-        postedData = utils.schemaFieldsMapping(schema, 'emp_attendance', req['body']);
+        postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
+        let isData = await apiHelper.getAttendance(postedData, 'employee_details')
+        if (Object.keys(isData).length > 0) {
+            resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['USER_EXIST']);
+            return res.send(resMsg);
+        }
         let postValue = {};
-        postValue.type = employeeAttendance.tableName;
+        postValue.type = employeePresonalDetails.tableName;
         postValue.body = [postedData];
         let insertResponse = await new Promise((resolve, reject) => {
-            databaseHelper.saveRecord(postValue, '', function (response) {
+            databaseHelper.saveRecord(postValue, '', function (response, err) {
+                if (err)
+                    reject(err)
                 resolve(response)
             });
         });
         insertResponse && insertResponse.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
         res.send(resMsg);
+    },
+    "updateEmployeeDetails": (req, res) => {
+
     },
     "getEmployeeAttendance": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'emp_attendance', req['body']);
@@ -132,6 +143,9 @@ const apiHelper = {
             resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
             res.send(resMsg);
         }
+    },
+    "getAllEmployeeDetails": (req, res) => {
+
     }
 }
 

@@ -34,6 +34,18 @@ const apis = [
 		"method": "post",
 		"callback": apiHelper.getEmployeeAttendance,
 		"cors": true
+	},
+	{
+		"routeName": `/addEmployeeDetails`,
+		"method": "post",
+		"callback": apiHelper.addEmployeeDetails,
+		"cors": true
+	},
+	{
+		"routeName": `/getEmployeeDetails`,
+		"method": "post",
+		"callback": apiHelper.getAllEmployeeDetails,
+		"cors": true
 	}
 ];
 module.exports = apis;

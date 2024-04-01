@@ -3,7 +3,11 @@ let baseUrl = config['serviceUrl'];
 let dataString;
 let apiUrl = {
     "registerUser": `${baseUrl}/registerUser`,
-    "loginUser": `${baseUrl}/login`
+    "loginUser": `${baseUrl}/login`,
+    "registerEmployees": `${baseUrl}/registerEmployees`,
+    "addAttendance": `${baseUrl}/addAttendance`,
+    "getEmployeeAttendance": `${baseUrl}/getEmployeeAttendance`,
+
 };
 let appService = {
     preLoaderShow: () => {
