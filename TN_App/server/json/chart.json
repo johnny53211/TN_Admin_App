@@ -1,0 +1,101 @@
+{
+    "deviceChart": [
+        {
+            "name": "device 1",
+            "data": [
+                {
+                    "date": "Feb 2,2024",
+                    "working": 10
+                },
+                {
+                    "date": "Feb 3,2024",
+                    "working": 7
+                },
+                {
+                    "date": "Feb 4,2024",
+                    "working": 14
+                },
+                {
+                    "date": "Feb 5,2024",
+                    "working": 10
+                },
+                {
+                    "date": "Feb 6,2024",
+                    "working": 12
+                }
+            ]
+        },
+        {
+            "name": "device 2",
+            "data": [
+                {
+                    "date": "Feb 2,2024",
+                    "working": 12
+                },
+                {
+                    "date": "Feb 3,2024",
+                    "working": 19
+                },
+                {
+                    "date": "Feb 4,2024",
+                    "working": 15
+                },
+                {
+                    "date": "Feb 5,2024",
+                    "working": 12
+                },
+                {
+                    "date": "Feb 6,2024",
+                    "working": 19
+                }
+            ]
+        }
+    ],
+    "heatMap": [
+        {
+            "x": "Category 1",
+            "y": "Day 1",
+            "value": 10
+        },
+        {
+            "x": "Category 1",
+            "y": "Day 2",
+            "value": 20
+        },
+        {
+            "x": "Category 1",
+            "y": "Day 3",
+            "value": 15
+        },
+        {
+            "x": "Category 2",
+            "y": "Day 1",
+            "value": 25
+        },
+        {
+            "x": "Category 2",
+            "y": "Day 2",
+            "value": 30
+        },
+        {
+            "x": "Category 2",
+            "y": "Day 3",
+            "value": 35
+        },
+        {
+            "x": "Category 3",
+            "y": "Day 1",
+            "value": 40
+        },
+        {
+            "x": "Category 3",
+            "y": "Day 2",
+            "value": 45
+        },
+        {
+            "x": "Category 3",
+            "y": "Day 3",
+            "value": 50
+        }
+    ]
+}

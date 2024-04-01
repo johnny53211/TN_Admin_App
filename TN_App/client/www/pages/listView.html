@@ -1,0 +1,64 @@
+<!-- 
+    // //------------------------------------------------------------------------
+    // // Name : Johnson R.					Date : 03-04-2023
+    //    Modifier Name :    			    Edited Date  :  
+    // //------------------------------------------------------------------------
+    // // Virtual List page content get from template
+    // //-----------------------------------------------------------------------
+ -->
+<div class="page" id="list_view_name_Change">
+    <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner sliding">
+            <p class="iconClass">
+                <a href="#" class="link back">
+                    <i class="icon icon-back"></i>
+                </a>
+            </p>
+            <div class="title">Virtual List</div>
+            <div class="subnavbar">
+                <form class="searchbar searchbar-init">
+                    <div class="searchbar-inner">
+                        <div class="searchbar-input-wrap">
+                            <span class=""></span>
+                            <input type="search" name="searchBar" placeholder="Search" />
+                            <i class="searchbar-icon"></i>
+                            <span class="input-clear-button"></span>
+                        </div>
+                        <span class="searchbar-disable-button if-not-aurora">Cancel</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="searchbar-backdrop"></div>
+    <div class="page-content">
+        <div class="list simple-list searchbar-not-found">
+            <ul id="not_found">
+                <li>Nothing found</li>
+            </ul>
+        </div>
+        <div class="list virtual-list media-list searchbar-found" id="searchBar">
+            <ul id="listViewList">
+                <!-- render template -->
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="item-media">
+    <i class="icon demo-list-icon"></i>
+</div>
+<div class="item-inner">
+    <div class="item-input-wrap input-dropdown-wrap">
+        <select placeholder="Please choose...">
+            <option value="Male">Option 1</option>
+            <option value="Female">Option 2</option>
+        </select>
+    </div>
+</div>
+<div class="item-inner">
+    <div class="item-input-wrap">
+        <input type="number" placeholder="Enter Port">
+        <span class="input-clear-button"></span>
+    </div>
+</div>

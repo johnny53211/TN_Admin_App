@@ -1,0 +1,33 @@
+{
+  "cwd": "C:\\xampp\\htdocs\\bt-training\\Training\\Project\\vault-setup",
+  "type": [
+    "web",
+    "pwa",
+    "cordova"
+  ],
+  "name": "BT Cricket",
+  "framework": "core",
+  "template": "tabs",
+  "bundler": false,
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false,
+  "pkg": "io.framework7.myapp",
+  "cordova": {
+    "folder": "cordova",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "plugins": [
+      "cordova-plugin-statusbar",
+      "cordova-plugin-keyboard",
+      "cordova-plugin-splashscreen"
+    ]
+  }
+}

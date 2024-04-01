@@ -1,0 +1,47 @@
+.displayNone {
+    display: none;
+}
+
+.errDiscover {
+    color: red !important;
+    margin-top: 5px;
+}
+
+.settingTitle {
+    margin: 15px !important;
+}
+
+.panelClose {
+    text-align: right;
+    margin-right: 4px;
+}
+
+.notFound {
+    display: none;
+}
+
+input[name="pin"]:invalid,
+input[name="confirmPin"]:invalid {
+    border-color: #900 !important;
+}
+
+.list li li:last-child .item-inner:after,
+.list li:last-child li .item-inner:after {
+    content: '';
+    position: absolute;
+    background-color: white !important;
+    display: block;
+    z-index: 15;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transform: scaleY(calc(1 / var(--f7-device-pixel-ratio)));
+}
+
+#unlinkAccount {
+    display: none;
+}

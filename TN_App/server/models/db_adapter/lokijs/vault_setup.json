@@ -1,0 +1,292 @@
+{
+    "filename": "D:\\Xampp\\htdocs\\bt-project\\bt-training\\bt-ipl-app\\server\\models\\db_adapter\\lokijs\\vault_setup.json",
+    "collections": [
+        {
+            "name": "bt_app_users",
+            "data": [
+                {
+                    "userName": "johnson@gmail.com",
+                    "password": "Johnson@2001",
+                    "name": "Johnson",
+                    "id": 1,
+                    "$loki": 1
+                },
+                {
+                    "userName": "jesmi@02032000",
+                    "password": "Jesmi@2000",
+                    "name": "Jesmi",
+                    "id": 2,
+                    "$loki": 2
+                },
+                {
+                    "userName": "joe@123",
+                    "password": "1",
+                    "name": "Joe",
+                    "id": 3,
+                    "$loki": 3
+                }
+            ],
+            "idIndex": null,
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "id"
+            ],
+            "transforms": {},
+            "objType": "bt_app_users",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": true,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "disableFreeze": true,
+            "ttl": null,
+            "maxId": 3,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        },
+        {
+            "name": "bt_app_admin",
+            "data": [
+                {
+                    "userName": "bt-Admin",
+                    "password": "1",
+                    "isAdmin": true,
+                    "id": 1,
+                    "$loki": 1
+                }
+            ],
+            "idIndex": null,
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "id"
+            ],
+            "transforms": {},
+            "objType": "bt_app_admin",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": true,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "disableFreeze": true,
+            "ttl": null,
+            "maxId": 1,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        },
+        {
+            "name": "ipl_team",
+            "data": [],
+            "idIndex": null,
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "id"
+            ],
+            "transforms": {},
+            "objType": "ipl_team",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": true,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "disableFreeze": true,
+            "ttl": null,
+            "maxId": 0,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        },
+        {
+            "name": "match_schedule",
+            "data": [],
+            "idIndex": null,
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                "id"
+            ],
+            "transforms": {},
+            "objType": "match_schedule",
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": true,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "disableFreeze": true,
+            "ttl": null,
+            "maxId": 0,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        },
+        {
+            "data": [],
+            "idIndex": null,
+            "binaryIndices": {},
+            "constraints": null,
+            "uniqueNames": [
+                null
+            ],
+            "transforms": {},
+            "dirty": false,
+            "cachedIndex": null,
+            "cachedBinaryIndex": null,
+            "cachedData": null,
+            "adaptiveBinaryIndices": true,
+            "transactional": false,
+            "cloneObjects": false,
+            "cloneMethod": "parse-stringify",
+            "asyncListeners": false,
+            "disableMeta": true,
+            "disableChangesApi": true,
+            "disableDeltaChangesApi": true,
+            "autoupdate": false,
+            "serializableIndices": true,
+            "disableFreeze": true,
+            "ttl": null,
+            "maxId": 0,
+            "DynamicViews": [],
+            "events": {
+                "insert": [],
+                "update": [],
+                "pre-insert": [],
+                "pre-update": [],
+                "close": [],
+                "flushbuffer": [],
+                "error": [],
+                "delete": [
+                    null
+                ],
+                "warning": [
+                    null
+                ]
+            },
+            "changes": [],
+            "dirtyIds": []
+        }
+    ],
+    "databaseVersion": 1.5,
+    "engineVersion": 1.5,
+    "autosave": false,
+    "autosaveInterval": 5000,
+    "autosaveHandle": null,
+    "throttledSaves": true,
+    "options": {
+        "serializationMethod": "normal",
+        "destructureDelimiter": "$<\n"
+    },
+    "persistenceMethod": "fs",
+    "persistenceAdapter": null,
+    "verbose": false,
+    "events": {
+        "init": [
+            null
+        ],
+        "loaded": [],
+        "flushChanges": [],
+        "close": [],
+        "changes": [],
+        "warning": []
+    },
+    "ENV": "NODEJS"
+}
