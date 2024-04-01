@@ -3,17 +3,6 @@
  * Date : 8 April 2019
  */
 'use strict';
-let appUrl = config.loginServiceUrl;
-let serverURL = `${appUrl}/git_master/`;
-let api = {
-    "authApi": `${serverURL}index.php/commonrestappservice/login/format/json`,
-    "forgotPwdApi": `${serverURL}index.php/commonrestappservice/forgotpw/format/json`,
-    "registerApi": `${serverURL}index.php/commonrestappservice/submitregisteruser/format/json`,
-    "checkPassword": `${serverURL}index.php/commonrestappservice/checkpassword/format/json`,
-    "changePassword": `${serverURL}index.php/commonrestappservice/changepassword/format/json`,
-    "checkUserExist": `${serverURL}/authserver/api.php?rquest=check_user&callback=?`,
-    "activateUser": `${serverURL}/authserver/api.php?rquest=doActive`
-};
 let activityObj;
 let loginService = {
     ajaxTimeOut: 5000,
@@ -49,7 +38,7 @@ let loginService = {
             dialogArgs = {
                 type: 'alert',
                 title: config.userStatuses[data.status],
-                text: "Bt Cricket"
+                text: "TN Maxval"
             }
             dialog.customDialog(dialogArgs)
         }
