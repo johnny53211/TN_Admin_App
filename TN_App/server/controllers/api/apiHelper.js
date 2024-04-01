@@ -5,7 +5,6 @@
 const config = require('../../config/config');
 const utils = require('../utils/utils');
 const path = require('path');
-const validateIp = require('ip-address-validator');
 const databaseHelper = require('../../models/databaseHelper/databaseHelper');
 const schema = require('../../models/databaseHelper/schema');
 let registerUser = schema.register_users,
