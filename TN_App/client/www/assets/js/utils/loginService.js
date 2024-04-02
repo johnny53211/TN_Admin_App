@@ -53,7 +53,7 @@ let loginService = {
         }
     },// ajax call 
     callAPI: (args) => {
-        $.ajax({
+        return $.ajax({
             async: args.isAsync,
             type: args.method,
             url: args.url,

@@ -26,15 +26,24 @@ let homeTab = {
             "typeVal": "password",
         }
     ],
-    "homeButton": [
+    "homeButtonJson": [
         {
-            "title": "employee",
+            "title": "Employee",
             "id": "employee",
             "url": "employee",
             "clickEvent": "",
             "classButton": "col button button-fill button-round",
             "anchorClass": "button button-fill",
             "name": "employee"
+        },
+        {
+            "title": "Events",
+            "id": "events",
+            "url": "events",
+            "clickEvent": "",
+            "classButton": "col button button-fill button-round",
+            "anchorClass": "button button-fill",
+            "name": "events"
         }
     ],
     homeTabShow: () => {
@@ -51,7 +60,7 @@ let homeTab = {
         }
     },
     homeRenderBtn: () => {
-        
+        template.renderTemplate('#homeButton', '#homeRender', homeTab['homeButtonJson'], '', 1);
     }
 }
 let id,

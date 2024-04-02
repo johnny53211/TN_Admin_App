@@ -7,7 +7,7 @@ let apiUrl = {
     "registerEmployees": `${baseUrl}/registerEmployees`,
     "addAttendance": `${baseUrl}/addAttendance`,
     "getEmployeeAttendance": `${baseUrl}/getEmployeeAttendance`,
-
+    "eventList": `${baseUrl}/getEmployeeAttendance`
 };
 let appService = {
     preLoaderShow: () => {
