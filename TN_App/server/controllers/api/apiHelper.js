@@ -12,6 +12,7 @@ let registerUser = schema.register_users,
     employeeAttendance = schema.emp_attendance,
     employeePresonalDetails = schema.employee_details,
     employeeContact = schema.emp_contact,
+    employeeAdharDetails = schema.emp_adhar_details,
     resMsg, postedData;
 
 const apiHelper = {
@@ -114,7 +115,7 @@ const apiHelper = {
     "addEmployeeDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
         let isData = await apiHelper.getAttendance(postedData, 'employee_details')
-        if (Object.keys(isData).length > 0) {
+        if (!Object.keys(isData).length > 0) {
             resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['USER_EXIST']);
             return res.send(resMsg);
         }
@@ -131,22 +132,65 @@ const apiHelper = {
         if (insertResponse && insertResponse.length) {
             postValue.type = employeeContact.tableName;
             postedData = utils.schemaFieldsMapping(schema, 'emp_contact', req['body']);
-            let insertContact = await apiHelper.insertContact(postedData);
-            insertContact && insertContact.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+            postValue.body = [postedData];
+            let insertContact = await apiHelper.insertContact(postValue);
+            if (insertContact && insertContact.length > 0) {
+                postValue.type = employeeAdharDetails.tableName;
+                postedData = utils.schemaFieldsMapping(schema, 'emp_adhar_details', req['body']);
+                postValue.body = [postedData];
+                let insertAdhar = await apiHelper.insertContact(postValue);
+                insertAdhar && insertAdhar.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], { insertResponse, insertAdhar, insertContact }) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+            } else {
+                resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
+            }
         } else {
             resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
         }
         res.send(resMsg);
     },
     "insertContact": async (postValue) => {
-        return await new Promise((resolve, reject) => {
+        let response = await new Promise((resolve, reject) => {
             databaseHelper.saveRecord(postValue, '', function (response, err) {
                 resolve(response)
             });
         })
+        return response
     },
-    "updateEmployeeDetails": (req, res) => {
-
+    "updateEmployeeDetails": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
+        let isData = await apiHelper.getAttendance(postedData, 'employee_details')
+        if (!Object.keys(isData).length > 0) {
+            resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['USER_EXIST']);
+            return res.send(resMsg);
+        }
+        let postValue = {};
+        postValue.type = employeePresonalDetails.tableName;
+        postValue.body = [postedData];
+        let insertResponse = await new Promise((resolve, reject) => {
+            databaseHelper.saveRecord(postValue, '', function (response, err) {
+                if (err)
+                    reject(err)
+                resolve(response)
+            });
+        });
+        if (insertResponse && insertResponse.length) {
+            postValue.type = employeeContact.tableName;
+            postedData = utils.schemaFieldsMapping(schema, 'emp_contact', req['body']);
+            postValue.body = [postedData];
+            let insertContact = await apiHelper.insertContact(postValue);
+            if (insertContact && insertContact.length > 0) {
+                postValue.type = employeeAdharDetails.tableName;
+                postedData = utils.schemaFieldsMapping(schema, 'emp_adhar_details', req['body']);
+                postValue.body = [postedData];
+                let insertAdhar = await apiHelper.insertContact(postValue);
+                insertAdhar && insertAdhar.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], { insertResponse, insertAdhar, insertContact }) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+            } else {
+                resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
+            }
+        } else {
+            resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
+        }
+        res.send(resMsg);
     },
     "getEmployeeAttendance": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'emp_attendance', req['body']);
@@ -161,8 +205,9 @@ const apiHelper = {
     },
     "getAllEmployeeDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
-        let response = await apiHelper.getEmpDetails(postedData);
-        res.send(response)
+        let getResponse = await apiHelper.getEmpDetails(postedData);
+        getResponse && getResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+        res.send(resMsg);
     },
     "getEmpDetails": (data, tableName) => {
         let { emp_code, mail_id } = data
@@ -196,6 +241,9 @@ const apiHelper = {
                 resolve(response || response[0] || {});
             });
         });
+    },
+    "addEvents": (req, res) => {
+
     }
 }
 

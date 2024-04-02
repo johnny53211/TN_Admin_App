@@ -33,7 +33,14 @@ const schema = {
 		tableName: "contact_details",
 		fields: {
 			emp_code: 'emp_code',
-			conatct_no: "conatct_no"
+			conatcts_no: "conatcts_no",
+		}
+	},
+	"emp_adhar_details": {
+		tableName: "emp_adhar_details",
+		fields: {
+			emp_code: 'emp_code',
+			emp_adhar: "emp_adhar",
 		}
 	},
 	"employee_details": {
