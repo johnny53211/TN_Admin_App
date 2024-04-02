@@ -14,7 +14,7 @@ let homeTab = {
         {
             "title": "Username",
             "placeHolderData": "Enter Username",
-            "nameValue": "userName",
+            "nameValue": "username",
             "typeVal": "text",
             "idVal": "linkUserName"
         },
@@ -26,28 +26,16 @@ let homeTab = {
             "typeVal": "password",
         }
     ],
-    "registerFormJson": [
+    "homeButton": [
         {
-            "title": "Username",
-            "placeHolderData": "Enter Username",
-            "nameValue": "userName",
-            "typeVal": "text",
-            "idVal": "registerUserName"
-        },
-        {
-            "title": "Password",
-            "placeHolderData": "Enter Password",
-            "nameValue": "password",
-            "idVal": "registerPassword",
-            "typeVal": "password",
-        },
-        {
-            "title": "Name",
-            "placeHolderData": "Enter Your Name",
-            "nameValue": "name",
-            "idVal": "name",
-            "typeVal": "text",
-        },
+            "title": "employee",
+            "id": "employee",
+            "url": "employee",
+            "clickEvent": "",
+            "classButton": "col button button-fill button-round",
+            "anchorClass": "button button-fill",
+            "name": "employee"
+        }
     ],
     homeTabShow: () => {
         loginService.redirect('/', {
@@ -61,6 +49,9 @@ let homeTab = {
             appService.preLoaderShow();
             loginService.processLogin();
         }
+    },
+    homeRenderBtn: () => {
+        
     }
 }
 let id,
@@ -73,10 +64,12 @@ $(document).ready(async function () {
     loginService.checkSession();
     formValidationn.validateIp();
     utils.showLoginName();
+    homeTab.homeRenderBtn();
 });
 
 $(document).on('page:init', function (e) {
     formValidationn.validateLoginForm();
     formValidationn.validateRegisterForm()
     utils.showLoginName();
+    homeTab.homeRenderBtn();
 });

@@ -13,3 +13,15 @@
     {{/each}}
 </script>
 <!-- linkAccount HTML Template end-->
+
+<!-- vault button template start-->
+<script id="homeButton" type="text/template7">
+    {{#each this}}
+    <div class="row home-button">
+        <p class="grid grid-gap {{#if pClass}} {{pClass}} {{/if}}">
+            <a {{#if url}} href="/{{url}}/" {{/if}} class=" col button button-fill button-round"  data-selector ="{{selector}}" {{#if onclickEvent}} onclick="{{onclickEvent}}(this)" {{/if}} id="{{id}}">{{title}}</a>
+        </p>
+    </div>
+    {{/each}}
+</script>
+<!-- vault button template end-->
