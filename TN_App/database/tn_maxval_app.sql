@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2024 at 05:08 PM
+-- Generation Time: Apr 02, 2024 at 04:55 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -43,6 +43,27 @@ INSERT INTO `attendance_status` (`id`, `attendance_status`, `add_date`, `update_
 (2, 'HD', '2024-04-01 10:54:53', NULL),
 (3, 'PRESENT', '2024-04-01 10:55:17', NULL),
 (4, 'ABSENT', '2024-04-01 10:55:17', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_details`
+--
+
+CREATE TABLE `contact_details` (
+  `id` int(100) NOT NULL,
+  `emp_code` int(100) NOT NULL,
+  `conatcts_no` varchar(100) NOT NULL,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `contact_details`
+--
+
+INSERT INTO `contact_details` (`id`, `emp_code`, `conatcts_no`, `add_date`, `update_date`) VALUES
+(1, 203, '8870880425', '2024-04-02 06:15:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,6 +121,13 @@ CREATE TABLE `emp_adhar_details` (
   `emp_adhar` int(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `emp_adhar_details`
+--
+
+INSERT INTO `emp_adhar_details` (`id`, `emp_code`, `emp_adhar`) VALUES
+(1, 203, 2147483647);
+
 -- --------------------------------------------------------
 
 --
@@ -136,15 +164,52 @@ CREATE TABLE `emp_personal_details` (
   `emp_code` int(100) NOT NULL,
   `father_name` varchar(100) NOT NULL,
   `mother_name` varchar(100) NOT NULL,
-  `conatct_no` int(100) NOT NULL,
   `gender` int(100) NOT NULL,
-  `maritial_status` int(100) NOT NULL,
   `designation` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `date_of_joining` varchar(100) NOT NULL,
   `blood_group` varchar(100) NOT NULL,
   `date_of_birth` varchar(100) NOT NULL,
   `team` int(100) NOT NULL,
+  `mail_id` varchar(250) NOT NULL,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `emp_personal_details`
+--
+
+INSERT INTO `emp_personal_details` (`id`, `emp_code`, `father_name`, `mother_name`, `gender`, `designation`, `address`, `date_of_joining`, `blood_group`, `date_of_birth`, `team`, `mail_id`, `add_date`, `update_date`) VALUES
+(1, 203, 'Rajamani M', 'Sasikala R', 1, 'Software Developer', '1/34 North Street Keelathathapparai Tuticorin 628001', '02/05/2022', 'A-ve', '02/03/2001', 3, 'johnson02032001@gmail.com', '2024-04-02 06:15:29', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(250) NOT NULL,
+  `event_name` varchar(100) NOT NULL,
+  `event_date` varchar(100) NOT NULL,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_preference`
+--
+
+CREATE TABLE `food_preference` (
+  `id` int(100) NOT NULL,
+  `emp_code` int(100) NOT NULL,
+  `food_type` int(100) NOT NULL,
+  `no_members` int(100) NOT NULL,
+  `event_name` varchar(100) NOT NULL,
+  `attend` int(11) NOT NULL,
   `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -224,6 +289,27 @@ INSERT INTO `team` (`id`, `team_name`) VALUES
 (2, 'MAXVAL'),
 (3, 'BUILDTRACK');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `yes_no_table`
+--
+
+CREATE TABLE `yes_no_table` (
+  `id` int(100) NOT NULL,
+  `response_type` varchar(250) NOT NULL,
+  `add_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `yes_no_table`
+--
+
+INSERT INTO `yes_no_table` (`id`, `response_type`, `add_date`, `update_date`) VALUES
+(1, 'Yes', '2024-04-02 14:34:09', NULL),
+(2, 'No', '2024-04-02 14:34:09', NULL);
+
 --
 -- Indexes for dumped tables
 --
@@ -233,6 +319,14 @@ INSERT INTO `team` (`id`, `team_name`) VALUES
 --
 ALTER TABLE `attendance_status`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact_details`
+--
+ALTER TABLE `contact_details`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `conatct_no` (`conatcts_no`),
+  ADD UNIQUE KEY `emp_code_contact` (`emp_code`) USING BTREE;
 
 --
 -- Indexes for table `credential`
@@ -267,10 +361,21 @@ ALTER TABLE `emp_attendance`
 --
 ALTER TABLE `emp_personal_details`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `emp_code_personal` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_personal` (`emp_code`) USING BTREE,
   ADD KEY `emp_gender_personal` (`gender`),
-  ADD KEY `emp_maritial_personal` (`maritial_status`),
   ADD KEY `emp_team` (`team`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `food_preference`
+--
+ALTER TABLE `food_preference`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `gender`
@@ -297,6 +402,12 @@ ALTER TABLE `team`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `yes_no_table`
+--
+ALTER TABLE `yes_no_table`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -305,6 +416,12 @@ ALTER TABLE `team`
 --
 ALTER TABLE `attendance_status`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `contact_details`
+--
+ALTER TABLE `contact_details`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `credential`
@@ -322,7 +439,7 @@ ALTER TABLE `employee_details`
 -- AUTO_INCREMENT for table `emp_adhar_details`
 --
 ALTER TABLE `emp_adhar_details`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `emp_attendance`
@@ -334,6 +451,18 @@ ALTER TABLE `emp_attendance`
 -- AUTO_INCREMENT for table `emp_personal_details`
 --
 ALTER TABLE `emp_personal_details`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `food_preference`
+--
+ALTER TABLE `food_preference`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
 
 --
@@ -361,14 +490,14 @@ ALTER TABLE `team`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `yes_no_table`
 --
+ALTER TABLE `yes_no_table`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for table `emp_adhar_details`
+-- Constraints for dumped tables
 --
-ALTER TABLE `emp_adhar_details`
-  ADD CONSTRAINT `emp_code` FOREIGN KEY (`emp_code`) REFERENCES `employee_details` (`emp_code`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `emp_attendance`
@@ -383,7 +512,6 @@ ALTER TABLE `emp_attendance`
 ALTER TABLE `emp_personal_details`
   ADD CONSTRAINT `emp_code_personal` FOREIGN KEY (`emp_code`) REFERENCES `employee_details` (`emp_code`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `emp_gender_personal` FOREIGN KEY (`gender`) REFERENCES `gender` (`id`),
-  ADD CONSTRAINT `emp_maritial_personal` FOREIGN KEY (`maritial_status`) REFERENCES `maritial_status` (`id`),
   ADD CONSTRAINT `emp_team` FOREIGN KEY (`team`) REFERENCES `team` (`id`);
 COMMIT;
 
