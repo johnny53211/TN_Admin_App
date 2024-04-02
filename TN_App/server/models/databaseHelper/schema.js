@@ -29,6 +29,13 @@ const schema = {
 			attendance_status: "attendance_status"
 		}
 	},
+	"emp_contact": {
+		tableName: "contact_details",
+		fields: {
+			emp_code: 'emp_code',
+			conatct_no: "conatct_no"
+		}
+	},
 	"employee_details": {
 		tableName: "emp_personal_details",
 		fields: {

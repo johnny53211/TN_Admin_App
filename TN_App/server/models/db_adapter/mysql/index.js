@@ -198,7 +198,7 @@ var insert = function (insertData, callback) {
           insertIds.push(lastInsertedId);
         }
       }
-    
+
     callback(err, insertIds);
   });
 };

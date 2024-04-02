@@ -11,6 +11,7 @@ let registerUser = schema.register_users,
     employeeList = schema.regsiter_employee,
     employeeAttendance = schema.emp_attendance,
     employeePresonalDetails = schema.employee_details,
+    employeeContact = schema.emp_contact,
     resMsg, postedData;
 
 const apiHelper = {
@@ -127,8 +128,22 @@ const apiHelper = {
                 resolve(response)
             });
         });
-        insertResponse && insertResponse.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+        if (insertResponse && insertResponse.length) {
+            postValue.type = employeeContact.tableName;
+            postedData = utils.schemaFieldsMapping(schema, 'emp_contact', req['body']);
+            let insertContact = await apiHelper.insertContact(postedData);
+            insertContact && insertContact.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+        } else {
+            resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
+        }
         res.send(resMsg);
+    },
+    "insertContact": async (postValue) => {
+        return await new Promise((resolve, reject) => {
+            databaseHelper.saveRecord(postValue, '', function (response, err) {
+                resolve(response)
+            });
+        })
     },
     "updateEmployeeDetails": (req, res) => {
 
@@ -144,8 +159,43 @@ const apiHelper = {
             res.send(resMsg);
         }
     },
-    "getAllEmployeeDetails": (req, res) => {
-
+    "getAllEmployeeDetails": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
+        let response = await apiHelper.getEmpDetails(postedData);
+        res.send(response)
+    },
+    "getEmpDetails": (data, tableName) => {
+        let { emp_code, mail_id } = data
+        let join = [{
+            'type': 'LEFT JOIN',
+            'table': 'gender',
+            'column': 'id',
+            'with_table': 'emp_personal_details',
+            'with_column': 'gender'
+        }, {
+            'type': 'LEFT JOIN',
+            'table': 'team',
+            'column': 'id',
+            'with_table': ' emp_personal_details',
+            'with_column': 'team'
+        }]
+        let query = [];
+        if (emp_code)
+            query.push({ ['emp_personal_details.emp_code']: emp_code });
+        // check pin is getting add one more query
+        if (mail_id) {
+            query.push({ ['emp_personal_details.mail_id']: mail_id });
+        }
+        let options = {
+            table: tableName || employeePresonalDetails.tableName,
+            query: query,
+            join
+        };
+        return new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
     }
 }
 
