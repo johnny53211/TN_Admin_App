@@ -46,6 +46,20 @@ let homeTab = {
             "name": "events"
         }
     ],
+    "employeePage": {
+        "list": [
+            {
+                "title": "Employee List",
+                "subTitle": "",
+                "idValue": "empList",
+                "data": "empList",
+                "subTitleId": "",
+                "url": "employeeList",
+                "divId": "emplyeeOne",
+                "class": "item-link item-content"
+            }
+        ]
+    },
     homeTabShow: () => {
         loginService.redirect('/', {
             reloadAll: true

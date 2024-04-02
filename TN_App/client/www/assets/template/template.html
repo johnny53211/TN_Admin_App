@@ -25,3 +25,20 @@
     {{/each}}
 </script>
 <!-- vault button template end-->
+
+<!-- list view template for virtuallist.html start-->
+<script id="listView" type="text/template7">
+{{#each list}}
+<li id="{{divId}}" {{#if clickEvent}} onclick="{{clickEvent}}" {{/if}} {{#if data}} data-value="{{data}}" {{/if}} {{#if dataName}} data-name ="{{dataName}}" {{/if}}>
+    <a href="/{{url}}/" class="{{class}}">
+        <div class="item-inner">
+            <div class="item-title-row">
+                <div class="item-title"{{/if idValue}} id="{{idValue}}" {{/if}}>{{title}}</div>
+            </div>
+            <div class="item-subtitle" id="{{subTitleId}}">{{subTitle}}</div>
+        </div>
+    </a>
+</li>
+{{/each}}
+</script>
+<!-- list view template for virtuallist.html end-->

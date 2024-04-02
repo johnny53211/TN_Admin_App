@@ -12,7 +12,6 @@ const dbAdapter = {
 		});
 	}
 };
-
 module.exports = dbAdapter;
 
 

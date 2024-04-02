@@ -24,6 +24,30 @@ let routes = [
       },
     },
   },
+  {
+    name: "employee",
+    path: '/employee/',
+    url: './pages/listView.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
+      },
+    },
+
+  },
+  {
+    name: "employee",
+    path: '/employeeList/',
+    url: './pages/listView.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        // template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
+      },
+    },
+
+  },
   // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',

@@ -18,7 +18,8 @@ var init = function (options, callback) {
     user: config.MYSQL_USER,
     password: config.MYSQL_PASSWORD,
     database: config.MYSQL_DATABASE,
-    dateStrings: true
+    dateStrings: true,
+    insecureAuth: true
   };
   // if connection pool then set no.of connection & then create pool
   if (config.CONNECTION_POOL) {
