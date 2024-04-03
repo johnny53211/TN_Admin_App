@@ -81,6 +81,20 @@ let homeTab = {
                 "url": "tournamentsList",
                 "divId": "tournamentOne",
                 "class": "item-link item-content"
+            },
+            {
+                "title": "Add Events",
+                "subTitle": "",
+                "idValue": "addEvents",
+                "data": "addEvents",
+                "subTitleId": "",
+                "url": "",
+                "divId": "tournamentOne",
+                "class": "item-link item-content",
+                "liClass": "popup-open",
+                "dataPopup": ".my-popup",
+                "clickEvent": "homeTab.handlePopupClick",
+                "dataName": "addEventPopup"
             }
         ]
     },
@@ -116,9 +130,11 @@ let homeTab = {
                 "idValue": "upcomingTounaments",
                 "data": "upcomingTounaments",
                 "subTitleId": "",
-                "url": "upcomingTounaments",
+                "url": "",
                 "divId": "upcomingTounamentsOne",
-                "class": "item-link item-content"
+                "class": "item-link item-content",
+                "liClass": "popup-open",
+                "dataPopup": ".my-popup"
             },
             {
                 "title": "Tounaments Add",
@@ -130,7 +146,7 @@ let homeTab = {
                 "divId": "tounamentsAddOne",
                 "class": "item-link item-content",
                 "liClass": "popup-open",
-                "dataPopup": ".my-popup"
+                "dataPopup": ".my-popup",
             }
         ]
     },
@@ -149,6 +165,49 @@ let homeTab = {
     },
     homeRenderBtn: () => {
         template.renderTemplate('#homeButton', '#homeRender', homeTab['homeButtonJson'], '', 1);
+    },
+    handlePopupClick: (element) => {
+        let clickedPopup = element.dataset.name;
+        homeTab[clickedPopup]();
+    },
+    addEventPopup: () => {
+        $('.popupTitle').html('Add Events');
+        let formContent = {
+            "list": [
+                {
+                    "name": "Event Name",
+                    "type": "text",
+                    "placeHolder": "Enter Event",
+                    "nameValue": "event_name"
+                },
+                {
+                    "name": "Event Name",
+                    "type": "datetime-local",
+                    "placeHolder": "Enter Event",
+                    "nameValue": "event_date"
+                },
+                {
+                    "name": "Select Event Type",
+                    "nameValue": "event_type",
+                    "select": [{
+                        "event_type": "Celebration",
+                        "value": 1
+                    }, {
+                        "event_type": "Tournaments",
+                        "value": 2
+                    }],
+                    "placeHolder": "Enter Name"
+                }
+            ]
+        }
+        let content = template.renderTemplate('#formtemplate', '', formContent);
+        debugger
+        let templateData = {
+            "content": content,
+            "clickEvent": "addEventData",
+            "btnName": "Add Events"
+        }
+        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1)
     }
 }
 let id,
@@ -162,11 +221,13 @@ $(document).ready(async function () {
     formValidationn.validateIp();
     utils.showLoginName();
     homeTab.homeRenderBtn();
+    await Promise.all([appService.getGender(), appService.getFoodType(), appService.getTeamList()]);
 });
 
-$(document).on('page:init', function (e) {
+$(document).on('page:init', async function (e) {
     formValidationn.validateLoginForm();
     formValidationn.validateRegisterForm()
     utils.showLoginName();
     homeTab.homeRenderBtn();
 });
+

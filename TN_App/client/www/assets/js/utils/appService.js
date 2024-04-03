@@ -7,7 +7,7 @@ let apiUrl = {
     "registerEmployees": `${baseUrl}/registerEmployees`,
     "addAttendance": `${baseUrl}/addAttendance`,
     "getEmployeeAttendance": `${baseUrl}/getEmployeeAttendance`,
-    "eventList": `${baseUrl}/getEmployeeAttendance`,
+    "eventList": `${baseUrl}/getEventList`,
     "yesNoList": `${baseUrl}/getEmpResponse`,
     "genderList": `${baseUrl}/getEmpGenderDetails`,
     "teamList": `${baseUrl}/getEmpTeamDetails`,
@@ -17,6 +17,7 @@ let appService = {
     foodType: null,
     genderType: null,
     teamList: null,
+    eventList: null,
     preLoaderShow: () => {
         app.dialog.preloader('Please Wait ...');
     },// app loader hide
@@ -59,7 +60,9 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
-            appService.teamList = JSON.parse(res);
+            debugger
+            if (res['status'] == 200)
+                appService.teamList = res['data'];
         } catch (error) {
             console.log(error);
         }
@@ -71,7 +74,8 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
-            appService.foodType = JSON.parse(res);
+            if (res['status'] == 200)
+                appService.foodType = res['data'];
         } catch (error) {
             console.log(error)
         }
@@ -83,9 +87,23 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
-            appService.genderType = JSON.parse(res);
+            if (res['status'] == 200)
+                appService.genderType = res['data'];
         } catch (error) {
             console.log(error)
         }
-    }
+    },
+    getEvents: async () => {
+        let args = {
+            url: apiUrl['eventList'],
+            method: 'get',
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            if (res['status'] == 200)
+                appService.eventList = res['data'];
+        } catch (error) {
+            console.log(error)
+        }
+    },
 }

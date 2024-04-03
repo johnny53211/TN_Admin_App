@@ -29,7 +29,7 @@
 <!-- list view template for virtuallist.html start-->
 <script id="listView" type="text/template7">
 {{#each list}}
-<li id="{{divId}}" {{#if liClass}} class={{liClass}} {{/if}} {{#if dataPopup}} data-popup="{{dataPopup}}" {{/if}} {{#if clickEvent}} onclick="{{clickEvent}}" {{/if}} {{#if data}} data-value="{{data}}" {{/if}} {{#if dataName}} data-name ="{{dataName}}" {{/if}}>
+<li id="{{divId}}" {{#if liClass}} class={{liClass}} {{/if}} {{#if dataPopup}} data-popup="{{dataPopup}}" {{/if}} {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}} {{#if data}} data-value="{{data}}" {{/if}} {{#if dataName}} data-name ="{{dataName}}" {{/if}}>
     <a {{#if url}} href="/{{url}}/" {{/if}} class="{{class}}">
         <div class="item-inner">
             <div class="item-title-row">
@@ -42,3 +42,43 @@
 {{/each}}
 </script>
 <!-- list view template for virtuallist.html end-->
+<!-- popup form template start -->
+<script id="popupForm" type="text/template7">
+    <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="chart-form">
+        <ul>
+          {{/if content}} {{content}} {{/if}}
+          <li class="item-content item-input">
+            <div class="item-media">
+              <i class="icon demo-list-icon"></i>
+            </div>
+            <div class="item-inner">
+              <div class="item-input-wrap">
+                <button class="button button-fill popup-close" {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}}  id="{{btnId}}">{{btnName}}</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+</script>
+<!-- list view template for popup content end-->
+<script id="formtemplate" type="text/template7">
+    {{#each list}}
+     <li class="item-content item-input">
+        <div class="item-inner">
+            <div class="item-title item-label">{{name}}</div>
+            <div class="item-input-wrap">
+                {{#if select}}
+                <select placeholder="{{placeHolder}}" name="{{nameValue}}">
+                    {{#each select}}
+                    <option value="{{value}}">{{event_type}}</option>
+                    {{/each}}
+                </select>
+                {{else}}
+                <input type="{{type}}" placeholder="{{placeHolder}}" name="{{nameValue}}">
+                <span class="input-clear-button"></span>
+                {{/if}}
+            </div>
+        </div>
+     </li>
+    {{/each}}
+</script>

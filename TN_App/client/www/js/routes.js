@@ -11,6 +11,12 @@ let routes = [
     name: 'home',
     path: '/',
     url: './index.html',
+    on: {
+      pageAfterIn: async function (e, page) {
+        // homeTab.homeRenderBtn();
+        await Promise.all([appService.getGender(), appService.getFoodType(), appService.getTeamList(), appService.getEvents()]);
+      }
+    }
   },
   {
     path: '/login/',

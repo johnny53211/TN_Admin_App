@@ -64,6 +64,12 @@ const apis = [
 		"method": "get",
 		"callback": apiHelper.getEmpResponse,
 		"cors": true
-	}
+	},
+	{
+		"routeName": `/getEventList`,
+		"method": "get",
+		"callback": apiHelper.getEventList,
+		"cors": true
+	},
 ];
 module.exports = apis;

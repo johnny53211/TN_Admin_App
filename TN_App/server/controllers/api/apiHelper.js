@@ -242,8 +242,17 @@ const apiHelper = {
             });
         });
     },
-    "addEvents": (req, res) => {
-
+    "getEventList": async (req, res) => {
+        let options = {
+            table: 'events'
+        }
+        let genderRes = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     },
     "getEmpGenderDetails": async (req, res) => {
         let options = {
@@ -254,14 +263,8 @@ const apiHelper = {
                 resolve(response || response[0] || {});
             });
         });
-        if (genderRes) {
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes);
-            res.send(resMsg);
-        }
-        else {
-            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-            res.send(resMsg);
-        }
+        genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     },
     "getEmpFoodPreference": async (req, res) => {
         let options = {
