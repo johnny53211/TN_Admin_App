@@ -39,7 +39,19 @@ let routes = [
   {
     name: "employee",
     path: '/employeeList/',
-    url: './pages/listView.html',
+    url: './pages/dataTable.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        // template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
+      },
+    },
+
+  },
+  {
+    name: "employee",
+    path: '/employeeDetails/',
+    url: './pages/dataTable.html',
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
