@@ -32,7 +32,6 @@ let loginService = {
     },// login success
     loginSuccess: function (args) {
         let data = args.data;
-        debugger
         if (config.userStatuses[data.status]) {
             appService.preLoaderHide();
             dialogArgs = {

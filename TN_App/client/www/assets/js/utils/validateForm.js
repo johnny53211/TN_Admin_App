@@ -142,28 +142,28 @@ let formValidationn = {
         let formData = app.form.convertToData(id)
         return formData;
     },
-    validateRegisterForm: () => {
-        $('#registerForm').validate({
+    validatePopupForm: () => {
+        $('#form-data').validate({
             rules: {
-                userName: {
+                event_name: {
                     required: true
                 },
-                password: {
+                event_date: {
                     required: true,
                 },
-                name: {
+                event_type: {
                     required: true
                 }
             },
             messages: {
-                userName: {
-                    required: 'Please Enter Username'
+                event_name: {
+                    required: 'Please Enter Event Name'
                 },
-                password: {
-                    required: 'Please Enter Password',
+                event_date: {
+                    required: 'Please Enter Event Data',
                 },
-                name: {
-                    required: 'Please Enter Name'
+                event_type: {
+                    required: 'Please Enter Event Type'
                 }
             },
             onkeyup: function (element) {

@@ -44,7 +44,7 @@
 <!-- list view template for virtuallist.html end-->
 <!-- popup form template start -->
 <script id="popupForm" type="text/template7">
-    <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="chart-form">
+    <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="form-data">
         <ul>
           {{/if content}} {{content}} {{/if}}
           <li class="item-content item-input">
@@ -53,7 +53,7 @@
             </div>
             <div class="item-inner">
               <div class="item-input-wrap">
-                <button class="button button-fill popup-close" {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}}  id="{{btnId}}">{{btnName}}</button>
+                <button class="button button-fill" {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}}  id="{{btnId}}">{{btnName}}</button>
               </div>
             </div>
           </li>

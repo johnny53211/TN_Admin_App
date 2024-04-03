@@ -63,6 +63,15 @@ const schema = {
 			conatct_no: "conatct_no",
 			mail_id: "mail_id"
 		}
+	},
+	"getEventData": {
+		tableName: "events",
+		fields: {
+			event_date: "event_date",
+			event_type: "event_type",
+			event_name: "event_name",
+			event_time: "event_time"
+		}
 	}
 };
 module.exports = schema;

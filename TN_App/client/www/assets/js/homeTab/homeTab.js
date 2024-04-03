@@ -201,13 +201,24 @@ let homeTab = {
             ]
         }
         let content = template.renderTemplate('#formtemplate', '', formContent);
-        debugger
         let templateData = {
             "content": content,
-            "clickEvent": "addEventData",
+            "clickEvent": "homeTab.addEventData",
             "btnName": "Add Events"
         }
         template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1)
+    },
+    addEventData: async (e) => {
+        event.preventDefault();
+        let validateForms = $("#form-data").valid();
+        if (validateForms) {
+            let formData = app.form.convertToData('#form-data');
+            let { time, date } = utils.convertDateAndTime(formData['event_date']);
+            formData['event_date'] = date;
+            formData['event_time'] = time;
+            appService.preLoaderShow();
+            await appService.addEvents(formData)
+        }
     }
 }
 let id,
@@ -226,8 +237,11 @@ $(document).ready(async function () {
 
 $(document).on('page:init', async function (e) {
     formValidationn.validateLoginForm();
-    formValidationn.validateRegisterForm()
     utils.showLoginName();
     homeTab.homeRenderBtn();
 });
+$(document).on('popup:opened', function () {
+    formValidationn.validatePopupForm()
+
+})
 

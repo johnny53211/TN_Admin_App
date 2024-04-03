@@ -13,6 +13,7 @@ let registerUser = schema.register_users,
     employeePresonalDetails = schema.employee_details,
     employeeContact = schema.emp_contact,
     employeeAdharDetails = schema.emp_adhar_details,
+    eventDataSchema = schema.getEventData,
     resMsg, postedData;
 
 const apiHelper = {
@@ -156,7 +157,7 @@ const apiHelper = {
         })
         return response
     },
-    "updateEmpDetails": async (req, res) => {
+    "updateEmpDetails": async (req, res) => { // not Finish
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
         let isData = await apiHelper.getAttendance(postedData, 'employee_details')
         if (!Object.keys(isData).length > 0) {
@@ -243,16 +244,28 @@ const apiHelper = {
         });
     },
     "getEventList": async (req, res) => {
-        let options = {
-            table: 'events'
+        let genderRes = await apiHelper.getEventData()
+        genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
+    },
+    "getEventData": async (data, tableName) => {
+        let { event_date, event_name } = data || {};
+        let query = [];
+        if (event_name)
+            query.push({ [eventDataSchema.fields.event_name]: event_name });
+        // check pin is getting add one more query
+        if (event_date) {
+            query.push({ [eventDataSchema.fields.event_date]: event_date, "condition": 'OR' });
         }
-        let genderRes = await new Promise((resolve, reject) => {
+        let options = {
+            table: tableName || eventDataSchema.tableName,
+            query: query,
+        };
+        return await new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
                 resolve(response || response[0] || {});
             });
         });
-        genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-        res.send(resMsg);
     },
     "getEmpGenderDetails": async (req, res) => {
         let options = {
@@ -319,6 +332,37 @@ const apiHelper = {
             resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
             res.send(resMsg);
         }
+    },
+    "addEventsData": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
+        let getResponse = await apiHelper.getEventData(postedData);
+        let postValue = {};
+        postValue.type = eventDataSchema.tableName;
+        postValue.body = [postedData];
+        if (Object.keys(getResponse).length > 0) {
+            let { event_name, event_date } = postedData;
+            let query = [];
+            if (event_name)
+                query.push({ [eventDataSchema.fields.event_name]: event_name });
+            // check pin is getting add one more query
+            if (event_date) {
+                query.push({ [eventDataSchema.fields.event_date]: event_date, "condition": "OR" });
+            }
+            let updateResponse = await new Promise((resolve, reject) => {
+                databaseHelper.saveRecord(postValue, query, function (response) {
+                    resolve(response)
+                });
+            });
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_UPDATED'], updateResponse);
+        } else {
+            let insertResponse = await new Promise((resolve, reject) => {
+                databaseHelper.saveRecord(postValue, '', function (response) {
+                    resolve(response)
+                });
+            });
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse);
+        }
+        res.send(resMsg)
     }
 }
 

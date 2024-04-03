@@ -12,6 +12,7 @@ let apiUrl = {
     "genderList": `${baseUrl}/getEmpGenderDetails`,
     "teamList": `${baseUrl}/getEmpTeamDetails`,
     "foodTypeList": `${baseUrl}/getEmpFoodPreference`,
+    "addEvents": `${baseUrl}/addEvents`
 };
 let appService = {
     foodType: null,
@@ -45,7 +46,7 @@ let appService = {
                     }
                     dialog.customDialog(dialogArgs);
                 } else {
-                    debugger
+
                     dialogArgs.title = responseData['message']
                     dialog.customDialog(dialogArgs);
                 }
@@ -60,7 +61,6 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
-            debugger
             if (res['status'] == 200)
                 appService.teamList = res['data'];
         } catch (error) {
@@ -106,4 +106,28 @@ let appService = {
             console.log(error)
         }
     },
+    addEvents: async (data) => {
+        let args = {
+            url: apiUrl['addEvents'],
+            method: 'post',
+            dataString: data
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            if (res['status'] == 200) {
+                let dialogArgs = {
+                    type: 'alert',
+                    title: res['message'],
+                    text: "TN Admin",
+                }
+                dialog.customDialog(dialogArgs)
+                appService.eventList = res['data'];
+                debugger
+            }
+            appService.preLoaderHide();
+        } catch (error) {
+            console.log(error)
+            appService.preLoaderHide();
+        }
+    }
 }
