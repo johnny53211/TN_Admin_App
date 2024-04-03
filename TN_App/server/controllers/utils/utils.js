@@ -69,7 +69,7 @@ let utils = {
 	 * @purpose  - Checking schema values is getting in request
 	 * @return
 	 */
-	"schemaFieldsMapping": function (schema, schemaName, dataObj) {
+	schemaFieldsMapping: function (schema, schemaName, dataObj) {
 		//get table schema
 		let schemaTbl = schema[schemaName];
 		let fieldsMapped = {};

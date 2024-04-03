@@ -30,21 +30,39 @@ const apis = [
 		"cors": true
 	},
 	{
-		"routeName": `/getEmployeeAttendance`,
+		"routeName": `/getEmpAttendance`,
 		"method": "post",
-		"callback": apiHelper.getEmployeeAttendance,
+		"callback": apiHelper.getEmpAttendance,
 		"cors": true
 	},
 	{
-		"routeName": `/addEmployeeDetails`,
+		"routeName": `/addEmpDetails`,
 		"method": "post",
-		"callback": apiHelper.addEmployeeDetails,
+		"callback": apiHelper.addEmpDetails,
 		"cors": true
 	},
 	{
-		"routeName": `/getEmployeeDetails`,
-		"method": "post",
-		"callback": apiHelper.getAllEmployeeDetails,
+		"routeName": `/getEmpGenderDetails`,
+		"method": "get",
+		"callback": apiHelper.getEmpGenderDetails,
+		"cors": true
+	},
+	{
+		"routeName": `/getEmpFoodPreference`,
+		"method": "get",
+		"callback": apiHelper.getEmpFoodPreference,
+		"cors": true
+	},
+	{
+		"routeName": `/getEmpTeamDetails`,
+		"method": "get",
+		"callback": apiHelper.getEmpTeamDetails,
+		"cors": true
+	},
+	{
+		"routeName": `/getEmpResponse`,
+		"method": "get",
+		"callback": apiHelper.getEmpResponse,
 		"cors": true
 	}
 ];

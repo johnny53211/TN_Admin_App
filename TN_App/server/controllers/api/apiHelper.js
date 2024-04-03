@@ -112,7 +112,7 @@ const apiHelper = {
             });
         });
     },
-    "addEmployeeDetails": async (req, res) => {
+    "addEmpDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
         let isData = await apiHelper.getAttendance(postedData, 'employee_details')
         if (!Object.keys(isData).length > 0) {
@@ -156,7 +156,7 @@ const apiHelper = {
         })
         return response
     },
-    "updateEmployeeDetails": async (req, res) => {
+    "updateEmpDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
         let isData = await apiHelper.getAttendance(postedData, 'employee_details')
         if (!Object.keys(isData).length > 0) {
@@ -192,7 +192,7 @@ const apiHelper = {
         }
         res.send(resMsg);
     },
-    "getEmployeeAttendance": async (req, res) => {
+    "getEmpAttendance": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'emp_attendance', req['body']);
         let response = await apiHelper.getAttendance(postedData);
         if (Object.keys(response).length > 0) {
@@ -203,7 +203,7 @@ const apiHelper = {
             res.send(resMsg);
         }
     },
-    "getAllEmployeeDetails": async (req, res) => {
+    "getAllEmpDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
         let getResponse = await apiHelper.getEmpDetails(postedData);
         getResponse && getResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
@@ -244,6 +244,78 @@ const apiHelper = {
     },
     "addEvents": (req, res) => {
 
+    },
+    "getEmpGenderDetails": async (req, res) => {
+        let options = {
+            table: 'gender'
+        }
+        let genderRes = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        if (genderRes) {
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes);
+            res.send(resMsg);
+        }
+        else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
+    },
+    "getEmpFoodPreference": async (req, res) => {
+        let options = {
+            table: 'food_type'
+        }
+        let foodPrefRes = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        if (foodPrefRes) {
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes);
+            res.send(resMsg);
+        }
+        else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
+    },
+    "getEmpTeamDetails": async (req, res) => {
+        let options = {
+            table: 'team'
+        }
+        let teamDetailsRes = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        if (teamDetailsRes) {
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], teamDetailsRes);
+            res.send(resMsg);
+        }
+        else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
+    },
+    "getEmpResponse": async (req, res) => {
+        let options = {
+            table: 'yes_no_table'
+        }
+        let empRes = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        if (empRes) {
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], empRes);
+            res.send(resMsg);
+        }
+        else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
     }
 }
 
