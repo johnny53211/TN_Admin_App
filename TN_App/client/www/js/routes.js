@@ -49,16 +49,37 @@ let routes = [
 
   },
   {
-    name: "employee",
-    path: '/employeeDetails/',
-    url: './pages/dataTable.html',
+    name: "eventsList",
+    path: '/events/',
+    url: './pages/listView.html',
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
-        // template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
+        template.renderTemplate(`#listView`, '#listViewList', homeTab['eventsList'], pageElement, 2)
       },
-    },
-
+    }
+  },
+  {
+    name: "celebrationList",
+    path: '/celebrationList/',
+    url: './pages/listView.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        template.renderTemplate(`#listView`, '#listViewList', homeTab['celebrationList'], pageElement, 2)
+      },
+    }
+  },
+  {
+    name: "tournamentsList",
+    path: '/tournamentsList/',
+    url: './pages/listView.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        template.renderTemplate(`#listView`, '#listViewList', homeTab['tournamentsList'], pageElement, 2)
+      },
+    }
   },
   // Default route (404 page). MUST BE THE LAST
   {

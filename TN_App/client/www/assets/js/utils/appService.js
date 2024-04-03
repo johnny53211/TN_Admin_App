@@ -8,10 +8,10 @@ let apiUrl = {
     "addAttendance": `${baseUrl}/addAttendance`,
     "getEmployeeAttendance": `${baseUrl}/getEmployeeAttendance`,
     "eventList": `${baseUrl}/getEmployeeAttendance`,
-    "yesNoList": `${baseUrl}/`,
-    "genderList": `${baseUrl}/`,
-    "teamList": `${baseUrl}/`,
-    "foodTypeList": `${baseUrl}/`,
+    "yesNoList": `${baseUrl}/getEmpResponse`,
+    "genderList": `${baseUrl}/getEmpGenderDetails`,
+    "teamList": `${baseUrl}/getEmpTeamDetails`,
+    "foodTypeList": `${baseUrl}/getEmpFoodPreference`,
 };
 let appService = {
     foodType: null,
@@ -87,6 +87,5 @@ let appService = {
         } catch (error) {
             console.log(error)
         }
-
     }
 }
