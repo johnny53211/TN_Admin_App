@@ -7,9 +7,16 @@ let apiUrl = {
     "registerEmployees": `${baseUrl}/registerEmployees`,
     "addAttendance": `${baseUrl}/addAttendance`,
     "getEmployeeAttendance": `${baseUrl}/getEmployeeAttendance`,
-    "eventList": `${baseUrl}/getEmployeeAttendance`
+    "eventList": `${baseUrl}/getEmployeeAttendance`,
+    "yesNoList": `${baseUrl}/`,
+    "genderList": `${baseUrl}/`,
+    "teamList": `${baseUrl}/`,
+    "foodTypeList": `${baseUrl}/`,
 };
 let appService = {
+    foodType: null,
+    genderType: null,
+    teamList: null,
     preLoaderShow: () => {
         app.dialog.preloader('Please Wait ...');
     },// app loader hide
@@ -17,7 +24,6 @@ let appService = {
         app.dialog.close();
     },
     registerUser: (data) => {
-        debugger
         let args = {
             url: apiUrl['registerUser'],
             method: 'post',
@@ -45,5 +51,42 @@ let appService = {
             }
         }
         loginService.callAPI(args)
+    },
+    getTeamList: async () => {
+        let args = {
+            url: apiUrl['teamList'],
+            method: 'get',
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            appService.teamList = JSON.parse(res);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getFoodType: async () => {
+        let args = {
+            url: apiUrl['foodTypeList'],
+            method: 'get',
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            appService.foodType = JSON.parse(res);
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    getGender: async () => {
+        let args = {
+            url: apiUrl['genderList'],
+            method: 'get',
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            appService.genderType = JSON.parse(res);
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 }
