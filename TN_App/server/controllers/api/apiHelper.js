@@ -288,14 +288,8 @@ const apiHelper = {
                 resolve(response || response[0] || {});
             });
         });
-        if (foodPrefRes) {
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes);
-            res.send(resMsg);
-        }
-        else {
-            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-            res.send(resMsg);
-        }
+        foodPrefRes && foodPrefRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     },
     "getEmpTeamDetails": async (req, res) => {
         let options = {
@@ -306,14 +300,8 @@ const apiHelper = {
                 resolve(response || response[0] || {});
             });
         });
-        if (teamDetailsRes) {
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], teamDetailsRes);
-            res.send(resMsg);
-        }
-        else {
-            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-            res.send(resMsg);
-        }
+        teamDetailsRes && teamDetailsRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], teamDetailsRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     },
     "getEmpResponse": async (req, res) => {
         let options = {
@@ -324,14 +312,8 @@ const apiHelper = {
                 resolve(response || response[0] || {});
             });
         });
-        if (empRes) {
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], empRes);
-            res.send(resMsg);
-        }
-        else {
-            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-            res.send(resMsg);
-        }
+        empRes && empRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], empRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     },
     "addEventsData": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
