@@ -77,5 +77,11 @@ const apis = [
 		"callback": apiHelper.addEventsData,
 		"cors": true
 	},
+	{
+		"routeName": `/getEmpDetails`,
+		"method": "post",
+		"callback": apiHelper.getAllEmpDetails,
+		"cors": true
+	},
 ];
 module.exports = apis;

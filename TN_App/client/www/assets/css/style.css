@@ -45,3 +45,11 @@ input[name="confirmPin"]:invalid {
 #unlinkAccount {
     display: none;
 }
+
+.dataTables_length,
+.dataTables_filter,
+.dataTables_processing,
+#dataTable_admin_paginate,
+.dataTables_info {
+    display: none;
+}

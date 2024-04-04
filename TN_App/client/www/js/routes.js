@@ -26,7 +26,6 @@ let routes = [
         let pageElement = page.$el;
         // Render Template
         template.renderTemplate(`#linkAccount`, '#loginFormList', homeTab["loginFormJson"], pageElement)
-
       },
     },
   },
@@ -49,8 +48,17 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
-        // template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
       },
+      pageAfterIn: function (e, page) {
+        let pageElement = page.$el;
+        let args = {
+          selector: 'dataTable_admin',
+          columns: [{
+            data: 'id'
+          }]
+        }
+        dataTable.categoryTable(args)
+      }
     },
 
   },

@@ -2,83 +2,61 @@
     <div class="navbar">
         <div class="navbar-bg"></div>
         <div class="navbar-inner">
-            <p class="iconClass">
-                <a href="#" class="link back">
-                    <i class="icon icon-back"></i>
-                </a>
-            </p>
             <div class="title">Data Table</div>
         </div>
     </div>
     <div class="page-content">
         <div class="card data-table">
-            <table>
+            <table id="dataTable_admin">
                 <thead>
                     <tr>
                         <th class="input-cell">
                             <span class="table-head-label">ID</span>
                             <div class="input" style="width: 50px">
-                                <input type="number" placeholder="Filter" />
-                            </div>
-                        </th>
-                        <th class="input-cell">
-                            <span class="table-head-label">Name</span>
-                            <div class="input">
-                                <input type="text" placeholder="Filter" />
+                                <input type="number" name="emp_code" placeholder="Filter" />
                             </div>
                         </th>
                         <th class="input-cell">
                             <span class="table-head-label">Email</span>
                             <div class="input">
-                                <input type="email" placeholder="Filter" />
+                                <input type="email" name="mail_id" placeholder="Filter" />
                             </div>
-                        </th>
-                        <th class="input-cell">
-                            <span class="table-head-label">Details</span>
                         </th>
                         <th class="input-cell">
                             <span class="table-head-label">Gender</span>
                             <div class="input input-dropdown">
-                                <select>
-                                    <option value="All">All</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                <select name="gender">
+                                    <option value="">All</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
                                 </select>
                             </div>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>john@doe.com</td>
-                        <td>view Details</td>
-                        <td>Male</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Jane Doe</td>
-                        <td>vladimir@google.com</td>
-                        <td>view Details</td>
-                        <td>Female</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Vladimir Kharlampidi</td>
-                        <td>vladimir@google.com</td>
-                        <td>view Details</td>
-                        <td>Male</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Jennifer Doe</td>
-                        <td>jennifer@doe.com</td>
-                        <td>view Details</td>
-                        <td>Female</td>
-                    </tr>
                 </tbody>
             </table>
+            <div class="data-table-footer">
+                <div class="data-table-rows-select">Per page:<div class="input input-dropdown">
+                        <select name="gnder">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="all">All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="data-table-pagination">
+                    <span class="data-table-pagination-label"></span>
+                    <a href="#" class="link prev">
+                        <i class="icon icon-prev color-gray"></i>
+                    </a>
+                    <a href="#" class="link next">
+                        <i class="icon icon-next color-gray"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

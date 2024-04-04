@@ -12,7 +12,8 @@ let apiUrl = {
     "genderList": `${baseUrl}/getEmpGenderDetails`,
     "teamList": `${baseUrl}/getEmpTeamDetails`,
     "foodTypeList": `${baseUrl}/getEmpFoodPreference`,
-    "addEvents": `${baseUrl}/addEvents`
+    "addEvents": `${baseUrl}/addEvents`,
+    "getEmpDetails": `${baseUrl}/getEmpDetails`
 };
 let appService = {
     foodType: null,
