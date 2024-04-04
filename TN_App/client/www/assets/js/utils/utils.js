@@ -1,4 +1,15 @@
 let utils = {
+    "leftPanel": {
+        "list": [
+            {
+                "clickEvent": "loginService.logout",
+                "iconOne": "person_alt",
+                "iconTwo": "house",
+                "title": "Logout",
+                "class": "panel-close"
+            }
+        ]
+    },
     showLoginName: function () {
         var userData = loginService.getData('userData');
         userData = JSON.parse(userData);

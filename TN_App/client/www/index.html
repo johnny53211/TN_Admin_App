@@ -68,11 +68,10 @@
             </div>
           </div>
           <div class="page-content">
-            <div class="block" data-popup=".my-popup">
-              <button class="button button-preloader">
-                <span class="preloader"></span>
-                <span>Load</span>
-              </button>
+            <div class="list links-list list-outline-ios list-strong-ios list-dividers-ios">
+              <ul id="leftPanelRender">
+                <!-- left panel render -->
+              </ul>
             </div>
           </div>
         </div>
@@ -80,26 +79,6 @@
     </div>
     <!-- Views/Tabs container -->
     <div class="views tabs safe-areas">
-      <!-- Tabbar for switching views-tabs -->
-      <div class="toolbar toolbar-bottom tabbar-icons">
-        <div class="toolbar-inner">
-          <a href="#view-home" class="tab-link tab-link-active" onclick="homeTab.homeTabShow()">
-            <i class="icon f7-icons if-not-md">house_fill</i>
-            <i class="icon material-icons if-md">home</i>
-            <span class="tabbar-label">Home</span>
-          </a>
-          <a href="#view-catalog" class="tab-link">
-            <i class="icon f7-icons if-not-md">square_list_fill</i>
-            <i class="icon material-icons if-md">view_list</i>
-            <span class="tabbar-label">Catalog</span>
-          </a>
-          <a href="#view-settings" class="tab-link">
-            <i class="icon f7-icons if-not-md">gear</i>
-            <i class="icon material-icons if-md">settings</i>
-            <span class="tabbar-label">Settings</span>
-          </a>
-        </div>
-      </div>
       <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
       <div id="view-home" class="view view-main view-init tab tab-active">
         <div class="page" data-name="home">
@@ -125,14 +104,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- Catalog View -->
-      <div id="view-catalog" class="view view-init tab" data-name="catalog" data-url="/catalog/">
-        <!-- Catalog page will be loaded here dynamically from /catalog/ route -->
-      </div>
-      <!-- Settings View -->
-      <div id="view-settings" class="view view-settings view-init tab" data-name="setting" data-url="/settings/">
-        <!-- Settings page will be loaded here dynamically from /settings/ route -->
       </div>
     </div>
     <div class="popup my-popup">

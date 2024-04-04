@@ -7,7 +7,6 @@ let dataTable = {
         let searchValue;
         function getSearchValue(value) {
             searchValue = value; // Update the searchValue variable with the new value
-            console.log(searchValue);
         }
         let ajaxData = {
             type: "post",
@@ -17,16 +16,17 @@ let dataTable = {
                 d.limit = d.length;
                 d.offset = d.start;
                 d.count = true;
-                d.search.value = d.search.value || searchValue;
-                // console.log(d.search.value);
+                d.search.value = searchValue || d.search.value;
+                console.log(d.search.value);
                 return d;
             },
             dataFilter: function (data) {
                 let json = jQuery.parseJSON(data);
-                // json.recordsTotal = json.data.total_record;
-                // json.recordsFiltered = json.data.total_record;
-                // json.data = json.data.data;
-                // this.TblData = json.data.data;
+                console.log(json);
+                json.recordsTotal = json.data.total_record;
+                json.recordsFiltered = json.data.total_record;
+                json.data = json.data.data || json.data || '';
+                this.TblData = json.data.data || json.data || '';
                 return JSON.stringify(json);
             },
         };
@@ -68,7 +68,6 @@ let dataTable = {
                         .off("keyup change") // Remove any previous event handlers
                         .on("input", function (e) {
                             let searchValue = $(this).val();
-                            debugger
                             getSearchValue(searchValue);
                             api.column(colIdx).search(searchValue).draw();
                         })
@@ -85,9 +84,13 @@ let dataTable = {
                 let dropdownFilter = filtersRow.find(".input-with-value");
                 console.log(dropdownFilter.length);
                 if (dropdownFilter.length) {
-                    dropdownFilter.on("change", function () {
+                    dropdownFilter.on("change", function (e) {
+                        e.preventDefault();
                         let selectedValue = $(this).val();
+                        console.log(selectedValue);
                         getSearchValue(selectedValue);
+                        let colIdx = $(this).data('col-index');
+                        console.log(colIdx);
                         api.column(colIdx).search(selectedValue).draw();
                     });
                 }

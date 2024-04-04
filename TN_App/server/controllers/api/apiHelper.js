@@ -205,7 +205,6 @@ const apiHelper = {
         }
     },
     "getAllEmpDetails": async (req, res) => {
-        console.log(req.body);
         postedData = req.body;
         let getResponse = await apiHelper.getEmpDetails(postedData);
         getResponse && getResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
@@ -249,17 +248,17 @@ const apiHelper = {
                     {
                         query: [
                             {
-                                name: `%${query.search.value}%`,
+                                gender: `%${query.search.value}%`,
                                 operator: "like",
                                 condition: "OR",
                             },
                             {
-                                description: `%${query.search.value}%`,
+                                mail_id: `%${query.search.value}%`,
                                 operator: "like",
                                 condition: "OR",
                             },
                             {
-                                status: `%${query.search.value}%`,
+                                emp_code: `%${query.search.value}%`,
                                 operator: "like",
                                 condition: "OR",
                             },
@@ -270,7 +269,8 @@ const apiHelper = {
         }
         //console.log( query.search.value);
         if (query && query.search && query.search.value) {
-            queryArray.push({ id: 0, operator: "!=", and });
+            console.log(query.search.value);
+            queryArray.push({ emp_code: 0, operator: "!=", and });
         }
         let totalCount = 0;
         if (query.count) {
@@ -288,6 +288,7 @@ const apiHelper = {
         options.count = false;
         let getResponse = await new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, async function (response) {
+                console.log(response);
                 let errMsg =
                     response && Object.keys(response).length === 0
                         ? config['response']['messages']['error']['TYPE_ERROR']

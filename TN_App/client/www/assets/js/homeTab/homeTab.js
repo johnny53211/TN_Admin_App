@@ -165,6 +165,7 @@ let homeTab = {
     },
     homeRenderBtn: () => {
         template.renderTemplate('#homeButton', '#homeRender', homeTab['homeButtonJson'], '', 1);
+        template.renderTemplate(`#leftPanelTemplate`, '#leftPanelRender', utils["leftPanel"], '', 1)
     },
     handlePopupClick: (element) => {
         let clickedPopup = element.dataset.name;

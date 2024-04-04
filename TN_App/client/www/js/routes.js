@@ -12,8 +12,13 @@ let routes = [
     path: '/',
     url: './index.html',
     on: {
+      pageBeforeIn: function (e, page) {
+        let pageElement = page.$el;
+        // Render Template
+
+      },
       pageAfterIn: async function (e, page) {
-        // homeTab.homeRenderBtn();
+        let pageElement = page.$el;
         await Promise.all([appService.getGender(), appService.getFoodType(), appService.getTeamList(), appService.getEvents()]);
       }
     }

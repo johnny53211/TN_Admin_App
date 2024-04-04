@@ -82,3 +82,21 @@
      </li>
     {{/each}}
 </script>
+
+<!-- left panel render  -->
+<script id="leftPanelTemplate" type="text/template7">
+{{#each list}}
+<li {{#if class}} class="{{class}}" {{/if}} {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}} >
+    <a>
+    <div class="item-media">
+        <i class="icon material-icons if-md">{{iconOne}}</i>
+        <i class="icon f7-icons if-not-md">{{iconTwo}}</i>
+    </div>
+    <div class="item-inner">
+        <div class="item-title">{{title}}</div>
+    </div>
+    </a>
+</li>
+{{/each}}
+</script>
+<!-- left panel render -->

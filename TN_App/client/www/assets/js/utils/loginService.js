@@ -104,16 +104,19 @@ let loginService = {
         app.views.main.router.navigate(`${page}`, options);
     },// logout service
     logout: function () {
-        let getToken = loginService.getUserInfo('token');
-        activityObj = {
-            token: getToken,
-            activity: "logout"
+        let dialogArgs = {
+            type: 'confirm',
+            title: 'Are You Sure ?',
+            text: "TN Admin",
+            callbackOk: function () {
+                loginService.removeData('userData');
+                app.tab.show("#view-home");
+                loginService.redirect('/login/', {
+                    reloadAll: true
+                })
+            }
         }
-        loginService.removeData('userData');
-        app.tab.show("#view-home");
-        loginService.redirect('/login/', {
-            reloadAll: true
-        })
+        dialog.customDialog(dialogArgs)
     },
     isRememberMe: () => {
         let isremember = $("#flexCheckDefault").is(":checked");
