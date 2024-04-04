@@ -209,22 +209,40 @@ const apiHelper = {
         postedData = req.body;
         let getResponse = await apiHelper.getEmpDetails(postedData);
         getResponse && getResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getResponse) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
-        res.send(resMsg);
+        res.send(getResponse);
     },
-    "getEmpDetails": (reqQuery, tableName) => {
+    "getEmpDetails": async (reqQuery, empCode, tableName) => {
         let queryArray = [];
         let query = reqQuery,
             options;
-        let typeID = req.body.id;
-        if (typeID) query.push({ ["id"]: typeID });
+        let { emp_code, mail_id } = reqQuery;
+        if (emp_code)
+            query.push({ ['emp_personal_details.emp_code']: emp_code });
+        // check pin is getting add one more query
+        if (mail_id) {
+            query.push({ ['emp_personal_details.mail_id']: mail_id });
+        }
+        let join = [{
+            'type': 'LEFT JOIN',
+            'table': 'gender',
+            'column': 'id',
+            'with_table': 'emp_personal_details',
+            'with_column': 'gender'
+        }, {
+            'type': 'LEFT JOIN',
+            'table': 'team',
+            'column': 'id',
+            'with_table': ' emp_personal_details',
+            'with_column': 'team'
+        }]
         options = {
-            table: schema.product_values.table,
+            table: employeePresonalDetails['tableName'],
             query: queryArray,
             limit: query.length || "",
+            join: join
         };
         let and;
         if (query && query.search && query.search.value) {
-            console.log(query.search.value);
             and = {
                 condition: "OR",
                 nest: [
@@ -251,7 +269,7 @@ const apiHelper = {
             };
         }
         //console.log( query.search.value);
-        if (query && query.search.value) {
+        if (query && query.search && query.search.value) {
             queryArray.push({ id: 0, operator: "!=", and });
         }
         let totalCount = 0;
@@ -268,56 +286,26 @@ const apiHelper = {
         options.limit = query.length || "";
         options.offset = query.start;
         options.count = false;
-        databaseHelper.getRecord(options, async function (response) {
-            console.log(response);
-            let errMsg =
-                response && Object.keys(response).length === 0
-                    ? config.messages.messages.success.EMPTY_DATA
-                    : config.messages.messages.success;
-            let resMsg = utils.generateResponse(
-                config.statusCodes.OK,
-                config.messages.messages.success.SUCCESS_MESSAGE,
-                {
-                    status: config.statusCodes["OK"],
-                    message: errMsg,
-                    total_record: totalCount,
-                    data: response,
-                }
-
-            );
-            res.send(resMsg);
-        })
-        let { emp_code, mail_id } = data
-        let join = [{
-            'type': 'LEFT JOIN',
-            'table': 'gender',
-            'column': 'id',
-            'with_table': 'emp_personal_details',
-            'with_column': 'gender'
-        }, {
-            'type': 'LEFT JOIN',
-            'table': 'team',
-            'column': 'id',
-            'with_table': ' emp_personal_details',
-            'with_column': 'team'
-        }]
-        let query = [];
-        if (emp_code)
-            query.push({ ['emp_personal_details.emp_code']: emp_code });
-        // check pin is getting add one more query
-        if (mail_id) {
-            query.push({ ['emp_personal_details.mail_id']: mail_id });
-        }
-        let options = {
-            table: tableName || employeePresonalDetails.tableName,
-            query: query,
-            join
-        };
-        return new Promise((resolve, reject) => {
-            databaseHelper.getRecord(options, function (response) {
-                resolve(response || response[0] || {});
+        let getResponse = await new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, async function (response) {
+                let errMsg =
+                    response && Object.keys(response).length === 0
+                        ? config['response']['messages']['error']['TYPE_ERROR']
+                        : config['response']['messages']['success']['CODE_SUCCESS'];
+                let resMsg = utils.generateResponse(
+                    config['response']['statusCodes']['OK'],
+                    config['response']['messages']['success']['CODE_SUCCESS'],
+                    {
+                        status: config['response']['statusCodes']['OK'],
+                        message: errMsg,
+                        total_record: totalCount,
+                        data: response,
+                    }
+                );
+                resolve(resMsg)
             });
-        });
+        })
+        return getResponse;
     },
     "getEventList": async (req, res) => {
         let genderRes = await apiHelper.getEventData()
