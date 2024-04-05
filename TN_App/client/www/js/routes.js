@@ -56,6 +56,7 @@ let routes = [
       },
       pageAfterIn: function (e, page) {
         let pageElement = page.$el;
+
         let args = {
           selector: 'dataTable_admin',
           columns: [
@@ -69,7 +70,9 @@ let routes = [
             }
           ]
         }
-        dataTable.categoryTable(args)
+        if (!$.fn.DataTable.isDataTable(`#${args['selector']}`)) {
+          dataTable.categoryTable(args)
+        }
       }
     },
 
@@ -97,6 +100,7 @@ let routes = [
         let resData = await appService.getEmpDetails(dataString);
         templateData["list"] = utils.mapEmpDetails(resData['data']);
         pageElement.find('#removeEmp').attr('data-emp_code', dataString['params']['emp_code']);
+        pageElement.find('#emp_name').html(resData['data'][0].emp_name)
         template.renderTemplate(`#listView`, '#employeeFilterList', templateData, pageElement, 2)
       },
     }
