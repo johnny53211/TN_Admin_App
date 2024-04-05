@@ -220,6 +220,10 @@ let homeTab = {
             appService.preLoaderShow();
             await appService.addEvents(formData)
         }
+    },
+    deleteEmp: async (e) => {
+        let emp_code = e.dataset['emp_code'];
+        
     }
 }
 let id,

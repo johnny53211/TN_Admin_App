@@ -95,13 +95,8 @@ let routes = [
         let pageElement = page.$el;
         let dataString = e.detail.route;
         let resData = await appService.getEmpDetails(dataString);
-        // templateData["list"] = [
-        //   {
-        //     title: "John",
-        //     subTitle: "hello"
-        //   }
-        // ]
         templateData["list"] = utils.mapEmpDetails(resData['data']);
+        pageElement.find('#removeEmp').attr('data-emp_code', dataString['params']['emp_code']);
         template.renderTemplate(`#listView`, '#employeeFilterList', templateData, pageElement, 2)
       },
     }
