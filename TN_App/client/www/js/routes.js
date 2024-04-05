@@ -58,9 +58,16 @@ let routes = [
         let pageElement = page.$el;
         let args = {
           selector: 'dataTable_admin',
-          columns: [{
-            data: 'id'
-          }]
+          columns: [
+            { data: 'emp_code' },
+            { data: 'mail_id' },
+            { data: 'gender' },
+            {
+              render: function (data, type, row) {
+                return ` <a class="link" href="/filterEmployee/${row['emp_code']}"> <i class="icon f7-icons color-green">doc_chart</i>`;
+              },
+            }
+          ]
         }
         dataTable.categoryTable(args)
       }
@@ -75,6 +82,18 @@ let routes = [
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
         template.renderTemplate(`#listView`, '#listViewList', homeTab['eventsList'], pageElement, 2)
+      },
+    }
+  },
+  {
+    name: "filterEmployee",
+    path: '/filterEmployee/:emp_code',
+    url: './pages/empProfile.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        debugger
+        let pageElement = page.$el;
+        // template.renderTemplate(`#listView`, '#listViewList', homeTab['eventsList'], pageElement, 2)
       },
     }
   },

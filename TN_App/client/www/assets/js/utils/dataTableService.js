@@ -35,11 +35,7 @@ let dataTable = {
             pageLength: 10,
             serverSide: true,
             ajax: ajaxData,
-            columns: [
-                { data: 'emp_code' },
-                { data: 'mail_id' },
-                { data: 'gender' }
-            ],
+            columns: columns,
             initComplete: function () {
                 let api = this.api();
                 let table = $('#dataTable_admin'); // Use selector to find the table element
