@@ -1,5 +1,43 @@
-<div class="page" data-name="home">
+<div class="page">
   <div class="page-content">
-    ... scrollable page content goes here ...
+    <div class="page no-navbar no-toolbar no-swipeback">
+      <div class="page-content login-screen-content">
+        <form id="loginForm" method="post" class="userForm">
+          <div class="list">
+            <div class="login-screen-title">LOGIN</div>
+            <div>
+              <p id="err-message" class="err-msg"></p>
+            </div>
+              <ul id="loginFormList">
+
+                <li class="item-content item-input valid">
+                    <div class="item-inner">
+                        <div class="item-title item-label">Username</div>
+                        <div class="item-input-wrap">
+                            <input type="text" name="username" class="inputBox" id="linkUserName" placeholder="Enter Username" aria-invalid="false">
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="item-content item-input">
+                    <div class="item-inner">
+                        <div class="item-title item-label">Password</div>
+                        <div class="item-input-wrap">
+                            <input type="password" name="password" class="inputBox" id="password" placeholder="Enter Password">
+                        </div>
+                    </div>
+                </li>
+                
+            </ul>
+          </div>
+          <div class="list">
+            <ul>
+              <li><a href="/" id="loginBtn" onclick="homeTab.loginConfirmation()" class="list-button">Login</a></li>
+              <li><a href="#" class="list-button">Forgot Password ?</a></li>
+            </ul>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

@@ -2,59 +2,81 @@
 <html>
 
 <head>
-    <!-- Required meta tags-->
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <!-- Color theme for statusbar (Android only) -->
-    <meta name="theme-color" content="#2196f3">
-    <!-- Your app title -->
-    <title>TN Admin</title>
-    <!-- Path to Framework7 Library Bundle CSS -->
-    <link rel="stylesheet" href="./framework7/framework7-bundle.min.css">
+  <meta charset="utf-8">
+  <!--
+  Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+      https://cordova.apache.org/docs/en/latest/
+  Some notes:
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+      * Enable inline JS: add 'unsafe-inline' to default-src
+  -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: content:">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+
+  <meta name="theme-color" content="#fff">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <title>Employee Portal</title>
+  <!-- web-start -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="./www/assets/icons/apple-touch-icon.png">
+  <link rel="icon" href="./www/assets/icons/favicon.png">
+  <!-- web-end -->
+  <link rel="stylesheet" href="./www/framework7/framework7-bundle.min.css">
+
 </head>
 
 <body>
-    <!-- App root element -->
+
     <div id="app">
 
-        <!-- Your main view, should have "view-main" class -->
-        <div class="view view-main">
-            <!-- Initial Page, "data-name" contains page name -->
-            <div data-name="home" class="page">
+      <!-- Your main view, should have "view-main" class -->
+      <div class="view view-main">
+          <!-- Initial Page, "data-name" contains page name -->
+          <div data-name="home" class="page">
 
-                <!-- Top Navbar -->
-                <div class="navbar">
-                    <div class="navbar-bg"></div>
-                    <div class="navbar-inner">
-                        <div class="title">Awesome App</div>
-                    </div>
-                </div>
+              <!-- Top Navbar -->
+              <!-- <div class="navbar">
+                  <div class="navbar-bg"></div>
+                  <div class="navbar-inner">
+                      <div class="title">Awesome App</div>
+                  </div>
+              </div> -->
 
-                <!-- Bottom Toolbar -->
-                <div class="toolbar toolbar-bottom">
-                    <div class="toolbar-inner">
-                        <!-- Toolbar links -->
-                        <a href="#" class="link">Link 1</a>
-                        <a href="#" class="link">Link 2</a>
-                    </div>
-                </div>
+              <!-- Bottom Toolbar -->
+              <!-- <div class="toolbar toolbar-bottom">
+                  <div class="toolbar-inner"> -->
+                      <!-- Toolbar links -->
+                      <!-- <a href="#" class="link">Link 1</a>
+                      <a href="#" class="link">Link 2</a>
+                  </div>
+              </div> -->
 
-                <!-- Scrollable page content -->
-                <div class="page-content">
-                    <p>Page content goes here</p>
-                    <!-- Link to another page -->
-                    <a href="/login/">About app</a>
+              <!-- Scrollable page content -->
+              <div class="page-content">
+                <div class="block grid grid-cols-2 grid-gap">
+                  <a href="/attendance/" class="button button-fill popup-open">Attendance</a>
+                  <a href="/events/" class="button button-fill">Events</a>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- Path to Framework7 Library Bundle JS-->
-    <script type="text/javascript" src="./framework7/framework7-bundle.min.js"></script>
-    <script src="./js/routes.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="./js/app.js"></script>
+              </div>
+          </div>
+      </div>
+  </div>
+    
+    <!-- CORDOVA_PLACEHOLDER_DONT_REMOVE -->
+
+    <!-- Framework7 library -->
+    <script src="./www/framework7/framework7-bundle.min.js"></script>
+
+    <!-- App routes -->
+    <script src="./www/js/routes.js"></script>
+
+    <!-- App scripts -->
+    <script src="./www/js/app.js"></script>
 </body>
 
 </html>

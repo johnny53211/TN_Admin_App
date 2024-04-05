@@ -3,6 +3,7 @@ var app = new Framework7({
   name: 'Employee Portal', // App name
   theme: 'auto', // Automatic theme detection
   el: '#app', // App root element
+  
   // Cordova Statusbar settings
   routes: routes,
   swipeBackPage: false,
