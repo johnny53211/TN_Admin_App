@@ -123,7 +123,23 @@ let appService = {
                 }
                 dialog.customDialog(dialogArgs)
                 appService.eventList = res['data'];
-                debugger
+            }
+            appService.preLoaderHide();
+        } catch (error) {
+            console.log(error)
+            appService.preLoaderHide();
+        }
+    },
+    "getEmpDetails": async (data) => {
+        let args = {
+            url: apiUrl['getEmpDetails'],
+            method: 'post',
+            dataString: data
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            if (res['status'] == 200) {
+                return res['data']
             }
             appService.preLoaderHide();
         } catch (error) {

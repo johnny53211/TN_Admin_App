@@ -90,10 +90,19 @@ let routes = [
     path: '/filterEmployee/:emp_code',
     url: './pages/empProfile.html',
     on: {
-      pageBeforeIn: function (e, page) {
-        debugger
+      pageBeforeIn: async function (e, page) {
+        let templateData = {}
         let pageElement = page.$el;
-        // template.renderTemplate(`#listView`, '#listViewList', homeTab['eventsList'], pageElement, 2)
+        let dataString = e.detail.route;
+        let resData = await appService.getEmpDetails(dataString);
+        // templateData["list"] = [
+        //   {
+        //     title: "John",
+        //     subTitle: "hello"
+        //   }
+        // ]
+        templateData["list"] = utils.mapEmpDetails(resData['data']);
+        template.renderTemplate(`#listView`, '#employeeFilterList', templateData, pageElement, 2)
       },
     }
   },
