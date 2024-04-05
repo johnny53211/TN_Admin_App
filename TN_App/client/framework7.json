@@ -5,7 +5,7 @@
     "pwa",
     "cordova"
   ],
-  "name": "BT Cricket",
+  "name": "TN Admin",
   "framework": "core",
   "template": "tabs",
   "bundler": false,
