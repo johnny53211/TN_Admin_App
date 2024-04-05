@@ -10,6 +10,10 @@ var routes = [{
     path: '/events/',
     url: './pages/events.html',
 },
+{
+    path: '/attendance/',
+    url: './pages/attendance.html',
+},
 // Default route (404 page). MUST BE THE LAST
 {
     path: '(.*)',
