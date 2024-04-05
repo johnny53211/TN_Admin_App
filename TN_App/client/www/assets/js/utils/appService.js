@@ -13,7 +13,8 @@ let apiUrl = {
     "teamList": `${baseUrl}/getEmpTeamDetails`,
     "foodTypeList": `${baseUrl}/getEmpFoodPreference`,
     "addEvents": `${baseUrl}/addEvents`,
-    "getEmpDetails": `${baseUrl}/getEmpDetails`
+    "getEmpDetails": `${baseUrl}/getEmpDetails`,
+    "deleteEmpDetails": `${baseUrl}/deleteEmp`
 };
 let appService = {
     foodType: null,
@@ -140,6 +141,28 @@ let appService = {
             let res = await loginService.callAPI(args);
             if (res['status'] == 200) {
                 return res['data']
+            }
+            appService.preLoaderHide();
+        } catch (error) {
+            console.log(error)
+            appService.preLoaderHide();
+        }
+    },
+    deleteEmpDetails: async (data) => {
+        let args = {
+            url: apiUrl['deleteEmpDetails'],
+            method: 'post',
+            dataString: data
+        }
+        try {
+            let res = await loginService.callAPI(args);
+            if (res['status'] == 200) {
+                let dialogArgs = {
+                    type: 'alert',
+                    title: res['message'],
+                    text: "TN Admin",
+                }
+                dialog.customDialog(dialogArgs)
             }
             appService.preLoaderHide();
         } catch (error) {

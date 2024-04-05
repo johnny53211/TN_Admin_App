@@ -32,7 +32,7 @@ let utils = {
     },
     mapEmpDetails: (data) => {
         const mappedData = data.map(employee => {
-            const { id, employee_name, father_name, mother_name, date_of_birth, designation, team_name, gender_type, mail_id, blood_group, date_of_joining, address, emp_code } = employee;
+            const { id, emp_name, father_name, mother_name, date_of_birth, designation, team_name, gender_type, mail_id, blood_group, date_of_joining, address, emp_code } = employee;
             return [
                 {
                     "liClass": `li${id}`,
@@ -44,7 +44,7 @@ let utils = {
                     "liClass": `li${id}`,
                     "title": "Employee Name",
                     "class": "item-link item-content",
-                    "subTitle": employee_name || '' // You haven't provided a value for employee name, so leaving it empty for now
+                    "subTitle": emp_name || '' // You haven't provided a value for employee name, so leaving it empty for now
                 },
                 {
                     "liClass": `li${id}`,

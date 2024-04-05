@@ -223,7 +223,17 @@ let homeTab = {
     },
     deleteEmp: async (e) => {
         let emp_code = e.dataset['emp_code'];
-        
+        if (emp_code) {
+            let dialogArgs = {
+                type: 'confirm',
+                title: "Are You Sure ?",
+                text: "TN Admin",
+                callback: () => {
+                    appService.deleteEmpDetails(e.dataset)
+                }
+            }
+            dialog.customDialog(dialogArgs)
+        }
     }
 }
 let id,

@@ -83,5 +83,11 @@ const apis = [
 		"callback": apiHelper.getAllEmpDetails,
 		"cors": true
 	},
+	{
+		"routeName": `/deleteEmp`,
+		"method": "post",
+		"callback": apiHelper.deleteEmpDetails,
+		"cors": true
+	},
 ];
 module.exports = apis;

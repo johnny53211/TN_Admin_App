@@ -233,6 +233,12 @@ const apiHelper = {
             'column': 'id',
             'with_table': ' emp_personal_details',
             'with_column': 'team'
+        }, {
+            'type': 'LEFT JOIN',
+            'table': 'employee_details',
+            'column': 'emp_code',
+            'with_table': ' emp_personal_details',
+            'with_column': 'emp_code'
         }]
         options = {
             table: employeePresonalDetails['tableName'],
@@ -410,6 +416,25 @@ const apiHelper = {
             resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse);
         }
         res.send(resMsg)
+    },
+    "deleteEmpDetails": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
+        let postValueEmpPersonal = postMainEmpDetail = {};
+        let query = [];
+        postValueEmpPersonal['table'] = employeePresonalDetails.tableName;
+        postMainEmpDetail['table'] = 'employee_details';
+        if (postedData && postedData['emp_code'])
+            query.push({ [employeePresonalDetails.fields['emp_code']]: postedData['emp_code'] })
+        postValueEmpPersonal['query'] = query;
+        postMainEmpDetail['query'] = query;
+        let deleteData = [postValueEmpPersonal, postMainEmpDetail];
+        let deleteResponse = await new Promise((resolve, reject) => {
+            databaseHelper.deleteRecord(deleteData, function (response) {
+                resolve(response)
+            })
+        })
+        deleteResponse && deleteResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_DELETED']) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
     }
 }
 
