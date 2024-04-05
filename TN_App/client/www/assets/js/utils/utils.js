@@ -109,5 +109,8 @@ let utils = {
             ];
         });
         return mappedData[0];
+    },
+    mapCelebrationArray: (data) => {
+        return data;
     }
 }

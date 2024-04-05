@@ -127,6 +127,19 @@ let routes = [
       },
     }
   },
+  {
+    name: "upcomingFunctions",
+    path: '/upcomingFunctions/:eventTypeId',
+    url: './pages/upcomingEvents.html',
+    on: {
+      pageBeforeIn: function (e, page) {
+        let dataString = e.detail.route;
+        let pageElement = page.$el;
+        $(pageElement).find('.subnavbar').remove();
+        // template.renderTemplate(`#listView`, '#listViewList', homeTab['tournamentsList'], pageElement, 2)
+      },
+    }
+  },
   // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',

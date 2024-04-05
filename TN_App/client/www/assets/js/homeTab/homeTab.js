@@ -106,7 +106,7 @@ let homeTab = {
                 "idValue": "upcomingFunctions",
                 "data": "upcomingFunctions",
                 "subTitleId": "",
-                "url": "upcomingFunctions",
+                "url": "upcomingFunctions/1",
                 "divId": "upcomingFunctionsOne",
                 "class": "item-link item-content"
             },
@@ -130,11 +130,9 @@ let homeTab = {
                 "idValue": "upcomingTounaments",
                 "data": "upcomingTounaments",
                 "subTitleId": "",
-                "url": "",
+                "url": "upcomingFunctions/2",
                 "divId": "upcomingTounamentsOne",
                 "class": "item-link item-content",
-                "liClass": "popup-open",
-                "dataPopup": ".my-popup"
             },
             {
                 "title": "Tounaments Add",
@@ -226,7 +224,7 @@ let homeTab = {
         if (emp_code) {
             let dialogArgs = {
                 type: 'confirm',
-                title: "Are You Sure ?",
+                title: "Are You Sure Delete ?",
                 text: "TN Admin",
                 callback: () => {
                     appService.deleteEmpDetails(e.dataset)
