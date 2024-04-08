@@ -100,3 +100,77 @@
 {{/each}}
 </script>
 <!-- left panel render -->
+
+<!-- grid expandable template start -->
+<script id="expandableTemplate" type="text/template7">
+    {{#each list}}
+    <div class="demo-expandable-cards">
+        <div class="card card-expandable">
+            <div class="card-content">
+                <div style="background: url(./img/beach.jpg) no-repeat center bottom; background-size: cover; height: 240px"></div>
+                <a class="link card-close card-opened-fade-in color-white" style="position: absolute; right: 15px; top: 15px">
+                    <i class="icon f7-icons">xmark_circle_fill</i>
+                </a>
+                <div class="card-header display-block" style="height: 60px">
+                    {{#if title}}
+                        {{title}}
+                    {{/if}}
+                    {{#if @root.isBirthDay}} 
+                        Month Birthday
+                    {{/if}}
+                    {{#if todayBirthday}} 
+                        Today Birthday 
+                    {{/if}} 
+                    Celebration
+                </div>
+                <div class="card-content-padding {{#if @root.isFullMonth}} list virtual-list media-list searchbar-found {{/if}} {{#if @root.isBirthDay}} list media-list  list-outline-ios list-strong-ios list-dividers-ios {{/if}}">
+                    {{#if @root.isFullMonth}}
+                        <ul id="listViewList">
+                            {{#each list}}
+                                <li id="{{divId}}" {{#if liClass}} class="{{liClass}}" {{/if}} {{#if dataPopup}} data-popup="{{dataPopup}}" {{/if}} {{#if clickEvent}} onclick="{{clickEvent}}(this)" {{/if}} {{#if data}} data-value="{{data}}" {{/if}} {{#if dataName}} data-name ="{{dataName}}" {{/if}}>
+                                    <a {{#if url}} href="/{{url}}/" {{/if}} class="{{class}}">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">{{title}}</div>
+                                            </div>
+                                            <div class="item-subtitle" id="{{subTitleId}}">{{subTitle}}</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            {{/each}}
+                            <li {{#if @root.liClass}} class="{{@root.liClass}} popup-open" {{/if}} data-popup=".my-popup" onclick="homeTab.getFoodCount(this)" data-name ="{{title}}">
+                                <a {{#if url}} href="/{{url}}/" {{/if}} class="{{class}}">
+                                    <div class="item-inner">
+                                        <a class="button button-round button-fill">Get Food Details</a>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    {{/if}}
+                    {{#if @root.isBirthDay}}
+                            <ul>
+                                {{#each list}}
+                                    <li>
+                                        <a class="item-link">
+                                            <div class="item-content">
+                                                <div class="item-media"><img style="border-radius: 8px" src="https://cdn.framework7.io/placeholder/people-160x160-1.jpg" width="70" /></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title-row">
+                                                        <div class="item-title">Happy Birthday {{employee_name}}</div>
+                                                        <div class="item-after">{{date_of_birth}}</div>
+                                                    </div>
+                                                    <div class="item-subtitle">{{team_name}}</div>
+                                                    <div class="item-text">God bless {{employee_name}}, our employee is {{team_name}} team</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}
+</script>

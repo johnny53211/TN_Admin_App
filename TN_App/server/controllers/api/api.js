@@ -67,7 +67,7 @@ const apis = [
 	},
 	{
 		"routeName": `/getEventList`,
-		"method": "get",
+		"method": "post",
 		"callback": apiHelper.getEventList,
 		"cors": true
 	},

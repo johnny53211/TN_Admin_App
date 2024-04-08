@@ -153,6 +153,19 @@ let utils = {
 	},
 	decryptData: function (data) {
 		return cryptr.decrypt(data);
+	},
+	getCuurentMonth: (isFull = false) => {
+		// Get today's date
+		const today = new Date();
+
+		// Get the year, month, and day
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+		const day = String(today.getDate()).padStart(2, '0');
+
+		// Format the date
+		const formattedDate = `${isFull ? `-${year}-` : ''}${month}${isFull ? `-${day}` : ''}`;
+		return formattedDate
 	}
 };
 

@@ -61,8 +61,7 @@ let routes = [
           selector: 'dataTable_admin',
           columns: [
             { data: 'emp_code' },
-            { data: 'mail_id' },
-            { data: 'gender' },
+            { data: 'emp_name' },
             {
               render: function (data, type, row) {
                 return ` <a class="link" href="/filterEmployee/${row['emp_code']}"> <i class="icon f7-icons color-green">doc_chart</i>`;
@@ -129,14 +128,26 @@ let routes = [
   },
   {
     name: "upcomingFunctions",
-    path: '/upcomingFunctions/:eventTypeId',
+    path: '/upcomingFunctions/:event_type',
     url: './pages/upcomingEvents.html',
     on: {
-      pageBeforeIn: function (e, page) {
+      pageBeforeIn: async function (e, page) {
+        let templateData = [];
         let dataString = e.detail.route;
         let pageElement = page.$el;
         $(pageElement).find('.subnavbar').remove();
-        // template.renderTemplate(`#listView`, '#listViewList', homeTab['tournamentsList'], pageElement, 2)
+        if (dataString['params']['event_type'] == 1) {
+          let { fullMonthCelbration, getMonthBirthday } = await appService.getEvents(dataString['params']);
+          templateData['list'] = utils.generateResponseEvents(fullMonthCelbration);
+          templateData['isFullMonth'] = true;
+          templateData['liClass'] = 'item-link item-content';
+          let fulMonthHtml = template.renderTemplate(`#expandableTemplate`, '', templateData, pageElement, 2);
+          templateData['list'] = [{ list: getMonthBirthday }];
+          templateData['isBirthDay'] = true;
+          templateData['isFullMonth'] = false;
+          let fulMonthBirthday = template.renderTemplate(`#expandableTemplate`, '', templateData, pageElement, 2);
+          pageElement.find('#renderCardCelebration').append(fulMonthHtml).append(fulMonthBirthday);
+        }
       },
     }
   },

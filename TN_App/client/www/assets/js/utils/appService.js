@@ -95,15 +95,17 @@ let appService = {
             console.log(error)
         }
     },
-    getEvents: async () => {
+    getEvents: async (data = {}) => {
         let args = {
             url: apiUrl['eventList'],
-            method: 'get',
+            method: 'post',
+            dataString: data
         }
         try {
             let res = await loginService.callAPI(args);
-            if (res['status'] == 200)
-                appService.eventList = res['data'];
+            if (res['status'] == 200) {
+                return res['data'];
+            }
         } catch (error) {
             console.log(error)
         }

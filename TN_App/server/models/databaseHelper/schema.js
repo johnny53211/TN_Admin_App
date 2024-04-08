@@ -70,7 +70,8 @@ const schema = {
 			event_date: "event_date",
 			event_type: "event_type",
 			event_name: "event_name",
-			event_time: "event_time"
+			event_time: "event_time",
+			"celeb_type": "celeb_type"
 		}
 	}
 };

@@ -110,7 +110,34 @@ let utils = {
         });
         return mappedData[0];
     },
-    mapCelebrationArray: (data) => {
-        return data;
+    generateResponseEvents: function (data) {
+        const mappedData = data.map(event => {
+            const { id, event_name, add_date, event_type, update_date, ...rest } = event; // Exclude unwanted keys
+            const list = Object.entries(rest).map(([key, value]) => ({
+                liClass: `li${id}`,
+                title: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '), // Capitalize the first letter and replace underscores with spaces
+                subTitle: value,
+                class: "item-link item-content"
+            }));
+            return { title: event_name, list };
+        });
+        return mappedData;
+    },
+    generateCelebHtml: (data = {}) => {
+        let { listSelector, pageElement, renderSelector, arrayData } = data;
+        arrayData = arrayData.map(element => {
+            // Create a new object with the `content` key
+            const mappedData = { title: element.title, content: '' };
+            // Extract the list property and assign it to the `list` key in mappedData
+            mappedData.list = element.list;
+            // Assuming `template.renderTemplate` is a function that renders a template
+            // with the provided parameters, use it to generate the content.
+            mappedData.content = template.renderTemplate(`#${listSelector}`, '', mappedData, pageElement, 2);
+            // Return the mappedData object containing both list and content
+            return mappedData;
+        });
+        let templateData = { list: arrayData };
+        return templateData;
     }
+
 }

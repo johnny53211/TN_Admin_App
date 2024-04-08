@@ -275,7 +275,6 @@ const apiHelper = {
         }
         //console.log( query.search.value);
         if (query && query.search && query.search.value) {
-            console.log(query.search.value);
             queryArray.push({ emp_code: 0, operator: "!=", and });
         }
         let totalCount = 0;
@@ -315,28 +314,69 @@ const apiHelper = {
         return getResponse;
     },
     "getEventList": async (req, res) => {
-        let genderRes = await apiHelper.getEventData()
-        genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-        res.send(resMsg);
+        postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
+        if (postedData && postedData['event_type']) {
+            postedData['event_date'] = utils.getCuurentMonth();
+            let getEventdata = await apiHelper.getEventData(postedData)
+            Object.keys(getEventdata).length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getEventdata) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
     },
     "getEventData": async (data, tableName) => {
-        let { event_date, event_name } = data || {};
+        let { event_date, event_name, event_type } = data || {};
         let query = [];
-        if (event_name)
-            query.push({ [eventDataSchema.fields.event_name]: event_name });
-        // check pin is getting add one more query
-        if (event_date) {
-            query.push({ [eventDataSchema.fields.event_date]: event_date, "condition": 'OR' });
+
+        // Constructing query for full month celebrations
+        if (event_name) query.push({ [eventDataSchema.fields.event_name]: event_name });
+        if (event_type) {
+            query.push({ [eventDataSchema.fields.celeb_type]: 2, "condition": 'AND' });
+            query.push({ [eventDataSchema.fields.event_type]: event_type, "condition": 'AND' });
         }
+        if (event_date) query.push({ [eventDataSchema.fields.event_date]: `%${event_date}%`, "condition": 'AND', operator: "like" });
+
         let options = {
             table: tableName || eventDataSchema.tableName,
-            query: query,
+            query: query
         };
-        return await new Promise((resolve, reject) => {
+
+        // Retrieving full month celebrations
+        let fullMonthCelebrationPromise = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
                 resolve(response || response[0] || {});
             });
         });
+
+        // Constructing query for month birthdays
+        query = [];
+        if (event_type) {
+            query.push({ [employeePresonalDetails.fields.date_of_birth]: `%${utils.getCuurentMonth()}%`, "condition": 'AND', operator: "like" });
+        }
+        options.query = query;
+        options.table = employeePresonalDetails.tableName;
+        options.select = 'date_of_birth,team_name as team_name,emp_name as employee_name';
+        options.join = [{
+            'type': 'LEFT JOIN',
+            'table': 'employee_details',
+            'column': 'emp_code',
+            'with_table': ' emp_personal_details',
+            'with_column': 'emp_code'
+        }, {
+            'type': 'LEFT JOIN',
+            'table': 'team',
+            'column': 'id',
+            'with_table': ' emp_personal_details',
+            'with_column': 'team'
+        }]
+        // Retrieving month birthdays
+        let monthBirthdayPromise = new Promise((resolve, reject) => {
+            databaseHelper.getRecord(options, function (response) {
+                resolve(response || response[0] || {});
+            });
+        });
+        return Promise.all([fullMonthCelebrationPromise, monthBirthdayPromise])
+            .then(([fullMonthCelbration, getMonthBirthday]) => {
+                return { getMonthBirthday, fullMonthCelbration };
+            });
     },
     "getEmpGenderDetails": async (req, res) => {
         let options = {
