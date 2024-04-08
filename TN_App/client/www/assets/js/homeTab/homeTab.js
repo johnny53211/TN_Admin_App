@@ -232,6 +232,9 @@ let homeTab = {
             }
             dialog.customDialog(dialogArgs)
         }
+    },
+    getFoodCount: () => {
+
     }
 }
 let id,
