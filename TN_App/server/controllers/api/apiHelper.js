@@ -402,9 +402,9 @@ const apiHelper = {
         let { food_type, emp_code, event_name, event_date, table, count } = args;
         let query = []
         if (food_type) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['food_type']}`]: food_type });
-        if (emp_code) query.push({ [schema.getEmpFoodPreference.fields.emp_code]: emp_code });
-        if (event_date) query.push({ [schema.getEmpFoodPreference.fields.event_date]: event_date });
-        if (event_name) query.push({ [schema.getEmpFoodPreference.fields.event_name]: event_name });
+        if (emp_code) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['emp_code']}`]: emp_code });
+        if (event_date) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['event_date']}`]: event_date });
+        if (event_name) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['event_name']}`]: event_name });
         let join = [
             {
                 'type': 'LEFT JOIN',
