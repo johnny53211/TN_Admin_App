@@ -73,6 +73,17 @@ const schema = {
 			event_time: "event_time",
 			"celeb_type": "celeb_type"
 		}
+	},
+	"getEmpFoodPreference": {
+		tableName: "food_preference",
+		fields: {
+			food_type: "food_type",
+			no_members: "no_members",
+			emp_code: "emp_code",
+			event_name: "event_name",
+			"attend": "attend",
+			event_date: "event_date"
+		}
 	}
 };
 module.exports = schema;

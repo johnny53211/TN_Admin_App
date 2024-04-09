@@ -132,6 +132,7 @@ let routes = [
     url: './pages/upcomingEvents.html',
     on: {
       pageBeforeIn: async function (e, page) {
+        appService.preLoaderShow();
         let templateData = [];
         let dataString = e.detail.route;
         let pageElement = page.$el;
@@ -147,6 +148,7 @@ let routes = [
           templateData['isFullMonth'] = false;
           let fulMonthBirthday = template.renderTemplate(`#expandableTemplate`, '', templateData, pageElement, 2);
           pageElement.find('#renderCardCelebration').append(fulMonthHtml).append(fulMonthBirthday);
+          appService.preLoaderHide();
         }
       },
     }

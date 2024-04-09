@@ -49,7 +49,7 @@ const apis = [
 	},
 	{
 		"routeName": `/getEmpFoodPreference`,
-		"method": "get",
+		"method": "post",
 		"callback": apiHelper.getEmpFoodPreference,
 		"cors": true
 	},

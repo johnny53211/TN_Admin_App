@@ -391,6 +391,7 @@ const apiHelper = {
         res.send(resMsg);
     },
     "getEmpFoodPreference": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'getEmpFoodPreference', req['body']);
         let options = {
             table: 'food_type'
         }
@@ -401,6 +402,11 @@ const apiHelper = {
         });
         foodPrefRes && foodPrefRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
         res.send(resMsg);
+    },
+    getFoodPreference: (args = {}) => {
+        let { food_type, emp_code, event_name, event_date } = args;
+        let query = []
+        if (food_type) query.push()
     },
     "getEmpTeamDetails": async (req, res) => {
         let options = {
