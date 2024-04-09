@@ -13,6 +13,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "devDependencies": {
+    "com.lampa.startapp": "^6.1.6",
     "cordova-android": "^10.1.2",
     "cordova-ios": "^6.3.0",
     "cordova-plugin-add-swift-support": "^2.0.2",
@@ -28,7 +29,8 @@
       "cordova-plugin-keyboard": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-enable-cleartext-traffic": {},
-      "cordova-plugin-zeroconf": {}
+      "cordova-plugin-zeroconf": {},
+      "com.lampa.startapp": {}
     },
     "platforms": [
       "android",

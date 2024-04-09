@@ -391,22 +391,51 @@ const apiHelper = {
         res.send(resMsg);
     },
     "getEmpFoodPreference": async (req, res) => {
+        let count = req['body']['count'] || false;
         postedData = utils.schemaFieldsMapping(schema, 'getEmpFoodPreference', req['body']);
+        postedData['count'] = count;
+        let foodPrefRes = await apiHelper.getFoodPreference(postedData)
+        foodPrefRes && foodPrefRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+        res.send(resMsg);
+    },
+    getFoodPreference: async (args = {}) => {
+        let { food_type, emp_code, event_name, event_date, table, count } = args;
+        let query = []
+        if (food_type) query.push({ [schema.getEmpFoodPreference.fields.food_type]: food_type });
+        if (emp_code) query.push({ [schema.getEmpFoodPreference.fields.emp_code]: emp_code });
+        if (event_date) query.push({ [schema.getEmpFoodPreference.fields.event_date]: event_date });
+        if (event_name) query.push({ [schema.getEmpFoodPreference.fields.event_name]: event_name });
+        let join = [{
+            'type': 'LEFT JOIN',
+            'table': 'food_type',
+            'column': 'food_id',
+            'with_table': schema.getEmpFoodPreference.tableName,
+            'with_column': schema.getEmpFoodPreference.fields.food_type
+        }, {
+            'type': 'LEFT JOIN',
+            'table': 'yes_no_table',
+            'column': 'id',
+            'with_table': schema.getEmpFoodPreference.tableName,
+            'with_column': schema.getEmpFoodPreference.fields.attend
+        }];
         let options = {
-            table: 'food_type'
+            table: table || schema.getEmpFoodPreference.tableName,
+            query: query,
+            join, join,
         }
-        let foodPrefRes = await new Promise((resolve, reject) => {
+
+        let totalFoodCount = {};
+        if (count && !emp_code) {
+            totalFoodCount.select = 'count() as total'
+            totalFoodCount.table = table || schema.getEmpFoodPreference.tableName
+            totalFoodCount.query = query
+            totalFoodCount.join = join
+        }
+        let getFullPreference = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
                 resolve(response || response[0] || {});
             });
         });
-        foodPrefRes && foodPrefRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
-        res.send(resMsg);
-    },
-    getFoodPreference: (args = {}) => {
-        let { food_type, emp_code, event_name, event_date } = args;
-        let query = []
-        if (food_type) query.push()
     },
     "getEmpTeamDetails": async (req, res) => {
         let options = {
