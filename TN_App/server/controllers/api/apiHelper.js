@@ -401,7 +401,7 @@ const apiHelper = {
     getFoodPreference: async (args = {}) => {
         let { food_type, emp_code, event_name, event_date, table, count } = args;
         let query = []
-        if (food_type) query.push({ [schema.getEmpFoodPreference.fields.food_type]: food_type });
+        if (food_type) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['food_type']}`]: food_type });
         if (emp_code) query.push({ [schema.getEmpFoodPreference.fields.emp_code]: emp_code });
         if (event_date) query.push({ [schema.getEmpFoodPreference.fields.event_date]: event_date });
         if (event_name) query.push({ [schema.getEmpFoodPreference.fields.event_name]: event_name });
@@ -435,12 +435,15 @@ const apiHelper = {
         }
         let getFullPreference = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
-                resolve(response || response[0] || {});
+                resolve(response || (response && response[0]) || {});
             });
         });
+
         let getFoodCount = new Promise((resolve, reject) => {
             databaseHelper.getRecord(totalFoodCount, function (response) {
-                resolve(response || response[0] || {});
+                if (response == null) resolve(null);
+                else
+                    resolve(response || {});
             });
         });
         return Promise.all([getFullPreference, getFoodCount])
