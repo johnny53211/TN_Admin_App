@@ -1,5 +1,100 @@
 <div class="page">
-    <div class="page-content">
-     <div>Hello</div>
-    </div>
+  <div class="page-content">
+      <div class="block-title">Event Name</div>
+
+      <div class="list list-strong-ios list-dividers-ios inset-ios hidden" style="display: none;">
+          <li class="item-content item-input">
+              <div class="item-media">
+                  <i class="icon demo-list-icon"></i>
+              </div>
+              <div class="item-inner">
+                  <div class="item-title item-label">Date time</div>
+                  <div class="item-input-wrap">
+                      <input type="datetime-local" placeholder="Please choose...">
+                  </div>
+              </div>
+          </li>
+      </div>
+
+
+      <div class="block block-strong-ios block-outline-ios">
+      <div class="block-title">Employee Availability</div>
+          <div class="list list-strong-ios list-outline-ios list-dividers-ios">
+              <ul>
+                  <li>
+                      <label class="radio">
+                          <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                          <span class="label-radio">Available</span>
+                      </label>
+                  </li>
+                  <li>
+                      <label class="radio">
+                          <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                          <span class="label-radio">Not Available</span>
+                      </label>
+                  </li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="block block-strong-ios block-outline-ios">
+        <div class="block-title">Car Parking</div>
+            <div class="list list-strong-ios list-outline-ios list-dividers-ios">
+                <ul>
+                    <li>
+                        <label class="radio">
+                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                            <span class="label-radio">Yes</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="radio">
+                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                            <span class="label-radio">No</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+      <div class="block block-strong-ios block-outline-ios">
+        <div class="block-title">Food Preference</div>
+            <div class="list list-strong-ios list-outline-ios list-dividers-ios">
+                <ul>
+                    <li>
+                        <label class="radio">
+                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                            <span class="label-radio">Veg</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="radio">
+                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
+                            <span class="label-radio">Non-Veg</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="block-title">Family Members</div>
+
+        <div class="grid grid-cols-2 grid-gap margin-top">
+          <div>
+            <div class="stepper stepper-small stepper-fill stepper-init">
+              <div class="stepper-button-minus"></div>
+              <div class="stepper-input-wrap">
+                <input type="text" value="0" min="0" max="100" step="1" readonly />
+              </div>
+              <div class="stepper-button-plus"></div>
+            </div>
+          </div>
+        </div>
+       
+
+      <div class="block block-strong block-outline-ios d-flex justify-content-center">
+          <p class="grid grid-cols-1 grid-gap">
+              <button class="button button-raised button-fill button-round">Submit</button>
+          </p>
+      </div>
   </div>
+</div>
