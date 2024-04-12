@@ -4,6 +4,7 @@
  */
 const apiHelper = require('../api/apiHelper');
 const auth = require('./jwtRoutes');
+const notification = require('./mailRoutes')
 const apis = [
 	{
 		"routeName": `/login`,
@@ -87,6 +88,11 @@ const apis = [
 		"routeName": `/deleteEmp`,
 		"method": "post",
 		"callback": apiHelper.deleteEmpDetails,
+		"cors": true
+	}, {
+		"routeName": `/sendMail`,
+		"method": "post",
+		"callback": notification.mailSend,
 		"cors": true
 	},
 ];

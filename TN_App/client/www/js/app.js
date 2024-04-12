@@ -2,7 +2,7 @@ var $$ = Dom7;
 
 var device = Framework7.getDevice();
 var app = new Framework7({
-  name: 'Vault App', // App name
+  name: 'TN Admin', // App name
   theme: 'auto', // Automatic theme detection
   el: '#app', // App root element
   id: 'io.framework7.myapp', // App bundle ID

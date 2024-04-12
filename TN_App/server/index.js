@@ -8,6 +8,7 @@ let config = require('./config/config');
 let utils = require('./controllers/utils/utils');
 let dbAdapter = require('./models/initDatabase');
 let ipAddress = utils.getLocalIP();
+const mailSend = require('./controllers/mailer/nodeMailer')
 // retrieve user entered parameters
 let argv = require('minimist')(process.argv.slice(2), {
     alias: {
@@ -23,7 +24,7 @@ if (!argv.db) {
     console.error('No database provided');
     process.exit(1);
 }
-app.start = function () {
+app.start = async function () {
     server.listen(config.response.PORT, () => console.log(`Server Started --> ${ipAddress}:${config.response.PORT}`));
     dbAdapter.initDatabase(argv);
 }

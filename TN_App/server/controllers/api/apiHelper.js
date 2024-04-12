@@ -233,12 +233,6 @@ const apiHelper = {
             'column': 'id',
             'with_table': ' emp_personal_details',
             'with_column': 'team'
-        }, {
-            'type': 'LEFT JOIN',
-            'table': 'employee_details',
-            'column': 'emp_code',
-            'with_table': ' emp_personal_details',
-            'with_column': 'emp_code'
         }]
         options = {
             table: employeePresonalDetails['tableName'],
@@ -291,6 +285,9 @@ const apiHelper = {
         options.limit = query.length || "";
         options.offset = query.start;
         options.count = false;
+        if (query.select) {
+            options.select = query.select;
+        }
         let getResponse = await new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, async function (response) {
                 console.log(response);
@@ -524,6 +521,13 @@ const apiHelper = {
         })
         deleteResponse && deleteResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_DELETED']) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
         res.send(resMsg);
+    },
+    "sendMail": async (req, res) => {
+        try {
+            await nodeMailer.sendMail()
+        } catch (error) {
+            res.send(error)
+        }
     }
 }
 

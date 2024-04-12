@@ -210,14 +210,45 @@ let homeTab = {
     addEventData: async (e) => {
         event.preventDefault();
         let validateForms = $("#form-data").valid();
-        if (validateForms) {
-            let formData = app.form.convertToData('#form-data');
-            let { time, date } = utils.convertDateAndTime(formData['event_date']);
-            formData['event_date'] = date;
-            formData['event_time'] = time;
-            appService.preLoaderShow();
-            await appService.addEvents(formData)
+        // if (validateForms) {
+        let formData = app.form.convertToData('#form-data');
+        let { time, date } = utils.convertDateAndTime(formData['event_date']);
+        formData['event_date'] = date;
+        formData['event_time'] = time;
+        // appService.preLoaderShow();
+        // await appService.addEvents(formData);
+        let data = {
+            "select": "emp_code,mail_id"
         }
+        let getEmpResponse = await appService.getEmpDetails(data);
+        for (let i = 0; i < getEmpResponse['data'].length; i++) {
+            try {
+                let shareUrl = `'page=share&emp_id=${getEmpResponse['emp_code']}&event_date=${date}&event_name=${formData['event_date']}`
+                let dataString = {
+                    shareUrl: shareUrl,
+                    secret: 'events'
+                };
+                let getUrl = utils.encryptData(dataString);
+                debugger
+                let args = {
+                    method: "post",
+                    url: url,
+                    dataString: dataString,
+                    successCallback: function (response) {
+                        //data = utils_service.getObjects(arcGisService.featureData,'Floor_No',floorData[i]);
+                        floorData[i].parentRecordID = response.data.recordID;
+                    },
+                    errorCallback: function (err) {
+                        console.log(err);
+                    }
+                }
+                await utils_service.callAPI(args); // Wait for the AJAX call to complete
+                $('#progressCount').text(i + 1);
+            } catch (err) {
+                console.log(err); // Handle errors if needed
+            }
+        }
+        // }
     },
     deleteEmp: async (e) => {
         let emp_code = e.dataset['emp_code'];

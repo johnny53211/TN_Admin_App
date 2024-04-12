@@ -141,6 +141,7 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
+            debugger
             if (res['status'] == 200) {
                 return res['data']
             }

@@ -138,6 +138,9 @@ let utils = {
         });
         let templateData = { list: arrayData };
         return templateData;
+    },
+    encryptData: (data = {}) => {
+        let { secret, shareUrl } = data;
+        return GibberishAES.enc(shareUrl, secret);
     }
-
 }
