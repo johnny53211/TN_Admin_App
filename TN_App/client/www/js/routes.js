@@ -96,7 +96,8 @@ let routes = [
         let templateData = {}
         let pageElement = page.$el;
         let dataString = e.detail.route;
-        let resData = await appService.getEmpDetails(dataString);
+        let resData = await appService.getEmpDetails(dataString['params']);
+        debugger
         templateData["list"] = utils.mapEmpDetails(resData['data']);
         pageElement.find('#removeEmp').attr('data-emp_code', dataString['params']['emp_code']);
         pageElement.find('#emp_name').html(resData['data'][0].emp_name)

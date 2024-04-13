@@ -216,10 +216,10 @@ const apiHelper = {
             options;
         let { emp_code, mail_id } = reqQuery;
         if (emp_code)
-            query.push({ ['emp_personal_details.emp_code']: emp_code });
+            queryArray.push({ ['emp_personal_details.emp_code']: emp_code });
         // check pin is getting add one more query
         if (mail_id) {
-            query.push({ ['emp_personal_details.mail_id']: mail_id });
+            queryArray.push({ ['emp_personal_details.mail_id']: mail_id });
         }
         let join = [{
             'type': 'LEFT JOIN',

@@ -223,27 +223,22 @@ let homeTab = {
         let getEmpResponse = await appService.getEmpDetails(data);
         for (let i = 0; i < getEmpResponse['data'].length; i++) {
             try {
-                let shareUrl = `'page=share&emp_id=${getEmpResponse['emp_code']}&event_date=${date}&event_name=${formData['event_date']}`
-                let dataString = {
+                let shareUrl = `'page=share&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
+                let urlData = {
                     shareUrl: shareUrl,
                     secret: 'events'
                 };
-                let getUrl = utils.encryptData(dataString);
-                debugger
+                let getUrl = utils.encryptData(urlData);
+                let dataString = {
+                    eventsUrl: getUrl,
+                    mailReceiver: getEmpResponse['data'][i]['mail_id']
+                }
                 let args = {
                     method: "post",
-                    url: url,
+                    url: apiUrl['sendMail'],
                     dataString: dataString,
-                    successCallback: function (response) {
-                        //data = utils_service.getObjects(arcGisService.featureData,'Floor_No',floorData[i]);
-                        floorData[i].parentRecordID = response.data.recordID;
-                    },
-                    errorCallback: function (err) {
-                        console.log(err);
-                    }
                 }
-                await utils_service.callAPI(args); // Wait for the AJAX call to complete
-                $('#progressCount').text(i + 1);
+                let response = await loginService.callAPI(args); // Wait for the AJAX call to complete
             } catch (err) {
                 console.log(err); // Handle errors if needed
             }

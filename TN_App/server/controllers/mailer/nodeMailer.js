@@ -14,15 +14,22 @@ const mailController = {
         }
     },
 
-    sendMail: async (options = {
-        from: mailConfig.adminEmail,
-        to: 'johnson02032001@gmail.com',
-        subject: "Test",
-        text: "Hi, this is a test email",
-    }) => {
+    sendMail: async (options = {}) => {
+        let { to, content } = options;
         try {
             const transporter = await mailController.getTransporter();
-            // const info = await transporter.sendMail(options);
+            const info = await transporter.sendMail({
+                from: 'johnson02032001@gmail.com',
+                to: to,
+                subject: "Events",
+                text: content,
+                auth: {
+                    user: 'a09216214@gmail.com',
+                    refreshToken: '1//04rkbBhJ2eqIzCgYIARAAGAQSNwF-L9IrF0Rv_w78iUdSJUwOf1sLNHBtNpJokMCHaZzWcHvuatVpBBNY--8t4mgOPC4D67NpGsM',
+                    accessToken: 'ya29.a0Ad52N3_jqnV7QLXMttqqaVxCF3GKp9iJUy2EPTCSohNaLBolp9ZLQWKMnUHN0WOQMzQhPnVqd0FQ8u-WT4s2qY7CdJ722xY2BelMV3fXS181TNXxDGoED6ihxHpP2Yj0N_KiU98wVv38SOsftS028kZaTU3GccCnsNacaCgYKAWASARASFQHGX2Mi1XPEvymITMjPHOhwhkiAiA0171',
+                },
+            });
+            return info;
             // console.log('Email sent:', info.response);
         } catch (error) {
             console.error('Error sending email:', error);
@@ -59,7 +66,7 @@ const mailController = {
         });
     },
 
-    getTransporter: async () => {
+    getTransporter: async (content) => {
         try {
             let transporter = nodemailer.createTransport({
                 host: "smtp.gmail.com",
@@ -71,18 +78,7 @@ const mailController = {
                     clientSecret: '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',
                 },
             });
-
-            transporter.sendMail({
-                from: 'johnson02032001@gmail.com',
-                to: "",
-                subject: "Message",
-                text: "I hope this message gets through!",
-                auth: {
-                    user: 'a09216214@gmail.com',
-                    refreshToken: '1//04EKuCElthgwjCgYIARAAGAQSNwF-L9IrsfxVjES37rquW1dGucRvZ3DvAtu2Qkp97NLO8NO321FLsMB-YQl3LuW7R2z-9U85aYE',
-                    accessToken: 'ya29.a0Ad52N3-ucnO2U4j2qFVt90GKkyt6VUr42cCWNa6N50UITePKN1-S7EG7uMVGd30z_K-OeAgS6xqo8K4S9U1JqMEn0MHDteJQfyBdXK1Q6l6fB_fPYElOBjhltT513WQnjM6Bdf0KubYjpnDywAA0YfBEuCdzAcaire-gaCgYKAdsSARASFQHGX2MiLe3u8G8oeGQidvKEe3x0CQ0171',
-                },
-            });
+            return transporter;
         } catch (error) {
             console.error('Error creating transporter:', error);
             throw error; // Re-throw for handling in calling function

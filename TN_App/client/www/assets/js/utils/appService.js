@@ -14,7 +14,8 @@ let apiUrl = {
     "foodTypeList": `${baseUrl}/getEmpFoodPreference`,
     "addEvents": `${baseUrl}/addEvents`,
     "getEmpDetails": `${baseUrl}/getEmpDetails`,
-    "deleteEmpDetails": `${baseUrl}/deleteEmp`
+    "deleteEmpDetails": `${baseUrl}/deleteEmp`,
+    "sendMail": `${baseUrl}/sendMail`
 };
 let appService = {
     foodType: null,
@@ -141,7 +142,6 @@ let appService = {
         }
         try {
             let res = await loginService.callAPI(args);
-            debugger
             if (res['status'] == 200) {
                 return res['data']
             }

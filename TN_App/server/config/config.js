@@ -1,5 +1,6 @@
 
 const response = {
+    mailDomain: 'http://192.168.4.120/bt-project/TN_Admin_App/TN_APP_Web/',
     PORT: 5000,
     messages: {
         error: {
@@ -36,5 +37,4 @@ const response = {
         "ALREADY_EXIST": 403
     }
 }
-
 module.exports = { response }

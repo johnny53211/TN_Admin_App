@@ -1,4 +1,5 @@
 var routes = [{
+    name: "home",
     path: '/',
     url: './index.html',
 },
@@ -7,8 +8,18 @@ var routes = [{
     url: './pages/login.html',
 },
 {
+    name: "events",
     path: '/events/',
     url: './pages/events.html',
+    on: {
+        pageBeforeIn: function (e, page) {
+            let pageElement = page.$el;
+            let queryData = e.detail.route.query || {};
+            if (queryData && Object.keys(queryData).length > 0) {
+                $(pageElement).find('.back').hide();
+            }
+        }
+    }
 },
 {
     path: '/attendance/',

@@ -1,110 +1,132 @@
 <div class="page">
-  <div class="page-content">
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="left">
-          <a href="#" class="link back">
-            <i class="icon icon-back"></i>
-            <span></span>
-        </a>
+    <div class="page-content">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="left">
+                    <a href="#" class="link back">
+                        <i class="icon icon-back"></i>
+                        <span></span>
+                    </a>
+                </div>
+                <div class="title">TN Admin APP</div>
+            </div>
         </div>
-        <div class="title">TN Admin APP</div>
-      </div>
+        <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="my-form">
+            <ul>
+                <li class="item-content item-input item-input-outline">
+                    <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title item-floating-label">Evnet Name</div>
+                        <div class="item-input-wrap">
+                            <input type="text" placeholder="" value="Pongal" readonly>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content item-input item-input-outline">
+                    <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title item-floating-label">Event Date</div>
+                        <div class="item-input-wrap">
+                            <input type="date" placeholder="" value="2024-04-12" readonly>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content item-input item-input-outline">
+                    <div class="item-media">
+                        <i class="icon demo-list-icon"></i>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title item-floating-label">Event Date</div>
+                        <div class="item-input-wrap">
+                            <input type="date" placeholder="" value="2024-04-12" readonly>
+                        </div>
+                    </div>
+                </li>
+                <!-- availability  -->
+                <li class="item-outline">
+                    <p class="item-title">Availability</p>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="availability" value="yes" checked />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">Yes</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="availability" value="No" />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">No</div>
+                        </div>
+                    </label>
+                </li>
+                <!-- availability  -->
+                <!-- parkingAvailabilty -->
+                <li class="item-outline">
+                    <p class="item-title">Parking</p>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="parking" value="yes" checked />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">Yes</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="parking" value="No" />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">No</div>
+                        </div>
+                    </label>
+                </li>
+                <!-- parkingAvailabilty -->
+                <!-- food prefernce  -->
+                <li class="item-outline">
+                    <p class="item-title">Food</p>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="parking" value="Veg" checked />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">Veg</div>
+                        </div>
+                    </label>
+                </li>
+                <li>
+                    <label class="item-radio item-radio-icon-start item-content">
+                        <input type="radio" name="parking" value="Non-Veg" />
+                        <i class="icon icon-radio"></i>
+                        <div class="item-inner">
+                            <div class="item-title">Non-Veg</div>
+                        </div>
+                    </label>
+                </li>
+                <!-- stepper food count -->
+                <div class="block-title">family Members</div>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">Count: <span id="food   -count"></span></div>
+                        <div class="item-after">
+                            <div class="stepper stepper-init stepper-small stepper-raised" data-value-el="#food-count">
+                                <div class="stepper-button-minus"></div>
+                                <div class="stepper-button-plus"></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </form>
+        <div class="block block-strong block-outline-ios d-flex justify-content-center">
+            <p class="grid grid-cols-1 grid-gap">
+                <button class="button button-raised button-fill button-round">Submit</button>
+            </p>
+        </div>
     </div>
-      <div class="block-title">Event Name</div>
-      <div class="list list-strong-ios list-dividers-ios inset-ios hidden" style="display: none;">
-          <li class="item-content item-input">
-              <div class="item-media">
-                  <i class="icon demo-list-icon"></i>
-              </div>
-              <div class="item-inner">
-                  <div class="item-title item-label">Date time</div>
-                  <div class="item-input-wrap">
-                      <input type="datetime-local" placeholder="Please choose...">
-                  </div>
-              </div>
-          </li>
-      </div>
-
-
-      <div class="block block-strong-ios block-outline-ios">
-      <div class="block-title">Employee Availability</div>
-          <div class="list list-strong-ios list-outline-ios list-dividers-ios">
-              <ul>
-                  <li>
-                      <label class="radio">
-                          <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                          <span class="label-radio">Available</span>
-                      </label>
-                  </li>
-                  <li>
-                      <label class="radio">
-                          <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                          <span class="label-radio">Not Available</span>
-                      </label>
-                  </li>
-              </ul>
-          </div>
-      </div>
-
-      <div class="block block-strong-ios block-outline-ios">
-        <div class="block-title">Car Parking</div>
-            <div class="list list-strong-ios list-outline-ios list-dividers-ios">
-                <ul>
-                    <li>
-                        <label class="radio">
-                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                            <span class="label-radio">Yes</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="radio">
-                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                            <span class="label-radio">No</span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-      <div class="block block-strong-ios block-outline-ios">
-        <div class="block-title">Food Preference</div>
-            <div class="list list-strong-ios list-outline-ios list-dividers-ios">
-                <ul>
-                    <li>
-                        <label class="radio">
-                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                            <span class="label-radio">Veg</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="radio">
-                            <input type="radio" name="demo-radio-inline"><i class="icon-radio"></i>
-                            <span class="label-radio">Non-Veg</span>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="block-title">Family Members</div>
-
-        <div class="grid grid-cols-2 grid-gap margin-top">
-          <div>
-            <div class="stepper stepper-small stepper-fill stepper-init">
-              <div class="stepper-button-minus"></div>
-              <div class="stepper-input-wrap">
-                <input type="text" value="0" min="0" max="100" step="1" readonly />
-              </div>
-              <div class="stepper-button-plus"></div>
-            </div>
-          </div>
-        </div>
-       
-
-      <div class="block block-strong block-outline-ios d-flex justify-content-center">
-          <p class="grid grid-cols-1 grid-gap">
-              <button class="button button-raised button-fill button-round">Submit</button>
-          </p>
-      </div>
-  </div>
 </div>
