@@ -20,7 +20,7 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Evnet Name</div>
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="" value="Pongal" readonly>
+                            <input type="text" name="event_name" placeholder="" value="Pongal" readonly>
                         </div>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Event Date</div>
                         <div class="item-input-wrap">
-                            <input type="date" placeholder="" value="2024-04-12" readonly>
+                            <input type="date" placeholder="" name="event_date" value="2024-04-12" readonly>
                         </div>
                     </div>
                 </li>
@@ -40,9 +40,9 @@
                         <i class="icon demo-list-icon"></i>
                     </div>
                     <div class="item-inner">
-                        <div class="item-title item-floating-label">Event Date</div>
+                        <div class="item-title item-floating-label">Event Time</div>
                         <div class="item-input-wrap">
-                            <input type="date" placeholder="" value="2024-04-12" readonly>
+                            <input type="text" placeholder="" name="event_time" value="2024-04-12" readonly>
                         </div>
                     </div>
                 </li>
@@ -50,7 +50,7 @@
                 <li class="item-outline">
                     <p class="item-title">Availability</p>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="availability" value="yes" checked />
+                        <input type="radio" name="availability" value="yes" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Yes</div>
@@ -71,7 +71,7 @@
                 <li class="item-outline">
                     <p class="item-title">Parking</p>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="parking" value="yes" checked />
+                        <input type="radio" name="parking" value="yes" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Yes</div>
@@ -92,7 +92,7 @@
                 <li class="item-outline">
                     <p class="item-title">Food</p>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="parking" value="Veg" checked />
+                        <input type="radio" name="food_type" value="Veg" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Veg</div>
@@ -101,7 +101,7 @@
                 </li>
                 <li>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="parking" value="Non-Veg" />
+                        <input type="radio" name="food_type" value="Non-Veg" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Non-Veg</div>
@@ -112,7 +112,7 @@
                 <div class="block-title">family Members</div>
                 <li class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">Count: <span id="food   -count"></span></div>
+                        <div class="item-title">Count: <span id="food-count"></span></div>
                         <div class="item-after">
                             <div class="stepper stepper-init stepper-small stepper-raised" data-value-el="#food-count">
                                 <div class="stepper-button-minus"></div>
@@ -125,7 +125,7 @@
         </form>
         <div class="block block-strong block-outline-ios d-flex justify-content-center">
             <p class="grid grid-cols-1 grid-gap">
-                <button class="button button-raised button-fill button-round">Submit</button>
+                <button class="button button-raised button-fill button-round submitEvents">Submit</button>
             </p>
         </div>
     </div>

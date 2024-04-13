@@ -312,10 +312,13 @@ const apiHelper = {
     },
     "getEventList": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
-        if (postedData && postedData['event_type']) {
+        if ((postedData && postedData['event_type']) || postedData && postedData['event_name']) {
             postedData['event_date'] = utils.getCuurentMonth();
             let getEventdata = await apiHelper.getEventData(postedData)
             Object.keys(getEventdata).length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getEventdata) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        } else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
             res.send(resMsg);
         }
     },
@@ -367,7 +370,7 @@ const apiHelper = {
         // Retrieving month birthdays
         let monthBirthdayPromise = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
-                resolve(response || response[0] || {});
+                resolve(response || {});
             });
         });
         return Promise.all([fullMonthCelebrationPromise, monthBirthdayPromise])
@@ -381,7 +384,7 @@ const apiHelper = {
         }
         let genderRes = await new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
-                resolve(response || response[0] || {});
+                resolve(response || {});
             });
         });
         genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);

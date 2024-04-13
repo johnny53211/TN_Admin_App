@@ -223,7 +223,7 @@ let homeTab = {
         let getEmpResponse = await appService.getEmpDetails(data);
         for (let i = 0; i < getEmpResponse['data'].length; i++) {
             try {
-                let shareUrl = `'page=share&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
+                let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
                 let urlData = {
                     shareUrl: shareUrl,
                     secret: 'events'

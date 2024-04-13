@@ -34,5 +34,23 @@ const utils = {
             // Return null if the key is not found
             return null;
         }
+    }, callAPI: (args) => {
+        return $.ajax({
+            async: args.isAsync,
+            type: args.method,
+            url: args.url,
+            data: args.dataString,
+            success: function (data) {
+                if (typeof args.successCallback != "undefined") {
+                    args.data = data;
+                    args.successCallback(args);
+                }
+            },
+            error: function (error) {
+                if (typeof args.errorCallback != "undefined") {
+                    args.errorCallback(error);
+                }
+            }
+        });
     }
 }
