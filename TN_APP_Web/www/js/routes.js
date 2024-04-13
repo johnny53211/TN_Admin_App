@@ -30,7 +30,7 @@ var routes = [{
 
                 // Cache the input fields
                 let $eventDateInput = $(pageElement).find('input[name="event_date"]');
-                let $eventTimeInput = $(pageElement).find('input[name="event_time"]');
+                let $eventTimeInput = $(pageElement).find('input[name="event_time"]').attr('type', 'text')
                 let $eventNameInput = $(pageElement).find('input[name="event_name"]');
                 let $eventType = $(pageElement).find('.submitEvents')
 
