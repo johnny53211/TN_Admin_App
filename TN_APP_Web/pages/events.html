@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page" data-name="events">
     <div class="page-content">
         <div class="navbar">
             <div class="navbar-bg"></div>
@@ -69,7 +69,7 @@
                 </li>
                 <!-- availability  -->
                 <!-- parkingAvailabilty -->
-                <li class="item-outline">
+                <li class="item-outline d-none">
                     <div class="block-title">Car Parking</div>
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="parking" value="yes" />
@@ -79,7 +79,7 @@
                         </div>
                     </label>
                 </li>
-                <li>
+                <li class="d-none">
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="parking" value="No" />
                         <i class="icon icon-radio"></i>
@@ -90,7 +90,7 @@
                 </li>
                 <!-- parkingAvailabilty -->
                 <!-- food prefernce  -->
-                <li class="item-outline">
+                <li class="item-outline d-none">
                     <div class="block-title">Food Preference</div>
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="food_type" value="Veg" />
@@ -100,7 +100,7 @@
                         </div>
                     </label>
                 </li>
-                <li>
+                <li class="d-none">
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="food_type" value="Non-Veg" />
                         <i class="icon icon-radio"></i>
@@ -110,20 +110,22 @@
                     </label>
                 </li>
                 <!-- stepper food count -->
-                <div class="block-title">Family Members</div>
-                <li class="item-content">
-                    <div class="item-inner">
-                        <div class="item-title">Count: <span id="food-count"></span>
-                            <div class="item-after">
-                                <div class="stepper stepper-init stepper-small stepper-raised"
-                                    data-value-el="#food-count">
-                                    <div class="stepper-button-minus"></div>
-                                    <div class="stepper-button-plus"></div>
+                <div class="d-none">
+                    <div class="block-title d-none">Family Members</div>
+                    <li class="item-content d-none">
+                        <div class="item-inner">
+                            <div class="item-title grid grid-cols-3">Count: <span id="food-count"></span>
+                                <div class="item-after grid-gap">
+                                    <div class="stepper stepper-init stepper-small stepper-raised"
+                                        data-value-el="#food-count">
+                                        <div class="stepper-button-minus"></div>
+                                        <div class="stepper-button-plus"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </div>
             </ul>
         </form>
         <div class="block block-strong block-outline-ios d-flex justify-content-center">
