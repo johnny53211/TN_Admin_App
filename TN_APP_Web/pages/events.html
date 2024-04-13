@@ -19,7 +19,7 @@
                         <i class="icon demo-list-icon"></i>
                     </div>
                     <div class="item-inner">
-                        <div class="item-title item-floating-label">Evnet Name</div>
+                        <div class="item-title item-floating-label">Event Name</div>
                         <div class="item-input-wrap">
                             <input type="text" name="event_name" placeholder="" value="Pongal" readonly>
                         </div>
@@ -32,7 +32,7 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Event Date</div>
                         <div class="item-input-wrap">
-                            <input type="date" placeholder="" name="event_date" value="2024-04-12" readonly>
+                            <input type="date" name="event_date" placeholder="" value="2024-04-12" readonly>
                         </div>
                     </div>
                 </li>
@@ -43,13 +43,13 @@
                     <div class="item-inner">
                         <div class="item-title item-floating-label">Event Time</div>
                         <div class="item-input-wrap">
-                            <input type="text" placeholder="" name="event_time" value="2024-04-12" readonly>
+                            <input type="time" placeholder="" name="event_time" value="12:00" readonly>
                         </div>
                     </div>
                 </li>
                 <!-- availability  -->
                 <li class="item-outline">
-                    <div class="block-title">Availability</div>
+                    <div class="block-title">Employee Availability</div>
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="availability" value="yes" />
                         <i class="icon icon-radio"></i>
@@ -70,7 +70,7 @@
                 <!-- availability  -->
                 <!-- parkingAvailabilty -->
                 <li class="item-outline">
-                    <div class="block-title">Parking</div>
+                    <div class="block-title">Car Parking</div>
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="parking" value="yes" />
                         <i class="icon icon-radio"></i>
@@ -91,7 +91,7 @@
                 <!-- parkingAvailabilty -->
                 <!-- food prefernce  -->
                 <li class="item-outline">
-                    <div class="block-title">Food Type</div>
+                    <div class="block-title">Food Preference</div>
                     <label class="item-radio item-radio-icon-start item-content">
                         <input type="radio" name="food_type" value="Veg" />
                         <i class="icon icon-radio"></i>
@@ -110,14 +110,16 @@
                     </label>
                 </li>
                 <!-- stepper food count -->
-                <div class="block-title">family Members</div>
+                <div class="block-title">Family Members</div>
                 <li class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">Count: <span id="food-count"></span></div>
-                        <div class="item-after">
-                            <div class="stepper stepper-init stepper-small stepper-raised" data-value-el="#food-count">
-                                <div class="stepper-button-minus"></div>
-                                <div class="stepper-button-plus"></div>
+                        <div class="item-title">Count: <span id="food-count"></span>
+                            <div class="item-after">
+                                <div class="stepper stepper-init stepper-small stepper-raised"
+                                    data-value-el="#food-count">
+                                    <div class="stepper-button-minus"></div>
+                                    <div class="stepper-button-plus"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
