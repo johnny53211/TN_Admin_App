@@ -143,5 +143,11 @@ let utils = {
     encryptData: (data = {}) => {
         let { secret, shareUrl } = data;
         return GibberishAES.enc(shareUrl, secret);
+    },
+    popupOpen: (selector, animate = true) => {
+        app.popup.open(selector, animate)
+    },
+    popupGet: (selector) => {
+        return app.popup.get(selector);
     }
 }

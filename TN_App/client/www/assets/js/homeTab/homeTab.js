@@ -287,6 +287,45 @@ let homeTab = {
         templateData['list'] = list;
         $('.popupTitle').text('Food Count :');
         template.renderTemplate('#tableTemplate', '.popupContent', templateData, '', 1)
+    },
+    addEmpDetails: () => {
+        utils.popupOpen('.my-popup');
+        $('.popupTitle').html('Add Employee');
+        let formContent = {
+            "list": [
+                {
+                    "name": "",
+                    "type": "text",
+                    "placeHolder": "Enter Event",
+                    "nameValue": "event_name"
+                },
+                {
+                    "name": "Event Name",
+                    "type": "datetime-local",
+                    "placeHolder": "Enter Event",
+                    "nameValue": "event_date"
+                },
+                {
+                    "name": "Select Event Type",
+                    "nameValue": "event_type",
+                    "select": [{
+                        "event_type": "Celebration",
+                        "value": 1
+                    }, {
+                        "event_type": "Tournaments",
+                        "value": 2
+                    }],
+                    "placeHolder": "Enter Name"
+                }
+            ]
+        }
+        let content = template.renderTemplate('#formtemplate', '', formContent);
+        let templateData = {
+            "content": content,
+            "clickEvent": "homeTab.addEventData",
+            "btnName": "Add Events"
+        }
+        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1)
     }
 }
 let id,

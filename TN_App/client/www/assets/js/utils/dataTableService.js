@@ -17,12 +17,10 @@ let dataTable = {
                 d.offset = d.start;
                 d.count = true;
                 d.search.value = searchValue || d.search.value;
-                console.log(d.search.value);
                 return d;
             },
             dataFilter: function (data) {
                 let json = jQuery.parseJSON(data);
-                console.log(json);
                 json.recordsTotal = json.data.total_record;
                 json.recordsFiltered = json.data.total_record;
                 json.data = json.data.data || json.data || '';
@@ -90,10 +88,7 @@ let dataTable = {
                         api.column(colIdx).search(selectedValue).draw();
                     });
                 }
-            },
-
+            }
         });
-
-        console.log(ajaxData);
     },
 }
