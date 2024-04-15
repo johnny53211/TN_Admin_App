@@ -53,3 +53,11 @@ input[name="confirmPin"]:invalid {
 .dataTables_info {
     display: none;
 }
+
+.f7-icons {
+    margin-right: 5px;
+}
+
+#emp_name {
+    margin-right: 35px;
+}
