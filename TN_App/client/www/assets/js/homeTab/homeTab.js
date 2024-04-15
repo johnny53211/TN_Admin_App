@@ -390,7 +390,7 @@ let homeTab = {
             "clickEvent": "homeTab.addEmpSubmit",
             "btnName": "Add Employee"
         }
-        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1)
+        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1);    
     },
     addEmpSubmit: () => {
         
