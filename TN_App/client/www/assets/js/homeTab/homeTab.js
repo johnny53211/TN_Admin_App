@@ -285,7 +285,7 @@ let homeTab = {
         };
         list.push(templateDataObj);
         templateData['list'] = list;
-        
+        $('.popupTitle').text('Food Count :');
         template.renderTemplate('#tableTemplate', '.popupContent', templateData, '', 1)
     }
 }

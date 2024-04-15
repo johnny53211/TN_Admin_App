@@ -57,7 +57,6 @@ let routes = [
       },
       pageAfterIn: function (e, page) {
         let pageElement = page.$el;
-
         let args = {
           selector: 'dataTable_admin',
           columns: [
