@@ -290,42 +290,110 @@ let homeTab = {
     },
     addEmpDetails: () => {
         utils.popupOpen('.my-popup');
-        $('.popupTitle').html('Add Employee');
+        let popup = utils.popupGet('.my-popup')
+        $(popup.$el).find('.popupTitle').html('Add Employee');
         let formContent = {
             "list": [
                 {
-                    "name": "",
+                    "name": "Emp Code",
                     "type": "text",
-                    "placeHolder": "Enter Event",
-                    "nameValue": "event_name"
+                    "placeHolder": "Employee code",
+                    "nameValue": "emp_code"
                 },
                 {
-                    "name": "Event Name",
-                    "type": "datetime-local",
-                    "placeHolder": "Enter Event",
-                    "nameValue": "event_date"
+                    "name": "Father Name",
+                    "type": "text",
+                    "placeHolder": "Enter Father Name",
+                    "nameValue": "father_name"
                 },
                 {
-                    "name": "Select Event Type",
-                    "nameValue": "event_type",
+                    "name": "Mother Name",
+                    "type": "text",
+                    "placeHolder": "Enter Mother Name",
+                    "nameValue": "mother_name"
+                },
+                {
+                    "name": "Designation",
+                    "type": "text",
+                    "placeHolder": "Enter Father Name",
+                    "nameValue": "father_name"
+                },
+                {
+                    "name": "Address",
+                    "type": "text",
+                    "placeHolder": "Enter Address",
+                    "nameValue": "address"
+                },
+                {
+                    "name": "Gender",
+                    "nameValue": "gender",
                     "select": [{
-                        "event_type": "Celebration",
+                        "event_type": "Male",
                         "value": 1
                     }, {
-                        "event_type": "Tournaments",
+                        "event_type": "Female",
                         "value": 2
                     }],
-                    "placeHolder": "Enter Name"
-                }
+                    "placeHolder": "Enter Gender"
+                },
+                {
+                    "name": "Date Of Joining",
+                    "type": "date",
+                    "placeHolder": "Enter date",
+                    "nameValue": "date_of_joining"
+                },
+                {
+                    "name": "Blood",
+                    "type": "text",
+                    "placeHolder": "Enter Blood Group",
+                    "nameValue": "blood_group"
+                },
+                {
+                    "name": "Date Of Birth",
+                    "type": "date",
+                    "placeHolder": "Enter Blood Group",
+                    "nameValue": "date_of_birth"
+                },
+                {
+                    "name": "Team",
+                    "nameValue": "team",
+                    "select": [{
+                        "event_type": "Maxval",
+                        "value": 2
+                    }, {
+                        "event_type": "Vectre",
+                        "value": 1
+                    }, {
+                        "event_type": "Buildtrack",
+                        "value": 3
+                    }
+                    ],
+                    "placeHolder": "Enter Team"
+                },
+                {
+                    "name": "Employee Name",
+                    "type": "text",
+                    "placeHolder": "Enter Employee Name",
+                    "nameValue": "emp_name"
+                },
+                {
+                    "name": "Employee Mail",
+                    "type": "email",
+                    "placeHolder": "Enter Employee Mail",
+                    "nameValue": "mail_id"
+                },
             ]
         }
         let content = template.renderTemplate('#formtemplate', '', formContent);
         let templateData = {
             "content": content,
-            "clickEvent": "homeTab.addEventData",
-            "btnName": "Add Events"
+            "clickEvent": "homeTab.addEmpSubmit",
+            "btnName": "Add Employee"
         }
         template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1)
+    },
+    addEmpSubmit: () => {
+        
     }
 }
 let id,
