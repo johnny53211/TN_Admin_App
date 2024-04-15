@@ -459,9 +459,12 @@ const apiHelper = {
 
         let totalFoodCount = {};
         if (count && !emp_code) {
+            let queryArray = [];
+            if (event_date) queryArray.push({ [`fp.${schema['getEmpFoodPreference']['fields']['event_date']}`]: event_date });
             totalFoodCount.select = 'COUNT(*), fp.food_type, fp.attend, SUM(fp.no_members) AS total_members'
             totalFoodCount.table = `${schema['getEmpFoodPreference']['tableName']} fp`
-            totalFoodCount.group_by = "fp.food_type, fp.attend"
+            totalFoodCount.group_by = "fp.food_type, fp.attend";
+            totalFoodCount.query = queryArray
         }
         let getFullPreference = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {

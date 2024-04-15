@@ -138,7 +138,7 @@
                                     </a>
                                 </li>
                             {{/each}}
-                            <li {{#if @root.liClass}} class="{{@root.liClass}} popup-open" {{/if}} data-popup=".my-popup" onclick="homeTab.getFoodCount(this)" data-name ="{{title}}">
+                            <li {{#if @root.liClass}} class="{{@root.liClass}} popup-open" {{/if}} data-popup=".my-popup" onclick="homeTab.getFoodCount('{{event_date}}','{{title}}')" data-name ="{{title}}">
                                 <a {{#if url}} href="/{{url}}/" {{/if}} class="{{class}}">
                                     <div class="item-inner">
                                         <a class="button button-round button-fill">Get Food Details</a>
@@ -173,4 +173,29 @@
         </div>
     </div>
 {{/each}}
+</script>
+
+<script id="tableTemplate" type="text/template7">
+    <div class="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th class="label-cell">Event Name</th>
+              <th class="numeric-cell">Veg</th>
+              <th class="numeric-cell">Non Veg</th>
+              <th class="numeric-cell">Total</th>
+            </tr>
+          </thead>
+          <tbody id="foodCountBody">
+            {{#each list}}
+            <tr>
+              <td class="label-cell">{{event_name}}</td>
+              <td class="numeric-cell">{{veg}}</td>
+              <td class="numeric-cell">{{nonveg}}</td>
+              <td class="numeric-cell">{{total}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+    </div>
 </script>

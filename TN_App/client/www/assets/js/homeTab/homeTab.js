@@ -259,8 +259,34 @@ let homeTab = {
             dialog.customDialog(dialogArgs)
         }
     },
-    getFoodCount: () => {
+    getFoodCount: async (eventDate, eventName) => {
+        const list = [];
+        let templateData = [];
+        let { getFoodCount } = await appService.getFoodType({
+            "event_date": eventDate,
+            "count": true
+        });
+        let vegTotal = 0;
+        let nonVegTotal = 0;
 
+        getFoodCount.forEach(item => {
+            if (item.food_type === 1) {
+                vegTotal += item.total_members;
+            } else if (item.food_type === 2) {
+                nonVegTotal += item.total_members;
+            }
+        });
+
+        const templateDataObj = {
+            "event_name": eventName,
+            "veg": vegTotal,
+            "nonveg": nonVegTotal,
+            "total": vegTotal + nonVegTotal
+        };
+        list.push(templateDataObj);
+        templateData['list'] = list;
+        
+        template.renderTemplate('#tableTemplate', '.popupContent', templateData, '', 1)
     }
 }
 let id,
@@ -274,7 +300,7 @@ $(document).ready(async function () {
     formValidationn.validateIp();
     utils.showLoginName();
     homeTab.homeRenderBtn();
-    await Promise.all([appService.getGender(), appService.getFoodType(), appService.getTeamList()]);
+    await Promise.all([appService.getGender(), appService.getTeamList()]);
 });
 
 $(document).on('page:init', async function (e) {

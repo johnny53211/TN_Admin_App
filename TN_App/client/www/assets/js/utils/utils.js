@@ -112,14 +112,15 @@ let utils = {
     },
     generateResponseEvents: function (data) {
         const mappedData = data.map(event => {
-            const { id, event_name, add_date, event_type, update_date, ...rest } = event; // Exclude unwanted keys
-            const list = Object.entries(rest).map(([key, value]) => ({
+            const { id, event_name, add_date, event_date, event_type, celeb_type, update_date, ...rest } = event; // Exclude unwanted keys
+            const updatedRest = { ...rest, event_date };
+            const list = Object.entries(updatedRest).map(([key, value]) => ({
                 liClass: `li${id}`,
                 title: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '), // Capitalize the first letter and replace underscores with spaces
                 subTitle: value,
                 class: "item-link item-content"
             }));
-            return { title: event_name, list };
+            return { title: event_name, event_date: event_date, list };
         });
         return mappedData;
     },

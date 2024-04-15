@@ -19,7 +19,7 @@ let routes = [
       },
       pageAfterIn: async function (e, page) {
         let pageElement = page.$el;
-        await Promise.all([appService.getGender(), appService.getFoodType(), appService.getTeamList(), appService.getEvents()]);
+        await Promise.all([appService.getGender(), appService.getTeamList(), appService.getEvents()]);
       }
     }
   },
@@ -98,7 +98,6 @@ let routes = [
         let pageElement = page.$el;
         let dataString = e.detail.route;
         let resData = await appService.getEmpDetails(dataString['params']);
-        debugger
         templateData["list"] = utils.mapEmpDetails(resData['data']);
         pageElement.find('#removeEmp').attr('data-emp_code', dataString['params']['emp_code']);
         pageElement.find('#emp_name').html(resData['data'][0].emp_name)

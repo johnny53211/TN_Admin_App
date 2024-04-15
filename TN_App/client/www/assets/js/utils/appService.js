@@ -70,15 +70,16 @@ let appService = {
             console.log(error);
         }
     },
-    getFoodType: async () => {
+    getFoodType: async (data) => {
         let args = {
             url: apiUrl['foodTypeList'],
-            method: 'get',
+            method: 'post',
+            dataString: data
         }
         try {
             let res = await loginService.callAPI(args);
             if (res['status'] == 200)
-                appService.foodType = res['data'];
+                return res['data']
         } catch (error) {
             console.log(error)
         }

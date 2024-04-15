@@ -46,17 +46,17 @@ var routes = [{
         },
         pageInit: async (e, page) => {
             app.preloader.show();
-            let pageElement = page.$el;
-            let queryData = e.detail.route.query || {};
-            let isFoodExistEmp = {
-                url: 'http://192.168.0.100:5000/addEmpFoodPreference',
-                method: "post",
-                dataString: foodPreference
-            }
-            let FoodListResponse = await utils.callAPI(isFoodExistEmp);
-            if (FoodListResponse['status'] == 200) {
+            // let pageElement = page.$el;
+            // let queryData = e.detail.route.query || {};
+            // let isFoodExistEmp = {
+            //     url: 'http://192.168.0.100:5000/getEventList',
+            //     method: "post",
+            //     dataString: foodPreference
+            // }
+            // let FoodListResponse = await utils.callAPI(isFoodExistEmp);
+            // if (FoodListResponse['status'] == 200) {
 
-            }
+            // }
         }
     }
 },
