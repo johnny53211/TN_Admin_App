@@ -5,3 +5,8 @@
 .d-flex {
     display: block;
 }
+
+.logo-img {
+    width: 200px;
+    height: auto;
+}
