@@ -135,7 +135,8 @@ let appService = {
             appService.preLoaderHide();
         }
     },
-    "getEmpDetails": async (data) => {
+    getEmpDetails: async (data) => {
+        appService.preLoaderShow();
         let args = {
             url: apiUrl['getEmpDetails'],
             method: 'post',
