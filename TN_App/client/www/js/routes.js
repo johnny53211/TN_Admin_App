@@ -41,7 +41,7 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
-        $(pageElement).find('.page-title').text('Employee')
+        $(pageElement).find('.page-title').text('Employee List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
       },
     },
@@ -54,6 +54,7 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Employee Details');
       },
       pageAfterIn: function (e, page) {
         let pageElement = page.$el;
@@ -83,6 +84,8 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Event List');
+        $(pageElement).find('.page-title').text('Event List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab['eventsList'], pageElement, 2)
       },
     }
@@ -95,6 +98,7 @@ let routes = [
       pageBeforeIn: async function (e, page) {
         let templateData = {}
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Employee Profile');
         let dataString = e.detail.route;
         let resData = await appService.getEmpDetails(dataString['params']);
         templateData["list"] = utils.mapEmpDetails(resData['data']);
@@ -111,6 +115,7 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Celebration List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab['celebrationList'], pageElement, 2)
       },
     }
@@ -122,6 +127,7 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Tournament List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab['tournamentsList'], pageElement, 2)
       },
     }
@@ -136,6 +142,7 @@ let routes = [
         let templateData = [];
         let dataString = e.detail.route;
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Upcoming Celebrations');
         $(pageElement).find('.subnavbar').remove();
         if (dataString['params']['event_type'] == 1) {
           let { fullMonthCelbration, getMonthBirthday } = await appService.getEvents(dataString['params']);
