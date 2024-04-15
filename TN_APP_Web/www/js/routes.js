@@ -15,6 +15,7 @@ var routes = [{
         pageBeforeIn: async function (e, page) {
             app.preloader.show();
             let pageElement = page.$el;
+            $(pageElement).find('.page-title').text('Events Management');
             let queryData = e.detail.route.query || {};
             if (Object.keys(queryData).length > 0) {
                 $(pageElement).find('.back').hide();
@@ -49,6 +50,12 @@ var routes = [{
 {
     path: '/attendance/',
     url: './pages/attendance.html',
+    on: {
+        pageBeforeIn: function (e, page) {
+            let pageElement = page.$el;
+            $(pageElement).find('.page-title').text('Attendance Management');
+        }
+    }
 },
 // Default route (404 page). MUST BE THE LAST
 {
