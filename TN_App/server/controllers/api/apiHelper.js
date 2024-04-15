@@ -14,6 +14,7 @@ let registerUser = schema.register_users,
     employeeContact = schema.emp_contact,
     employeeAdharDetails = schema.emp_adhar_details,
     eventDataSchema = schema.getEventData,
+    empFoodPreference = schema.getEmpFoodPreference,
     resMsg, postedData;
 
 const apiHelper = {
@@ -390,6 +391,35 @@ const apiHelper = {
         genderRes && genderRes.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], genderRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
         res.send(resMsg);
     },
+    "addEmpFoodPreference": async (req, res) => {
+        postedData = utils.schemaFieldsMapping(schema, 'getEmpFoodPreference', req['body']);
+        if (postedData && Object.keys(postedData).length > 0) {
+            let isExist = {
+                "emp_code": postedData['emp_code'],
+                "event_date": postedData['event_date']
+            }
+            let { getFullPreference } = await apiHelper.getFoodPreference(isExist);
+            if (getFullPreference && getFullPreference.length) {
+                resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['USER_EXIST']);
+                return res.send(resMsg);
+            }
+            let postValue = {};
+            postValue.type = empFoodPreference.tableName;
+            postValue.body = [postedData];
+            let insertResponse = await new Promise((resolve, reject) => {
+                databaseHelper.saveRecord(postValue, '', function (response, err) {
+                    if (err)
+                        reject(err)
+                    resolve(response)
+                });
+            });
+            insertResponse && insertResponse.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED']) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
+            res.send(resMsg);
+        } else {
+            resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
+            res.send(resMsg);
+        }
+    },
     "getEmpFoodPreference": async (req, res) => {
         let count = req['body']['count'] || false;
         postedData = utils.schemaFieldsMapping(schema, 'getEmpFoodPreference', req['body']);
@@ -398,7 +428,7 @@ const apiHelper = {
         foodPrefRes && Object.keys(foodPrefRes).length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], foodPrefRes) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);
         res.send(resMsg);
     },
-    getFoodPreference: async (args = {}) => {
+    "getFoodPreference": async (args = {}) => {
         let { food_type, emp_code, event_name, event_date, table, count } = args;
         let query = []
         if (food_type) query.push({ [`fp.${schema['getEmpFoodPreference']['fields']['food_type']}`]: food_type });

@@ -41,6 +41,7 @@ let routes = [
     on: {
       pageBeforeIn: function (e, page) {
         let pageElement = page.$el;
+        $(pageElement).find('.page-title').text('Employee')
         template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
       },
     },

@@ -12,9 +12,7 @@
                 <img class="logo-img" src="https://www.maxval.net/images/maxval_logo.svg">
             </div>
         </div>
-        <div class="title page-title"></div>
-
-        <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="my-form">
+        <form class="list list-strong-ios list-dividers-ios list-outline-ios" id="foodPreference">
             <ul>
                 <li class="item-content item-input item-input-outline">
                     <div class="item-media">
@@ -53,7 +51,7 @@
                 <li class="item-outline">
                     <div class="block-title">Employee Availability</div>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="availability" value="yes" />
+                        <input type="radio" name="availability" value="1" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Yes</div>
@@ -62,7 +60,7 @@
                 </li>
                 <li>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="availability" value="No" />
+                        <input type="radio" name="availability" value="2" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">No</div>
@@ -74,7 +72,7 @@
                 <li class="item-outline d-none">
                     <div class="block-title">Car Parking</div>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="parking" value="yes" />
+                        <input type="radio" name="parking" value="1" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Yes</div>
@@ -83,7 +81,7 @@
                 </li>
                 <li class="d-none">
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="parking" value="No" />
+                        <input type="radio" name="parking" value="2" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">No</div>
@@ -95,7 +93,7 @@
                 <li class="item-outline d-none">
                     <div class="block-title">Food Preference</div>
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="food_type" value="Veg" />
+                        <input type="radio" name="food_type" value="1" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Veg</div>
@@ -104,7 +102,7 @@
                 </li>
                 <li class="d-none">
                     <label class="item-radio item-radio-icon-start item-content">
-                        <input type="radio" name="food_type" value="Non-Veg" />
+                        <input type="radio" name="food_type" value="2" />
                         <i class="icon icon-radio"></i>
                         <div class="item-inner">
                             <div class="item-title">Non-Veg</div>
@@ -130,7 +128,8 @@
                 </div>
             </ul>
         </form>
-        <div class="block block-strong block-outline-ios d-flex justify-content-center">
+        <div class="block block-strong block-outline-ios d-flex justify-content-center"
+            onclick="foddPreferenceSubmit()">
             <p class="grid grid-cols-1 grid-gap">
                 <button class="button button-raised button-fill button-round submitEvents">Submit</button>
             </p>

@@ -89,11 +89,18 @@ const apis = [
 		"method": "post",
 		"callback": apiHelper.deleteEmpDetails,
 		"cors": true
-	}, {
+	},
+	{
 		"routeName": `/sendMail`,
 		"method": "post",
 		"callback": notification.mailSend,
 		"cors": true
 	},
+	{
+		"routeName": `/addEmpFoodPreference`,
+		"method": "post",
+		"callback": apiHelper.addEmpFoodPreference,
+		"cors": true
+	}
 ];
 module.exports = apis;
