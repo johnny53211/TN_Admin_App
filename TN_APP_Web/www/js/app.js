@@ -8,13 +8,4 @@ var app = new Framework7({
   routes: routes,
 });
 
-let mainView = app.views.create('.view-main', {
-
-  // Because we use fixed-through navbar we can enable dynamic navbar   
-  preloadPreviousPage: false,
-  animatePages: true,
-  options: {
-    history: false,
-    browserHistory: false
-  }
-});
+let mainView = app.views.create('.view-main');
