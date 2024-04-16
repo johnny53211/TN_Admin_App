@@ -255,8 +255,8 @@ let homeTab = {
                 type: 'confirm',
                 title: "Are You Sure Delete ?",
                 text: "TN Admin",
-                callback: () => {
-                    appService.deleteEmpDetails(e.dataset)
+                callbackOk: async () => {
+                    await appService.deleteEmpDetails(e.dataset);
                 }
             }
             dialog.customDialog(dialogArgs)

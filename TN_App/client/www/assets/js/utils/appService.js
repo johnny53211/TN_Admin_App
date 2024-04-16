@@ -162,12 +162,12 @@ let appService = {
         try {
             let res = await loginService.callAPI(args);
             if (res['status'] == 200) {
-                let dialogArgs = {
-                    type: 'alert',
-                    title: res['message'],
-                    text: "TN Admin",
-                }
-                dialog.customDialog(dialogArgs)
+                notification.customNotification({ text: res['message'], title: "TN Admin", type: "create" });
+                loginService.redirect('/employeeList/', {
+                    reloadPrevious: true
+                })
+            } else {
+                notification.customNotification({ text: res['message'], title: "TN Admin", type: "create" });
             }
             appService.preLoaderHide();
         } catch (error) {

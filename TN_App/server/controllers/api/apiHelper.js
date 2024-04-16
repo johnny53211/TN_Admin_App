@@ -529,15 +529,13 @@ const apiHelper = {
     },
     "deleteEmpDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
-        let postValueEmpPersonal = postMainEmpDetail = {};
+        let postValueEmpPersonal = {};
         let query = [];
         postValueEmpPersonal['table'] = employeePresonalDetails.tableName;
-        postMainEmpDetail['table'] = 'employee_details';
         if (postedData && postedData['emp_code'])
             query.push({ [employeePresonalDetails.fields['emp_code']]: postedData['emp_code'] })
         postValueEmpPersonal['query'] = query;
-        postMainEmpDetail['query'] = query;
-        let deleteData = [postValueEmpPersonal, postMainEmpDetail];
+        let deleteData = [postValueEmpPersonal]
         let deleteResponse = await new Promise((resolve, reject) => {
             databaseHelper.deleteRecord(deleteData, function (response) {
                 resolve(response)
