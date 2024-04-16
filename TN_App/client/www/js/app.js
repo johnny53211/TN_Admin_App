@@ -17,7 +17,7 @@ var app = new Framework7({
   options: {
     history: false
   },
-  preloadPreviousPage: false,
+  preloadPreviousPage: false, // for deep navigation enable this //
   // Input settings
   input: {
     scrollIntoViewOnFocus: device.cordova,
