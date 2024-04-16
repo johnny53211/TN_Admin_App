@@ -147,7 +147,21 @@ let utils = {
     popupOpen: (selector, animate = true) => {
         app.popup.open(selector, animate)
     },
+    popupClose: (selector) => {
+        app.popup.close(selector)
+    },
     popupGet: (selector) => {
         return app.popup.get(selector);
+    },
+    getFormData: (selector) => {
+        return app.form.convertToData(selector)
+    },
+    serachBarList: () => {
+        $(document).on('keyup keydown change', 'input[name="searchBar"]', function (e) {
+            var value = $(this).val().toLowerCase();
+            $("#searchBar ul li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) >= 0 || value.trim());
+            });
+        });
     }
 }

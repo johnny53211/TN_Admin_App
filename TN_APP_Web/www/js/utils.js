@@ -52,5 +52,13 @@ const utils = {
                 }
             }
         });
+    },
+    serachBarList: () => {
+        $(document).on('keyup keydown change', 'input[name="searchBar"]', function (e) {
+            var value = $(this).val().toLowerCase();
+            $("#searchBar ul li").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) >= 0 || value.trim());
+            });
+        });
     }
 }

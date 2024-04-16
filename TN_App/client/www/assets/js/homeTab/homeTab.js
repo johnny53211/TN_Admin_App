@@ -210,40 +210,43 @@ let homeTab = {
     addEventData: async (e) => {
         event.preventDefault();
         let validateForms = $("#form-data").valid();
-        // if (validateForms) {
-        let formData = app.form.convertToData('#form-data');
-        let { time, date } = utils.convertDateAndTime(formData['event_date']);
-        formData['event_date'] = date;
-        formData['event_time'] = time;
-        // appService.preLoaderShow();
-        // await appService.addEvents(formData);
-        let data = {
-            "select": "emp_code,mail_id"
-        }
-        let getEmpResponse = await appService.getEmpDetails(data);
-        for (let i = 0; i < getEmpResponse['data'].length; i++) {
-            try {
-                let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
-                let urlData = {
-                    shareUrl: shareUrl,
-                    secret: 'events'
-                };
-                let getUrl = utils.encryptData(urlData);
-                let dataString = {
-                    eventsUrl: getUrl,
-                    mailReceiver: getEmpResponse['data'][i]['mail_id']
-                }
-                let args = {
-                    method: "post",
-                    url: apiUrl['sendMail'],
-                    dataString: dataString,
-                }
-                let response = await loginService.callAPI(args); // Wait for the AJAX call to complete
-            } catch (err) {
-                console.log(err); // Handle errors if needed
+        if (validateForms) {
+            let formData = app.form.convertToData('#form-data');
+            let { time, date } = utils.convertDateAndTime(formData['event_date']);
+            formData['event_date'] = date;
+            formData['event_time'] = time;
+            appService.preLoaderShow();
+            await appService.addEvents(formData);
+            let data = {
+                "select": "emp_code,mail_id"
             }
+            let getEmpResponse = await appService.getEmpDetails(data);
+            appService.preLoaderShow('Sending Mail ....');
+            for (let i = 0; i < getEmpResponse['data'].length; i++) {
+                try {
+                    let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
+                    let urlData = {
+                        shareUrl: shareUrl,
+                        secret: 'events'
+                    };
+                    let getUrl = utils.encryptData(urlData);
+                    let dataString = {
+                        eventsUrl: getUrl,
+                        mailReceiver: getEmpResponse['data'][i]['mail_id']
+                    }
+                    let args = {
+                        method: "post",
+                        url: apiUrl['sendMail'],
+                        dataString: dataString,
+                    }
+                    let response = await loginService.callAPI(args); // Wait for the AJAX call to complete
+                } catch (err) {
+                    appService.preLoaderHide()
+                    console.log(err); // Handle errors if needed
+                }
+            }
+            appService.preLoaderHide();
         }
-        // }
     },
     deleteEmp: async (e) => {
         let emp_code = e.dataset['emp_code'];
@@ -288,7 +291,8 @@ let homeTab = {
         $('.popupTitle').text('Food Count :');
         template.renderTemplate('#tableTemplate', '.popupContent', templateData, '', 1)
     },
-    addEmpDetails: () => {
+    addEmpDetails: (e) => {
+
         utils.popupOpen('.my-popup');
         let popup = utils.popupGet('.my-popup')
         $(popup.$el).find('.popupTitle').html('Add Employee');
@@ -299,6 +303,12 @@ let homeTab = {
                     "type": "text",
                     "placeHolder": "Employee code",
                     "nameValue": "emp_code"
+                },
+                {
+                    "name": "Employee Name",
+                    "type": "text",
+                    "placeHolder": "Enter Employee Name",
+                    "nameValue": "emp_name"
                 },
                 {
                     "name": "Father Name",
@@ -315,8 +325,8 @@ let homeTab = {
                 {
                     "name": "Designation",
                     "type": "text",
-                    "placeHolder": "Enter Father Name",
-                    "nameValue": "father_name"
+                    "placeHolder": "Enter Designation",
+                    "nameValue": "designation"
                 },
                 {
                     "name": "Address",
@@ -371,12 +381,6 @@ let homeTab = {
                     "placeHolder": "Enter Team"
                 },
                 {
-                    "name": "Employee Name",
-                    "type": "text",
-                    "placeHolder": "Enter Employee Name",
-                    "nameValue": "emp_name"
-                },
-                {
                     "name": "Employee Mail",
                     "type": "email",
                     "placeHolder": "Enter Employee Mail",
@@ -390,10 +394,16 @@ let homeTab = {
             "clickEvent": "homeTab.addEmpSubmit",
             "btnName": "Add Employee"
         }
-        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1);    
+        template.renderTemplate('#popupForm', '.popupContent', templateData, '', 1);
     },
-    addEmpSubmit: () => {
-        
+    addEmpSubmit: (e) => {
+        event.preventDefault();
+        let validateForms = $("#form-data").valid();
+        if (validateForms) {
+            appService.preLoaderShow();
+            let formData = utils.getFormData('#form-data');
+            appService.addEmpDetails(formData);
+        }
     }
 }
 let id,
@@ -407,6 +417,7 @@ $(document).ready(async function () {
     formValidationn.validateIp();
     utils.showLoginName();
     homeTab.homeRenderBtn();
+    utils.serachBarList()
     await Promise.all([appService.getGender(), appService.getTeamList()]);
 });
 
@@ -414,9 +425,9 @@ $(document).on('page:init', async function (e) {
     formValidationn.validateLoginForm();
     utils.showLoginName();
     homeTab.homeRenderBtn();
+    utils.serachBarList();
 });
 $(document).on('popup:opened', function () {
     formValidationn.validatePopupForm()
-
 })
 

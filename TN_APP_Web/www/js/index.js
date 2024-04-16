@@ -3,13 +3,14 @@ $(document).ready(function () {
     localStorage.removeItem('isShare');
     let isSharePage = utils.isSharePage();
     if (isSharePage && Object.keys(isSharePage).length) {
-        
+
         utils.redirect({ path: '/events/', query: isSharePage });
     }
 });
 $$(document).on('page:init', '.page[data-name="events"]', function (e, page) {
     let pageElement = page.$el;
     $('input[type="radio"][name="attend"]').change(function () {
+        
         // Check the value of the selected radio button
         var selectedValue = $(this).val();
         // Show or hide content based on the selected value
@@ -32,6 +33,15 @@ async function foddPreferenceSubmit() {
     }
     let response = await utils.callAPI(args);
     if (response['status'] == 200) {
+        nofication = app.notification.create({
+            icon: '<i class="icon icon-f7"></i>',
+            title: 'TN Admin',
+            subtitle: `Food Preference ${response['message']}`,
+            closeTimeout: 3000,
+        });
+        nofication.open();
+        $('.submitEvents').addClass('disabled');
+    } else {
         nofication = app.notification.create({
             icon: '<i class="icon icon-f7"></i>',
             title: 'TN Admin',

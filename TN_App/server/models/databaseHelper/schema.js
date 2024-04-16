@@ -57,6 +57,7 @@ const schema = {
 			blood_group: "blood_group",
 			date_of_birth: 'date_of_birth',
 			team: "team",
+			emp_name: "emp_name",
 			address: 'address',
 			date_of_joining: "date_of_joining",
 			blood_group: "blood_group",

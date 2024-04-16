@@ -153,7 +153,46 @@ let formValidationn = {
                 },
                 event_type: {
                     required: true
-                }
+                },
+                emp_code: {
+                    required: true
+                },
+                emp_code: {
+                    required: true
+                },
+                father_name: {
+                    required: true
+                },
+                mother_name: {
+                    required: true
+                },
+                designation: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                gender: {
+                    required: true
+                },
+                date_of_joining: {
+                    required: true
+                },
+                blood_group: {
+                    required: true
+                },
+                date_of_birth: {
+                    required: true
+                },
+                team: {
+                    required: true
+                },
+                emp_name: {
+                    required: true
+                },
+                mail_id: {
+                    required: true
+                },
             },
             messages: {
                 event_name: {

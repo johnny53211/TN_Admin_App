@@ -8,8 +8,8 @@
 // ========================================
 'use strict';
 let config = {
-    PORT: 4000,
-    serviceUrl: 'http://192.168.80.80:5000',
+    PORT: 5000,
+    serviceUrl: 'http://192.168.4.120',
     userStatuses: {
         "0": "Account is deactivated, Contact Administrator",
         "401": "Invalid Username or Password."

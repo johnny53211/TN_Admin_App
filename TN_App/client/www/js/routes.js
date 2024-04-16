@@ -19,7 +19,6 @@ let routes = [
       },
       pageAfterIn: async function (e, page) {
         let pageElement = page.$el;
-        await Promise.all([appService.getGender(), appService.getTeamList(), appService.getEvents()]);
       }
     }
   },

@@ -116,8 +116,8 @@ const apiHelper = {
     },
     "addEmpDetails": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'employee_details', req['body']);
-        let isData = await apiHelper.getAttendance(postedData, 'employee_details')
-        if (!Object.keys(isData).length > 0) {
+        let isData = await apiHelper.getAttendance(postedData, 'emp_personal_details')
+        if (Object.keys(isData).length > 0) {
             resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['USER_EXIST']);
             return res.send(resMsg);
         }
@@ -132,19 +132,7 @@ const apiHelper = {
             });
         });
         if (insertResponse && insertResponse.length) {
-            postValue.type = employeeContact.tableName;
-            postedData = utils.schemaFieldsMapping(schema, 'emp_contact', req['body']);
-            postValue.body = [postedData];
-            let insertContact = await apiHelper.insertContact(postValue);
-            if (insertContact && insertContact.length > 0) {
-                postValue.type = employeeAdharDetails.tableName;
-                postedData = utils.schemaFieldsMapping(schema, 'emp_adhar_details', req['body']);
-                postValue.body = [postedData];
-                let insertAdhar = await apiHelper.insertContact(postValue);
-                insertAdhar && insertAdhar.length ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], { insertResponse, insertAdhar, insertContact }) : resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR']);
-            } else {
-                resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
-            }
+            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse);
         } else {
             resMsg = utils.generateResponse(config.response.statusCodes['SERVER_ERROR'], config.response.messages.error['OTHER_ERROR'])
         }

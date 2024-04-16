@@ -1,5 +1,5 @@
 'use strict';
-let baseUrl = config['serviceUrl'];
+let baseUrl = `${config['serviceUrl']}:${config['PORT']}`;
 let dataString;
 let apiUrl = {
     "registerUser": `${baseUrl}/registerUser`,
@@ -15,15 +15,16 @@ let apiUrl = {
     "addEvents": `${baseUrl}/addEvents`,
     "getEmpDetails": `${baseUrl}/getEmpDetails`,
     "deleteEmpDetails": `${baseUrl}/deleteEmp`,
-    "sendMail": `${baseUrl}/sendMail`
+    "sendMail": `${baseUrl}/sendMail`,
+    "addEmpDetails": `${baseUrl}/addEmpDetails`,
 };
 let appService = {
     foodType: null,
     genderType: null,
     teamList: null,
     eventList: null,
-    preLoaderShow: () => {
-        app.dialog.preloader('Please Wait ...');
+    preLoaderShow: (content = 'Please Wait ...') => {
+        app.dialog.preloader(content);
     },// app loader hide
     preLoaderHide: () => {
         app.dialog.close();
@@ -168,6 +169,29 @@ let appService = {
                 }
                 dialog.customDialog(dialogArgs)
             }
+            appService.preLoaderHide();
+        } catch (error) {
+            console.log(error)
+            appService.preLoaderHide();
+        }
+    },
+    addEmpDetails: async (data) => {
+        let args = {
+            url: apiUrl['addEmpDetails'],
+            method: 'post',
+            dataString: data
+        };
+        try {
+            let res = await loginService.callAPI(args);
+            if (res['status'] == 200) {
+                notification.customNotification({ text: res['message'], title: "TN Admin", type: "create" });
+                loginService.redirect('/employeeList/', {
+                    reloadCurrent: true
+                })
+            } else {
+                notification.customNotification({ text: res['message'], title: "TN Admin", type: "create" });
+            }
+            utils.popupClose('.my-popup');
             appService.preLoaderHide();
         } catch (error) {
             console.log(error)

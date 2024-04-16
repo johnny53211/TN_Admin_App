@@ -13,12 +13,10 @@ var routes = [{
     url: './pages/events.html',
     on: {
         pageBeforeIn: async function (e, page) {
-            app.preloader.show();
             let pageElement = page.$el;
             $(pageElement).find('.page-title').text('Events Management');
             let queryData = e.detail.route.query || {};
             if (Object.keys(queryData).length > 0) {
-                $(pageElement).find('.back').hide();
                 let args = {
                     url: 'http://192.168.0.100:5000/getEventList',
                     method: 'post',
@@ -43,20 +41,6 @@ var routes = [{
             } else {
                 app.preloader.hide();
             }
-        },
-        pageInit: async (e, page) => {
-            app.preloader.show();
-            // let pageElement = page.$el;
-            // let queryData = e.detail.route.query || {};
-            // let isFoodExistEmp = {
-            //     url: 'http://192.168.0.100:5000/getEventList',
-            //     method: "post",
-            //     dataString: foodPreference
-            // }
-            // let FoodListResponse = await utils.callAPI(isFoodExistEmp);
-            // if (FoodListResponse['status'] == 200) {
-
-            // }
         }
     }
 },
