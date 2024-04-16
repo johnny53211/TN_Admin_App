@@ -42,7 +42,7 @@ let routes = [
         let pageElement = page.$el;
         $(pageElement).find('.page-title').text('Employee List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab["employeePage"], pageElement, 2)
-      },
+      }
     },
 
   },
@@ -128,7 +128,7 @@ let routes = [
         let pageElement = page.$el;
         $(pageElement).find('.page-title').text('Tournament List');
         template.renderTemplate(`#listView`, '#listViewList', homeTab['tournamentsList'], pageElement, 2)
-      },
+      }
     }
   },
   {

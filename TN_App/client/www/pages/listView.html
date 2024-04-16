@@ -1,12 +1,4 @@
-<!-- 
-    // //------------------------------------------------------------------------
-    // // Name : Johnson R.					Date : 03-04-2023
-    //    Modifier Name :    			    Edited Date  :  
-    // //------------------------------------------------------------------------
-    // // Virtual List page content get from template
-    // //-----------------------------------------------------------------------
- -->
-<div class="page" id="list_view_name_Change">
+<div class="page">
     <div class="navbar">
         <div class="navbar-bg"></div>
         <div class="navbar-inner sliding">
@@ -17,8 +9,8 @@
             </p>
             <div class="title page-title"></div>
             <div class="subnavbar">
-
-                <form class="searchbar">
+                <form data-search-container=".search-list" data-search-in=".item-title"
+                    class="searchbar searchbar-init">
                     <div class="searchbar-inner">
                         <div class="searchbar-input-wrap">
                             <input type="search" placeholder="Search" />
@@ -31,35 +23,18 @@
             </div>
         </div>
     </div>
-    <div class="searchbar-backdrop"></div>
     <div class="page-content">
-        <div class="list simple-list searchbar-not-found">
-            <ul id="not_found">
-                <li>Nothing found</li>
+        <div class="searchbar-backdrop"></div>
+
+        <div class="list list-strong-ios list-outline-ios list-dividers-ios simple-list searchbar-not-found">
+            <ul>
+                <li class="block block-title block-title-medium">Nothing found</li>
             </ul>
         </div>
-        <div class="list list-strong list-outline-ios inset-md list-dividers-ios virtual-list media-list searchbar-found"
-            id="searchBar">
+        <div class="list list-strong-ios list-outline-ios list-dividers-ios search-list  searchbar-found">
             <ul id="listViewList">
-                <!-- render template -->
+
             </ul>
         </div>
-    </div>
-</div>
-<div class="item-media">
-    <i class="icon demo-list-icon"></i>
-</div>
-<div class="item-inner">
-    <div class="item-input-wrap input-dropdown-wrap">
-        <select placeholder="Please choose...">
-            <option value="Male">Option 1</option>
-            <option value="Female">Option 2</option>
-        </select>
-    </div>
-</div>
-<div class="item-inner">
-    <div class="item-input-wrap">
-        <input type="number" placeholder="Enter Port">
-        <span class="input-clear-button"></span>
     </div>
 </div>

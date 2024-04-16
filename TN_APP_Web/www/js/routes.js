@@ -46,7 +46,7 @@ var routes = [{
 },
 {
     path: '/attendance/',
-    url: './pages/attendance.html',
+    url: './pages/testPages.html',
     on: {
         pageBeforeIn: function (e, page) {
             let pageElement = page.$el;

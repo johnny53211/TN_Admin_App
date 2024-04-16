@@ -421,7 +421,7 @@ $(document).ready(async function () {
     await Promise.all([appService.getGender(), appService.getTeamList()]);
 });
 
-$(document).on('page:init', async function (e) {
+$(document).on('page:init', async function (e, page) {
     formValidationn.validateLoginForm();
     utils.showLoginName();
     homeTab.homeRenderBtn();
