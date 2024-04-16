@@ -1,7 +1,7 @@
 {
-  "name": "Vault App",
-  "short_name": "Vault App",
-  "description": "Vault App",
+  "name": "Admin App",
+  "short_name": "Admin App",
+  "description": "Admin App",
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",
