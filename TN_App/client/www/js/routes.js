@@ -141,9 +141,9 @@ let routes = [
         let templateData = [];
         let dataString = e.detail.route;
         let pageElement = page.$el;
-        $(pageElement).find('.page-title').text('Upcoming Celebrations');
         $(pageElement).find('.subnavbar').remove();
         if (dataString['params']['event_type'] == 1) {
+          $(pageElement).find('.page-title').text('Upcoming Celebrations');
           let { fullMonthCelbration, getMonthBirthday } = await appService.getEvents(dataString['params']);
           templateData['list'] = utils.generateResponseEvents(fullMonthCelbration);
           templateData['isFullMonth'] = true;
@@ -154,6 +154,9 @@ let routes = [
           templateData['isFullMonth'] = false;
           let fulMonthBirthday = template.renderTemplate(`#expandableTemplate`, '', templateData, pageElement, 2);
           pageElement.find('#renderCardCelebration').append(fulMonthHtml).append(fulMonthBirthday);
+          appService.preLoaderHide();
+        } else {
+          $(pageElement).find('.page-title').text('Upcoming Tournaments');
           appService.preLoaderHide();
         }
       },
