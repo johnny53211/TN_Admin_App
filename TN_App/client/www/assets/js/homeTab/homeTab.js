@@ -211,41 +211,42 @@ let homeTab = {
         event.preventDefault();
         let validateForms = $("#form-data").valid();
         if (validateForms) {
+            appService.preLoaderHide();
             let formData = app.form.convertToData('#form-data');
             let { time, date } = utils.convertDateAndTime(formData['event_date']);
             formData['event_date'] = date;
             formData['event_time'] = time;
             appService.preLoaderShow();
             await appService.addEvents(formData);
-            let data = {
-                "select": "emp_code,mail_id"
-            }
+            let data = { "select": "emp_code,mail_id" };
             let getEmpResponse = await appService.getEmpDetails(data);
-            appService.preLoaderShow('Sending Mail ....');
-            for (let i = 0; i < getEmpResponse['data'].length; i++) {
-                try {
-                    let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
-                    let urlData = {
-                        shareUrl: shareUrl,
-                        secret: 'events'
-                    };
-                    let getUrl = utils.encryptData(urlData);
-                    let dataString = {
-                        eventsUrl: getUrl,
-                        mailReceiver: getEmpResponse['data'][i]['mail_id']
+            if (getEmpResponse && getEmpResponse.length > 0) {
+                appService.preLoaderShow('Sending Mail ....');
+                for (let i = 0; i < getEmpResponse['data'].length; i++) {
+                    try {
+                        let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
+                        let urlData = {
+                            shareUrl: shareUrl,
+                            secret: 'events'
+                        };
+                        let getUrl = utils.encryptData(urlData);
+                        let dataString = {
+                            eventsUrl: getUrl,
+                            mailReceiver: getEmpResponse['data'][i]['mail_id']
+                        }
+                        let args = {
+                            method: "post",
+                            url: apiUrl['sendMail'],
+                            dataString: dataString,
+                        }
+                        await loginService.callAPI(args); // Wait for the AJAX call to complete
+                    } catch (err) {
+                        appService.preLoaderHide()
+                        console.log(err); // Handle errors if needed
                     }
-                    let args = {
-                        method: "post",
-                        url: apiUrl['sendMail'],
-                        dataString: dataString,
-                    }
-                    let response = await loginService.callAPI(args); // Wait for the AJAX call to complete
-                } catch (err) {
-                    appService.preLoaderHide()
-                    console.log(err); // Handle errors if needed
                 }
+                appService.preLoaderHide();
             }
-            appService.preLoaderHide();
         }
     },
     deleteEmp: async (e) => {
@@ -292,9 +293,8 @@ let homeTab = {
         template.renderTemplate('#tableTemplate', '.popupContent', templateData, '', 1)
     },
     addEmpDetails: (e) => {
-
         utils.popupOpen('.my-popup');
-        let popup = utils.popupGet('.my-popup')
+        let popup = utils.popupGet('.my-popup');
         $(popup.$el).find('.popupTitle').html('Add Employee');
         let formContent = {
             "list": [
@@ -406,8 +406,7 @@ let homeTab = {
         }
     }
 }
-let id,
-    dataName;
+let id, dataName;
 $(document).ready(async function () {
     // accessing template files and json files -- start
     await template.accessFile('./assets/template/template.html');
