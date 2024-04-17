@@ -11,7 +11,7 @@ const utils = {
         var eventsValue = utils.getParameterValue(currentPageURL, 'events'),
             decoreUrl = utils.decryptData({ decrypt: eventsValue, secret: 'events' }),
             emp_code = utils.getParameterValue(decoreUrl, 'emp_id'),
-            event_date = utils.getParameterValue(decoreUrl, 'event_date'),
+            event_date = utils.getParameterValue(decoreUrl, 'ed'),
             event_name = utils.getParameterValue(decoreUrl, 'event_name');
         return { emp_code, event_date, event_name };
 

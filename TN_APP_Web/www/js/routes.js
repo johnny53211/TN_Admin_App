@@ -25,9 +25,8 @@ var routes = [
                         method: 'post',
                         dataString: queryData
                     };
-
                     let response = await utils.callAPI(args);
-                    let celebrationresponse = response.data.fullMonthCelbration.find((element) => element.event_name == queryData['event_name']);
+                    let celebrationresponse = response.data.fullMonthCelbration.find((element) => element.event_date == queryData['event_date']);
 
                     // Cache the input fields
                     let $eventDateInput = $(pageElement).find('input[name="event_date"]');

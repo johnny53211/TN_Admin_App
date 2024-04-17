@@ -301,7 +301,7 @@ const apiHelper = {
     },
     "getEventList": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
-        if ((postedData && postedData['event_type']) || postedData && postedData['event_name']) {
+        if ((postedData && postedData['event_type']) || postedData && postedData['event_name'] || postedData && postedData['event_date']) {
             postedData['event_date'] = utils.getCuurentMonth();
             let getEventdata = await apiHelper.getEventData(postedData)
             Object.keys(getEventdata).length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_LISTED'], getEventdata) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG']);

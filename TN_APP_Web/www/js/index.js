@@ -3,14 +3,23 @@ $(document).ready(function () {
     localStorage.removeItem('isShare');
     let isSharePage = utils.isSharePage();
     if (isSharePage && Object.keys(isSharePage).length) {
-
         utils.redirect({ path: '/events/', query: isSharePage });
     }
 });
-$$(document).on('page:init', '.page[data-name="events"]', function (e, page) {
+$$(document).on('page:init', '.page[data-name="events"]', async function (e, page) {
     let pageElement = page.$el;
+    let isShare = localStorage.getItem('isShare');
+    if (isShare == 1) {
+        let queryData = e.detail.route.query || {};
+        delete queryData.event_name;
+        let args = {
+            url: 'http://192.168.1.59:5000/getEmpFoodPreference',
+            method: 'post',
+            dataString: queryData
+        };
+        let response = await utils.callAPI(args);
+    }
     $('input[type="radio"][name="attend"]').change(function () {
-
         // Check the value of the selected radio button
         var selectedValue = $(this).val();
         // Show or hide content based on the selected value

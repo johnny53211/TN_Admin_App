@@ -224,7 +224,7 @@ let homeTab = {
                 appService.preLoaderShow('Sending Mail ....');
                 for (let i = 0; i < getEmpResponse['data'].length; i++) {
                     try {
-                        let shareUrl = `emp_id=${getEmpResponse['data'][i]['emp_code']}&event_name=${formData['event_name']}`
+                        let shareUrl = `emp_id=${getEmpResponse['data'][i]['emp_code']}&event_name=${formData['event_name']}&ed=${formData['event_date']}`
                         let urlData = {
                             shareUrl: shareUrl,
                             secret: 'events'
