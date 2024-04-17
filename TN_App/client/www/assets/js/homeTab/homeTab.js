@@ -245,7 +245,10 @@ let homeTab = {
                         console.log(err); // Handle errors if needed
                     }
                 }
+                app.popup.get('.my-popup').close();
                 appService.preLoaderHide();
+            } else {
+                app.popup.get('.my-popup').close();
             }
         }
     },
