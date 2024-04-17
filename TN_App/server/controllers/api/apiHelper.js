@@ -316,12 +316,11 @@ const apiHelper = {
         let query = [];
 
         // Constructing query for full month celebrations
-        if (event_name) query.push({ [eventDataSchema.fields.event_name]: event_name });
+        if (event_name) query.push({ [eventDataSchema.fields.event_name]: event_name, condition: "And" });
         if (event_type) {
-            query.push({ [eventDataSchema.fields.celeb_type]: 2, "condition": 'AND' });
-            query.push({ [eventDataSchema.fields.event_type]: event_type, "condition": 'AND' });
+            query.push({ [eventDataSchema.fields.event_type]: event_type, condition: "AND" });
         }
-        if (event_date) query.push({ [eventDataSchema.fields.event_date]: `%${event_date}%`, "condition": 'AND', operator: "like" });
+        if (event_date) query.push({ [eventDataSchema.fields.event_date]: `%${event_date}%`, condition: "OR", operator: "like" });
 
         let options = {
             table: tableName || eventDataSchema.tableName,
@@ -331,7 +330,7 @@ const apiHelper = {
         // Retrieving full month celebrations
         let fullMonthCelebrationPromise = new Promise((resolve, reject) => {
             databaseHelper.getRecord(options, function (response) {
-                resolve(response || response[0] || {});
+                resolve(response || {});
             });
         });
 
@@ -498,32 +497,33 @@ const apiHelper = {
     },
     "addEventsData": async (req, res) => {
         postedData = utils.schemaFieldsMapping(schema, 'getEventData', req['body']);
-        let getResponse = await apiHelper.getEventData(postedData);
+        let event_date = postedData['event_date']
+        delete postedData.event_date;
+        let { fullMonthCelbration } = await apiHelper.getEventData(postedData);
         let postValue = {};
         postValue.type = eventDataSchema.tableName;
+        postedData.event_date = event_date;
         postValue.body = [postedData];
-        if (Object.keys(getResponse).length > 0) {
+        if (fullMonthCelbration.length > 0) {
             let { event_name, event_date } = postedData;
             let query = [];
             if (event_name)
-                query.push({ [eventDataSchema.fields.event_name]: event_name });
+                query.push({ [eventDataSchema.fields.event_name]: event_name, condition: 'or' });
             // check pin is getting add one more query
-            if (event_date) {
-                query.push({ [eventDataSchema.fields.event_date]: event_date, "condition": "OR" });
-            }
+            postValue.data = [postedData];
             let updateResponse = await new Promise((resolve, reject) => {
                 databaseHelper.saveRecord(postValue, query, function (response) {
                     resolve(response)
                 });
             });
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_UPDATED'], updateResponse);
+            updateResponse == 1 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_UPDATED'], updateResponse) : utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['OTHER_ERROR'])
         } else {
             let insertResponse = await new Promise((resolve, reject) => {
                 databaseHelper.saveRecord(postValue, '', function (response) {
                     resolve(response)
                 });
             });
-            resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse);
+            insertResponse && insertResponse.length > 0 ? resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['RECORD_CREATED'], insertResponse) : resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['CODE_ERROR'])
         }
         res.send(resMsg)
     },
