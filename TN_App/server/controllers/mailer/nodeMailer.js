@@ -25,8 +25,8 @@ const mailController = {
                 port: 465,
                 secure: true,
                 auth: {
-                    user: 'dhivyaraman18@gmail.com',
-                    pass: 'uqotzmointdsyqrs'
+                    user: 'a09216214@gmail.com',
+                    pass: 'ohibdxcmwapwcwsv'
                 },
                 tls: { rejectUnauthorized: false }
             });

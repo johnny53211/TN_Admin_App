@@ -1,6 +1,6 @@
 
 const response = {
-    mailDomain: 'http://192.168.80.52/bt-project/TN_Admin_App/TN_APP_Web/',
+    mailDomain: 'http://192.168.1.59/bt-project/TN_Admin_App/TN_APP_Web/',
     PORT: 5000,
     messages: {
         error: {

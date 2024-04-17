@@ -10,7 +10,7 @@ $(document).ready(function () {
 $$(document).on('page:init', '.page[data-name="events"]', function (e, page) {
     let pageElement = page.$el;
     $('input[type="radio"][name="attend"]').change(function () {
-        
+
         // Check the value of the selected radio button
         var selectedValue = $(this).val();
         // Show or hide content based on the selected value
@@ -27,7 +27,7 @@ async function foddPreferenceSubmit() {
     foodPreference['emp_code'] = $('.submitEvents').data('empcode');
     foodPreference['no_members'] = $('#food-count').text();
     let args = {
-        url: 'http://192.168.0.100:5000/addEmpFoodPreference',
+        url: 'http://192.168.1.59:5000/addEmpFoodPreference',
         method: "post",
         dataString: foodPreference
     }

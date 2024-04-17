@@ -19,8 +19,9 @@ var routes = [
                 $(pageElement).find('.page-title').text('Events Management');
                 let queryData = e.detail.route.query || {};
                 if (Object.keys(queryData).length > 0) {
+                    pageElement.find('.back').hide();
                     let args = {
-                        url: 'http://192.168.80.52:5000/getEventList',
+                        url: 'http://192.168.1.59:5000/getEventList',
                         method: 'post',
                         dataString: queryData
                     };
