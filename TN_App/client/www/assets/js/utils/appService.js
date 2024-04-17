@@ -122,13 +122,13 @@ let appService = {
         try {
             let res = await loginService.callAPI(args);
             if (res['status'] == 200) {
-                let dialogArgs = {
-                    type: 'alert',
-                    title: res['message'],
-                    text: "TN Admin",
-                }
-                dialog.customDialog(dialogArgs)
-                appService.eventList = res['data'];
+                // let dialogArgs = {
+                //     type: 'alert',
+                //     title: res['message'],
+                //     text: "TN Admin",
+                // }
+                // dialog.customDialog(dialogArgs)
+                // appService.eventList = res['data'];
             }
             appService.preLoaderHide();
         } catch (error) {

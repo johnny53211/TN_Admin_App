@@ -6,7 +6,9 @@ let notification = {
             content = `${config['response']['mailDomain']}?events=${postedData['eventsUrl']}`;
         let dataString = { to: postedData['mailReceiver'], content }
         let mailResponse = await nodeMailer.sendMail(dataString);
-        res.send(mailResponse)
+        if (mailResponse && mailResponse.accepted) resMsg = utils.generateResponse(config.response.statusCodes['OK'], config.response.messages.success['CODE_SUCCESS'])
+        else resMsg = utils.generateResponse(config.response.statusCodes['AUTH_ERROR'], config.response.messages.error['AUTH_MSG'])
+        res.send(resMsg)
     }
 }
 

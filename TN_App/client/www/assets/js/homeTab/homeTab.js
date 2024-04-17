@@ -220,7 +220,7 @@ let homeTab = {
             await appService.addEvents(formData);
             let data = { "select": "emp_code,mail_id" };
             let getEmpResponse = await appService.getEmpDetails(data);
-            if (getEmpResponse && getEmpResponse.length > 0) {
+            if (getEmpResponse && getEmpResponse['data'].length > 0) {
                 appService.preLoaderShow('Sending Mail ....');
                 for (let i = 0; i < getEmpResponse['data'].length; i++) {
                     try {
