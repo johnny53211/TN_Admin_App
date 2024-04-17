@@ -1,5 +1,6 @@
 const nodeMailer = require('../mailer/nodeMailer');
-const config = require('../../config/config')
+const config = require('../../config/config');
+const utils = require('../utils/utils')
 let notification = {
     "mailSend": async (req, res) => {
         let postedData = req['body'],

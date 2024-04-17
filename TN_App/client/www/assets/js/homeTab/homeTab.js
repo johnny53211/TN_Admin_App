@@ -224,12 +224,12 @@ let homeTab = {
                 appService.preLoaderShow('Sending Mail ....');
                 for (let i = 0; i < getEmpResponse['data'].length; i++) {
                     try {
-                        let shareUrl = `&emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
+                        let shareUrl = `emp_id=${getEmpResponse['data'][i]['emp_code']}&event_date=${date}&event_name=${formData['event_name']}`
                         let urlData = {
                             shareUrl: shareUrl,
                             secret: 'events'
                         };
-                        let getUrl = utils.encryptData(urlData);
+                        let getUrl = await utils.encryptData(urlData);
                         let dataString = {
                             eventsUrl: getUrl,
                             mailReceiver: getEmpResponse['data'][i]['mail_id']

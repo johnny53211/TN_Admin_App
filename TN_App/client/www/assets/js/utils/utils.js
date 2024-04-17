@@ -140,9 +140,9 @@ let utils = {
         let templateData = { list: arrayData };
         return templateData;
     },
-    encryptData: (data = {}) => {
+    encryptData: async (data = {}) => {
         let { secret, shareUrl } = data;
-        return GibberishAES.enc(shareUrl, secret);
+        return await GibberishAES.enc(shareUrl, secret);
     },
     popupOpen: (selector, animate = true) => {
         app.popup.open(selector, animate)

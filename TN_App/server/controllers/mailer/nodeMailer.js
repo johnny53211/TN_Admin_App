@@ -10,7 +10,7 @@ const mailController = {
                 from: 'johnson02032001@gmail.com',
                 to: to,
                 subject: "Events",
-                text: content,
+                html: content,
             });
             return info;
             // console.log('Email sent:', info.response);
