@@ -20,13 +20,13 @@ var routes = [
                 let queryData = e.detail.route.query || {};
                 if (Object.keys(queryData).length > 0) {
                     let args = {
-                        url: 'http://192.168.0.100:5000/getEventList',
+                        url: 'http://192.168.80.52:5000/getEventList',
                         method: 'post',
                         dataString: queryData
                     };
 
                     let response = await utils.callAPI(args);
-                    let celebrationresponse = response.data.fullMonthCelbration[0];
+                    let celebrationresponse = response.data.fullMonthCelbration.find((element) => element.event_name == queryData['event_name']);
 
                     // Cache the input fields
                     let $eventDateInput = $(pageElement).find('input[name="event_date"]');
