@@ -6,7 +6,9 @@ const utils = {
     isSharePage: (pageElement) => {
         const currentPage = $(location);
         const currentPageURL = currentPage.attr("href");
-        if (currentPageURL.indexOf("embed") == -1) false;
+        if (currentPageURL.indexOf("events") == -1) {
+            return false;
+        }
         localStorage.setItem('isShare', 1); // add is share if url was shared
         var eventsValue = utils.getParameterValue(currentPageURL, 'events'),
             decoreUrl = utils.decryptData({ decrypt: eventsValue, secret: 'events' }),
