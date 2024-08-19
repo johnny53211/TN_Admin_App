@@ -13,7 +13,7 @@ const mailSend = require('./controllers/mailer/nodeMailer')
 let argv = require('minimist')(process.argv.slice(2), {
     alias: {
         d: ['database', 'db'],
-        s: ['db-size', 'size']
+        s: ['db-size', 'size']  
     },
     default: {
         d: "mysql",
